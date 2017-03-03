@@ -1,6 +1,6 @@
 # paper
 <paper> -> {
-  "flow-aggregations": <flow-aggregations>,
+  "flow_aggregations": <flow-aggregations>,
   "flows": <flows>, 
   "packets": <packets>, 
   "methods": <methods>,
