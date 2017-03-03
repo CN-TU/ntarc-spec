@@ -1,0 +1,161 @@
+# paper
+<paper> -> {
+  "flow-aggregations": <flow-aggregations>,
+  "flows": <flows>, 
+  "packets": <packets>, 
+  "methods": <methods>,
+  "evaluations": <evaluations>,
+  "datasets": <datasets>,
+  "reference": <reference>
+}
+# end
+
+# reference
+<reference> -> {
+  "author": <free-text>,
+  "title": <free-text>, 
+  "year": <free-integer>
+}
+# end
+
+# method
+<methods> -> [<method>+] | null
+<method> -> {
+  "name": <free-text>
+  "supervision": <supervision>,
+  "type": <type>,
+  "similarity_metric": <similarity_metric>
+}
+<supervision> -> "supervised" | "unsupervised" | "semi_supervised"
+<type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "other"
+<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "other"
+# end
+
+# evaluation
+<evaluations> -> [<evaluation>+] | null
+<evaluation> -> {
+  "metrics": [<metric>+] | null
+  "method_evaluation": [<method_evaluation>] | null  # null means no evaluation of method
+}
+<metric> -> "error_rate"   # e.g. accuracy, precision, recall, f-1, etc
+<metric> -> "classification_loss"   # e.g. log-loss, etc
+<metric> -> "error_rate_variation"  # e.g. ROC, AUC, etc
+<metric> -> "error_distance"  # e.g. sum of squared error, absolute error, r^2, etc
+<metric> -> "clustering_metrics"  # e.g. silhouette, etc
+<method_evaluation> -> "internal"  # e.g. silhouette
+<method_evaluation> -> "external" # e.g. accuracy
+<method_evaluation> -> "both"  # both internal and external
+# end
+
+# dataset
+<datasets> -> [<dataset>+] | null
+<dataset> -> <free-text>  # dataset key
+# end
+
+# flows
+<flows> -> [<flow>+] | null
+<flow> -> {
+  "features": <features>, 
+  "goals": <goals>, 
+  "key": <key>, 
+  "tool": <tool>, 
+  "window": <window>
+}
+# end
+
+# window
+<window> -> <free-integer> | null
+# end
+
+# key
+<key> -> {
+  "bidirectional": <bidirectional>, 
+  "key_features": <features>
+} | null
+# end
+# bidirectional
+<bidirectional> -> true | false | null | "separate_directions"  # "separate_directions" in the case where the key is bidirectional and each feature appears twice, one for each direction
+# end
+
+# packets
+<packets> -> [<packet>+] | null
+<packet> -> {
+  "features": <features>, 
+  "goals": <goals>, 
+  "tool": <tool>, 
+}
+# end
+
+# flow-aggregations
+# flow-aggregations -- features are extracted from sets of flows
+<flow-aggregations> -> [<flow-aggregation>+] | null
+<flow-aggregation> -> {
+  "features": <features>, 
+  "goals": <goals>, 
+  "key": <key>, 
+  "tool": <tool>, 
+  "window": <window>
+}
+# end
+
+# features
+<features> -> [<feature>+] | null
+<feature> -> <packet-feature> | <flow-feature> | <aggregation-feature> | <operation>
+# end
+
+<tool> -> <free-text>  # tool key
+
+# operation
+# <operation> always outputs a single number
+<operation> -> {"mean": [<values>]}
+<operation> -> {"stdev": [<values>]}
+<operation> -> {"variance": [<values>]}
+<operation> -> {"minimum": [<values>]}
+<operation> -> {"maximum": [<values>]}
+<operation> -> {"argmin": [<values>]}
+<operation> -> {"argmax": [<values>]}
+<operation> -> {"count": [<selection>]}  # returns number of selected objects
+<operation> -> {"distinct": [<feature>, <selection>]}  # returns number of distinct values in <feature> in the selected objects
+<operation> -> {"apply": [<feature>, <selection>]}  # returns a feature value for a subset of objects
+<operation> -> {"map": [<feature>, <selection>]}  # returns a feature value for each object in selection
+<operation> -> {"add": [<value>+]} | {"add": [<values>]}
+<operation> -> {"subtract": [<value>, <value>]}
+<operation> -> {"multiply": [<value>+]} | {"multiply": [<values>]
+<operation> -> {"divide": [<value>, <value>]}
+<operation> -> {"entropy": [<value>]}
+<operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
+<operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
+# end
+
+# values
+<values> -> <value>+ | UNDEFINED  # TODO define these, should be the list of feature values a particular set (in case of flows, the list of a particular packet-level feature)
+# end
+
+# value
+<value> -> <feature> | <operation> | <free-integer>
+# end
+
+# selection
+# <selection> outputs a list of objects (packets, flows or aggregations, depending on what kind of feature is used)
+<selection> -> {"select": [<logic>]}
+# end
+
+# logic
+# <logic> is used for selection, should be evaluated for each object
+<logic> -> {"and": [<logic>+]} | {"or": [<logic>+]}
+<logic> -> <compare-packet> | <compare-flow> | true | false
+# end
+
+# compare 
+<compare-packet> -> {"geq": [<feature-packet>, <value>]}
+<compare-packet> -> {"leq": [<feature-packet>, <value>]}
+<compare-packet> -> {"less": [<feature-packet>, <value>]}
+<compare-packet> -> {"greater": [<feature-packet>, <value>]}
+<compare-packet> -> {"equal": [<feature-packet>, <value>]}
+<compare-flow> -> {"geq": [<feature-flow>, <value>]}
+<compare-flow> -> {"leq": [<feature-flow>, <value>]}
+<compare-flow> -> {"less": [<feature-flow>, <value>]}
+<compare-flow> -> {"greater": [<feature-flow>, <value>]}
+<compare-flow> -> {"equal": [<feature-flow>, <value>]}
+# end
+
