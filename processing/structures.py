@@ -194,11 +194,13 @@ class Evaluation(object):
             d = simplejson.load(open(d, 'r'))
         self.metrics = _get(d, 'metrics')
         if not self.metrics is None:
-            assert all([m in self._metrics for m in self.metrics]), "Unknown metric!"
+            for m in self.metrics:
+                assert m in self._metrics, "Unknown metric %s!" % (m)
 
         self.method_evaluation = _get(d, 'method_evaluation')
         if not self.method_evaluation is None:
-            assert all([m in self._method_evaluation for m in self.method_evaluation]), "Unknown method of evaluation!"
+            assert self.method_evaluation in self._method_evaluation, "Unknown method of evaluation %s!" % \
+                                                                      (self.method_evaluation)
 
 
 class Dataset(object):
@@ -208,7 +210,7 @@ class Dataset(object):
         self.key = d
         with open(self._datasets_file) as fd:
             parsed = simplejson.load(fd)
-            assert d in parsed, "Unknown dataset!"
+            assert d in parsed, "Unknown dataset %s!" % (d)
 
 
 
