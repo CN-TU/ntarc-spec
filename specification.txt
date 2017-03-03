@@ -42,6 +42,8 @@
 <metric> -> "error_rate_variation"  # e.g. ROC, AUC, etc
 <metric> -> "error_distance"  # e.g. sum of squared error, absolute error, r^2, etc
 <metric> -> "clustering_metrics"  # e.g. silhouette, etc
+<metric> -> "time"  # time complexity/how much time is takes
+<metric> -> "space"  # space complexity/how much space is takes
 <method_evaluation> -> "internal"  # e.g. silhouette
 <method_evaluation> -> "external" # e.g. accuracy
 <method_evaluation> -> "both"  # both internal and external
