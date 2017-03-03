@@ -1,0 +1,13 @@
+{ <dataset>+ }
+<dataset> -> <dataset-key>: {
+  "name": <free-text>,
+  "year": <free-integer>,
+  "data-type": <data-type>,
+  "type": <type>,
+  "availability": <availability>
+}
+
+<dataset-key> -> <free-text>
+<data-type> -> "packet_pcap" | "packet_other" | "flow_sflow" | "flow_netflow" | "flow_ipfix" | "flow_other" | "other"
+<type> -> "real" | "synthetic" | "mixed"
+<availability> -> "public" | "private" | "on_demand"
