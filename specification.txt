@@ -27,7 +27,7 @@
   "similarity_metric": <similarity_metric>
 }
 <supervision> -> "supervised" | "unsupervised" | "semi_supervised"
-<type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "other"
+<type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
 <similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "other"
 # end
 
