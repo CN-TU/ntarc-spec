@@ -210,7 +210,10 @@ class Dataset(object):
     def __init__(self, d):
         self.key = d
         with open(self._datasets_file) as fd:
-            parsed = simplejson.load(fd)
+            try:
+                parsed = simplejson.load(fd)
+            except:
+                assert False, "Error parsing datasets file!"
             assert d in parsed, "Unknown dataset %s!" % (d)
 
 
