@@ -46,6 +46,7 @@ Selection & Logic
 ~~~~~~~~~~~~~~~~~
 
 The ``selection`` directive is useful for filtering out packets or any other information which might not be interesting for a particular feature.
+Intuitively, using selection on a flow will select packets (that is, the result will be the packets that fulfill the conditions in the selection), and in a flow_aggregation will select flows.
 
 Its syntax is the following:
 
