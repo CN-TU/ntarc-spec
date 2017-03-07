@@ -28,7 +28,7 @@
 }
 <supervision> -> "supervised" | "unsupervised" | "semi_supervised"
 <type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
-<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "other"
+<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "other"
 # end
 
 # evaluation
