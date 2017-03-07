@@ -14,5 +14,7 @@ This is the high-level structure of a paper JSON file:
     :end-before: # end
 
 As is usual in JSON, all fields are optional, but it is good to write as complete specification of a paper as possible.
+On the other end, adding extra fields for specific papers is OK, for example for comments you want to make.
+
 
 .. _JSON: http://www.json.org
