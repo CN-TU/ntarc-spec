@@ -92,6 +92,7 @@
 # flow-aggregations -- features are extracted from sets of flows
 <flow-aggregations> -> [<flow-aggregation>+] | null
 <flow-aggregation> -> {
+  "flow": <flow>,
   "features": <features>, 
   "goals": <goals>, 
   "key": <key>, 
