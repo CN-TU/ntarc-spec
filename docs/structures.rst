@@ -25,6 +25,8 @@ The ``key`` directive contains itself some more fields:
     :end-before: # end
 
 The ``key_features`` directive indicates the features used for a flow/flow-aggregation.
+If you do not know the features being used as key, use ``null`` or leave empty.
+If there is no key (as in, everything is aggregated together), use an empty list (``[]``).
 
 The ``bidirectional`` directive indicates whether a flow is unidirectional (only has packets with the exact same key as in ``key_features``), bidirectional (has packets with the same key as in ``key_features``, and packets in the opposite direction) or "separate_directions" (has packets as if it was bidirectional, but the features in the ``features`` directive are evaluated twice, once for each direction; i.e. if you have octetTotalCount in the features list, and key has "separate_directions",
 you will get two features, one with the octetTotalCount in the packets in one direction, and another in the opposite direction).
