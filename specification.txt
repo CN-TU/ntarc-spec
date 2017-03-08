@@ -90,6 +90,7 @@
   "features": <features>, 
   "goals": <goals>, 
   "tool": <tool>, 
+  "traffic_type": <traffic_type>
 }
 # end
 
@@ -102,7 +103,8 @@
   "goals": <goals>, 
   "key": <key>, 
   "tool": <tool>, 
-  "window": <window>
+  "window": <window>,
+  "traffic_type": <traffic_type>
 }
 # end
 
@@ -131,6 +133,7 @@
 <operation> -> {"multiply": [<value>+]} | {"multiply": [<values>]
 <operation> -> {"divide": [<value>, <value>]}
 <operation> -> {"log": [<value>]}
+<operation> -> {"exp": [<value>]}
 <operation> -> {"entropy": [<value>]}
 <operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
 <operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
