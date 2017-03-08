@@ -4,7 +4,7 @@ Workflow
 The following should be the basic workflow:
 
 1) look at paper
-2) write JSON file
+2) create json file in papers/YEAR/LNAME_1STWORD.json, with YEAR the year of the paper, LNAME the author's last name and 1STWORD the first word (or first two) of the title, all of this in lowercase; check existing files for consistency
 3) run verify script and check that it agrees with what you wrote
 4) add contribution to ``done_papers_list.csv``
 5) commit (and push if possible) changes
