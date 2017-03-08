@@ -9,6 +9,9 @@ The following should be the basic workflow:
 4) add contribution to ``done_papers_list.csv``
 5) commit (and push if possible) changes
 
+.. Note:: There are papers which look like they have features on a first look, but turn out not to have any on deeper inspection.
+    If this is the case, just move onto the next paper.
+
 
 Verify Script
 -------------
