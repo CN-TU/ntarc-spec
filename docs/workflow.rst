@@ -10,6 +10,14 @@ The following should be the basic workflow:
 5) commit (and push if possible) changes
 
 
+Verify Script
+-------------
+
+Run ``./verify PATH/TO/PAPER.json``, and verify that the output corresponds to what you expected.
+This script is not a complete verification form: if it says that something is wrong, it means that something is wrong; however it is possible that something is wrong with the JSON file and the script does not complain.
+
+The output of this script (when no errors are raised) is just a count of objects in several fields.
+
 Common Problems
 ---------------
 
