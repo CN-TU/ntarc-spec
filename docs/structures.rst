@@ -49,7 +49,18 @@ The following is an example of the very common unidirectional 5-tuple key:
         "destinationIPv4Address", 
         "destinationTransportPort"
       ]
-    },
+    }
+
+Traffic Type
+~~~~~~~~~~~~
+
+The ``traffic_type`` directive is to be used when only traffic of a certain type is used.
+Its definition follows:
+
+.. include:: ../specification.txt
+    :literal:
+    :start-after: # traffic_type
+    :end-before: # end
 
 Definitions
 -----------
