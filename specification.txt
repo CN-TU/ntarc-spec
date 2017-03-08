@@ -26,9 +26,9 @@
   "type": <type>,
   "similarity_metric": <similarity_metric>
 }
-<supervision> -> "supervised" | "unsupervised" | "semi_supervised"
+<supervision> -> "supervised" | "unsupervised" | "semi_supervised" | "descriptive"
 <type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
-<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "other"
+<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "exact_matching" | "other"
 # end
 
 # evaluation
@@ -61,12 +61,17 @@
   "goals": <goals>, 
   "key": <key>, 
   "tool": <tool>, 
-  "window": <window>
+  "window": <window>,
+  "traffic_type": <traffic_type>
 }
 # end
 
 # window
 <window> -> <free-integer> | null
+# end
+
+# traffic_type
+<traffic_type> -> "ip" | "tcp" | "udp" | "dns" | "http" | null
 # end
 
 # key
@@ -125,6 +130,7 @@
 <operation> -> {"subtract": [<value>, <value>]}
 <operation> -> {"multiply": [<value>+]} | {"multiply": [<values>]
 <operation> -> {"divide": [<value>, <value>]}
+<operation> -> {"log": [<value>]}
 <operation> -> {"entropy": [<value>]}
 <operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
 <operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
