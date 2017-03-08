@@ -28,7 +28,7 @@ Cannot write the feature, because...
 
     * ... it is obviously too complicated to write in a structured system: just give it a name starting with `__` (double underscore), which is descriptive of what it does
     * ... I see multiple ways of doing it with the current format specification: the features specification should not be ambiguous, so if this happens either there is something wrong with the specification (very likely), or you are misunderstanding something about it; report this to Daniel and/or open a redmine ticket
-    * ... I think it is possible to represent, but I am having trouble with it: ask for help, don't get stuck in something like this
+    * ... I think it is possible to represent, but I am having trouble with it: use ``{"basedon": [FEATURE1, FEATURE2, ..., FEATUREN]}``, or ask for help; don't get stuck in something like this
 
 Problems with Methods/Evaluation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
