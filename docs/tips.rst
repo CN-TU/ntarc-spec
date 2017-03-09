@@ -6,6 +6,8 @@ Tips
 
 You might find features that are unidirectional for flows defined bidirectionals. For example, given the flow A<>B, authors can use the total number of bytes from: (1) A to B, (2) B to A, or (3) both. In such cases, remember to define the <bidirectional> attribute as "separate_directions". Also, you can create the "_client_to_server" and "_server_to_client" faetures to discriminate the A>B and A<B situations (see the example below).
 
+.. code-block:: none
+
 "features": [
 	{"basedon": ["octetTotalCount","_server_to_client"]},
 	{"basedon": ["octetTotalCount","_client_to_server"]},
@@ -27,11 +29,15 @@ If you find a paper which uses many features or a high dimensional feature space
 
 In case of feature selection "methods". If you see:
 
+.. code-block:: none
+
 -<whatever> filter --> they are usually "unsupervised" methods
 -<whatever> wrapper (e.g., stepwise regression, forward selection, backward elimination) --> they are usually "supervised" and embed a classifier (type: "regression" and you add another entry for the classifier)
 -<whatever> hybrid --> they are mixed (we could also say "semi-supervised")
 
 If they are really good, they will use "stability selection" (everybody should do this ;) ). Stability selection is kinda bootstrapping and nest/embed a feature selection method. Therefore...
+
+.. code-block:: none
 
 {
 	"name": "Stability selection",
