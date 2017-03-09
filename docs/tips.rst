@@ -29,13 +29,13 @@ If you find a paper which uses many features or a high dimensional feature space
 
 In case of feature selection "methods". If you see:
 
-<whatever> filter --> they are usually "unsupervised" methods
+<whatever> filter --> they are usually "unsupervised" methods.
 
-<whatever> wrapper (e.g., stepwise regression, forward selection, backward elimination) --> they are usually "supervised" and embed a classifier (type: "regression" and you add another entry for the classifier)
+<whatever> wrapper (e.g., stepwise regression, forward selection, backward elimination) --> they are usually "supervised" and embed a classifier (type: "regression" and you add another entry for the classifier).
 
 <whatever> hybrid --> they are mixed (we could also say "semi-supervised")
 
-If they are really good, they will use "stability selection" (everybody should do this ;) ). Stability selection is kinda bootstrapping and nest/embed a feature selection method. Therefore...
+If authors are really good, they will use "stability selection" (everybody should do this ;) ). Stability selection is kinda bootstrapping and nests/embeds a feature selection method. Therefore...
 
 .. code-block:: none
 
