@@ -6,11 +6,11 @@ Tips
 
 You might find features that are unidirectional for flows defined bidirectionals. For example, given the flow A<>B, authors can use the total number of bytes from: (1) A to B, (2) B to A, or (3) both. In such cases, remember to define the <bidirectional> attribute as "separate_directions". Also, you can create the "_client_to_server" and "_server_to_client" faetures to discriminate the A>B and A<B situations (see the example below).
 
-        "features": [
-          {"basedon": ["octetTotalCount","_server_to_client"]},
-	  {"basedon": ["octetTotalCount","_client_to_server"]},
-          "octetTotalCount",
-        ], 
+"features": [
+	{"basedon": ["octetTotalCount","_server_to_client"]},
+	{"basedon": ["octetTotalCount","_client_to_server"]},
+	"octetTotalCount",
+], 
 
 
 * BAYES CLASSIFIER (SIMILARITY METRIC) -- FIV, Mar 8, 2017
@@ -33,12 +33,12 @@ In case of feature selection "methods". If you see:
 
 If they are really good, they will use "stability selection" (everybody should do this ;) ). Stability selection is kinda bootstrapping and nest/embed a feature selection method. Therefore...
 
-      {
-          "name": "Stability selection",
-          "supervision": "unsupervised",
-          "type": "statistics",
-          "similarity_metric": "euclidean"(1)
-      }
+{
+	"name": "Stability selection",
+	"supervision": "unsupervised",
+	"type": "statistics",
+	"similarity_metric": "euclidean"(1)
+}
 
 (1): Or "other", or null. Well, it just weights performance indices...
 
