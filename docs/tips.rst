@@ -8,11 +8,11 @@ You might find features that are unidirectional for flows defined bidirectionals
 
 .. code-block:: none
 
-"features": [
-	{"basedon": ["octetTotalCount","_server_to_client"]},
-	{"basedon": ["octetTotalCount","_client_to_server"]},
-	"octetTotalCount",
-], 
+	"features": [
+		{"basedon": ["octetTotalCount","_server_to_client"]},
+		{"basedon": ["octetTotalCount","_client_to_server"]},
+		"octetTotalCount",
+	], 
 
 
 * BAYES CLASSIFIER (SIMILARITY METRIC) -- FIV, Mar 8, 2017
@@ -31,20 +31,20 @@ In case of feature selection "methods". If you see:
 
 .. code-block:: none
 
--<whatever> filter --> they are usually "unsupervised" methods
--<whatever> wrapper (e.g., stepwise regression, forward selection, backward elimination) --> they are usually "supervised" and embed a classifier (type: "regression" and you add another entry for the classifier)
--<whatever> hybrid --> they are mixed (we could also say "semi-supervised")
+	-<whatever> filter --> they are usually "unsupervised" methods
+	-<whatever> wrapper (e.g., stepwise regression, forward selection, backward elimination) --> they are usually "supervised" and embed a classifier (type: "regression" and you add another entry for the classifier)
+	-<whatever> hybrid --> they are mixed (we could also say "semi-supervised")
 
 If they are really good, they will use "stability selection" (everybody should do this ;) ). Stability selection is kinda bootstrapping and nest/embed a feature selection method. Therefore...
 
 .. code-block:: none
 
-{
-	"name": "Stability selection",
-	"supervision": "unsupervised",
-	"type": "statistics",
-	"similarity_metric": "euclidean"(1)
-}
+	{
+		"name": "Stability selection",
+		"supervision": "unsupervised",
+		"type": "statistics",
+		"similarity_metric": "euclidean"(1)
+	}
 
 (1): Or "other", or null. Well, it just weights performance indices...
 
