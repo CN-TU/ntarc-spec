@@ -2,6 +2,17 @@ Tips
 ====
 
 
+* UNIDIRECTIONAL FEATURES IN BIDIRECTIONAL FLOWS -- FIV, Mar 8, 2017
+
+You might find features that are unidirectional for flows defined bidirectionals. For example, given the flow A<>B, authors can use the total number of bytes from: (1) A to B, (2) B to A, or (3) both. In such cases, remember to define the <bidirectional> attribute as "separate_directions". Also, you can create the "_client_to_server" and "_server_to_client" faetures to discriminate the A>B and A<B situations (see the example below).
+
+        "features": [
+          {"basedon": ["octetTotalCount","_server_to_client"]},
+	  {"basedon": ["octetTotalCount","_client_to_server"]},
+          "octetTotalCount",
+        ], 
+
+
 * BAYES CLASSIFIER (SIMILARITY METRIC) -- FIV, Mar 8, 2017
 
 If you wonder which <similarity_metric> is used by bayes classifiers, they don't use any, they are probabilistic classifiers, so, in our case, we can just write "other", or alternatively, "probabilistic".
