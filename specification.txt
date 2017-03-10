@@ -136,6 +136,7 @@
 <operation> -> {"exp": [<value>]}
 <operation> -> {"entropy": [<value>]}
 <operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
+<operation> -> {"slice": [<value>, <value>, <values>]} | {"slice": [<value>, <value>, <value>]}  # gets third_argument[first_argument, second_argument] (if the third argument is also <value>, the elements are bits)
 <operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
 # end
 
