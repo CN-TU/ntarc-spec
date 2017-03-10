@@ -71,7 +71,7 @@
 # end
 
 # traffic_type
-<traffic_type> -> "ip" | "tcp" | "udp" | "dns" | "http" | null
+<traffic_type> -> "ip" | "tcp" | "udp" | "icmp" | "dns" | "http" | null
 # end
 
 # key
