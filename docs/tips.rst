@@ -11,9 +11,9 @@ I guess you might have noticed that many flow-based analysis validate/evaluate/v
 	"ground_truth": "packet_inspection" | "manual_verification" | "labeled_data" | "method_comparison"
 	"ground_truth_tool": {the specific name of the tool/method} 
 
-* UNIDIRECTIONAL FEATURES IN BIDIRECTIONAL FLOWS -- FIV, Mar 10, 2017
+* FEATURE SELECTION, X-VALIDATION,... NESTED METHODS -- FIV, Mar 10, 2017
 
-in some papers authors carry out "feature selection" and/or "cross-validation" as part of the analysis methods. They do not completely fit our templates, but it is very important to collect such information because these are two good examples of steps commonly considered as "good practices" (if not necessary) and, in many cases, not performed.
+In some papers authors carry out "feature selection" and/or "cross-validation" as part of the analysis methods. They do not completely fit our templates, but it is very important to collect such information because these are two good examples of steps commonly considered as "good practices" (if not necessary) and, in many cases, not performed.
 
 It does not make sense saying if X-validation is "supervised" or "unsupervised". Well, you could argue both definitions, because it is not supervised by itself but actually embeds/nests a supervised method.
 
