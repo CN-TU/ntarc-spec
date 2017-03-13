@@ -126,7 +126,7 @@
 <operation> -> {"argmax": [<values>]}
 <operation> -> {"count": [<selection>]}  # returns number of selected objects
 <operation> -> {"distinct": [<feature>, <selection>]}  # returns number of distinct values in <feature> in the selected objects
-<operation> -> {"apply": [<feature>, <selection>]}  # returns a feature value for a subset of objects
+<operation> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
 <operation> -> {"map": [<feature>, <selection>]}  # returns a feature value for each object in selection
 <operation> -> {"add": [<value>+]} | {"add": [<values>]}
 <operation> -> {"subtract": [<value>, <value>]}
