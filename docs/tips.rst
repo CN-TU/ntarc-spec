@@ -2,6 +2,35 @@ Tips
 ====
 
 
+* GROUND TRUTH FOR EVALUATION -- FIV, Mar 13, 2017
+
+I guess you might have noticed that many flow-based analysis validate/evaluate/verify their results by comparing their methods with other techniques (usually payload-based) that work as benchmarks. This is important for evaluations because, obviously, results (performance scores) are strongly linked to the benchmark (e.g., a classifier that obtains 100% of accuracy differentiating trivial classes like "TCP", "UDP", "ICMP" and "other-protocols" is not a breakthrough even though the nice classification performance). To collect related info I'm adding two fields in the <evaluation> group. They are:
+
+.. code-block:: none
+
+	"ground_truth": "packet_inspection" | "manual_verification" | "labeled_data" | "method_comparison"
+	"ground_truth_tool": {the specific name of the tool/method} 
+
+* UNIDIRECTIONAL FEATURES IN BIDIRECTIONAL FLOWS -- FIV, Mar 10, 2017
+
+in some papers authors carry out "feature selection" and/or "cross-validation" as part of the analysis methods. They do not completely fit our templates, but it is very important to collect such information because these are two good examples of steps commonly considered as "good practices" (if not necessary) and, in many cases, not performed.
+
+It does not make sense saying if X-validation is "supervised" or "unsupervised". Well, you could argue both definitions, because it is not supervised by itself but actually embeds/nests a supervised method.
+
+Therefore, I would propose, at some point, to use perhaps <learning> instead of the <supervision> field (in order not to make things more complicated, leave it like it is right now; I guess we can change it in the future automatically with some parsing tool). Anyway, the options would be:
+
+.. code-block:: none
+	<learning> (current <supervision>):
+   		-"supervised"
+   		-"unsupervised"
+  		-"semi_supervised"
+   		-"descriptive"
+   		-"nest"
+
+"descriptive" is for analysis methods that just give some plain description or summary of the analyzed data. Some examples of "nest" methods would be: stability selection, forward or backward selection (regression), consensus clustering, cross-validation, ensemble learning, etc.
+
+I would also include "feature_selection" as a new method <type>. It will be relevant to easily search which papers used feature selection in their methods.
+
 * UNIDIRECTIONAL FEATURES IN BIDIRECTIONAL FLOWS -- FIV, Mar 8, 2017
 
 You might find features that are unidirectional for flows defined bidirectionals. For example, given the flow A<>B, authors can use the total number of bytes from: (1) A to B, (2) B to A, or (3) both. In such cases, remember to define the <bidirectional> attribute as "separate_directions". Also, you can create the "_client_to_server" and "_server_to_client" faetures to discriminate the A>B and A<B situations (see the example below).
