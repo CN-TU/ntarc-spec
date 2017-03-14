@@ -1,6 +1,9 @@
 Tips
 ====
 
+* METRIC TYPE: MUTUAL INFORMATION AND INFORMATION GAIN -- FIV, Mar 14, 2017
+
+As metrics, "mutual information" and "information gain" are synonyms (also "entropy differences"). It's the typical metric for decision tress and other classifiers and filters that work with nominal features.
 
 * GROUND TRUTH FOR EVALUATION -- FIV, Mar 13, 2017
 
