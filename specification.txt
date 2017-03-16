@@ -124,6 +124,7 @@
 <operation> -> {"maximum": [<values>]}
 <operation> -> {"argmin": [<values>]}
 <operation> -> {"argmax": [<values>]}
+<operation> -> {"mode": [<values>]} # returns the most frequent element in <values>
 <operation> -> {"count": [<selection>]}  # returns number of selected objects
 <operation> -> {"distinct": [<feature>, <selection>]}  # returns number of distinct values in <feature> in the selected objects
 <operation> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
@@ -137,6 +138,7 @@
 <operation> -> {"entropy": [<value>]}
 <operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
 <operation> -> {"slice": [<value>, <value>, <values>]} | {"slice": [<value>, <value>, <value>]}  # gets third_argument[first_argument, second_argument] (if the third argument is also <value>, the elements are bits)
+<operation> -> {"ifelse": [<logic>, <value>, <value>]} # if the condition is true, return the first argument else the second
 <operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
 # end
 
