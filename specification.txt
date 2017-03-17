@@ -120,6 +120,8 @@
 <operation> -> {"mean": [<values>]}
 <operation> -> {"stdev": [<values>]}
 <operation> -> {"variance": [<values>]}
+<operation> -> {"median": [<values>]}
+<operation> -> {"quantile": [<values>, <value>]} # second argument is a number from 0 to 1, where 0 is the minimum and 1 the maximum
 <operation> -> {"minimum": [<values>]}
 <operation> -> {"maximum": [<values>]}
 <operation> -> {"argmin": [<values>]}
