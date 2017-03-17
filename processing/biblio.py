@@ -4,10 +4,11 @@ import csv
 import xml.etree.cElementTree as ElementTree
 from utils import XmlDictConfig
 from structures import Reference
+from conf import PROJECT_PATH
 
 
-META_FILE = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/papers_list.xml'
-OUTPUT_CSV = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/papers_list.csv'
+META_FILE = PROJECT_PATH + '/papers_list.xml'
+OUTPUT_CSV = PROJECT_PATH + '/papers_list.csv'
 
 
 class Paper(Reference):

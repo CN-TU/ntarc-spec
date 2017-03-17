@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 import math
 import csv
 from parse import *
+from conf import PROJECT_PATH
 
-PAPERS_DIR = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/papers'
+PAPERS_DIR = PROJECT_PATH + '/papers'
 
 
 def sort_dict(d):

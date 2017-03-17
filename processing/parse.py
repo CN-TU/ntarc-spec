@@ -37,9 +37,10 @@ def _open_json(filename):
 
 
 def _iterate_directory(directory):
-    for filename in sorted(os.listdir(directory)):
-        if filename[-5:] == '.json':
-            yield _open_json(directory + os.sep + filename)
+    for year in sorted(os.listdir(directory)):
+        for filename in sorted(os.listdir(directory + os.sep + year)):
+            if filename[-5:] == '.json':
+                yield _open_json(directory + os.sep + year + os.sep + filename)
 
 
 ##############################################
@@ -58,7 +59,7 @@ def find_all_features(d):
 
 def find_flow_features(d):
     out = set()
-    if d['flows'] is not None:
+    if 'flows' in d and d['flows'] is not None:
         for flow in d['flows']:
             feats = flow['features']
             if feats is not None:
@@ -120,17 +121,17 @@ def list_operations(directory):
 
 
 def list_references(directory):
-    out = set()
+    out = []
     for d in _iterate_directory(directory):
-        out.add(Reference(d))
+        out.append(Reference(d))
     return out
 
 
 def list_flow_references(directory):
-    out = set()
+    out = []
     for d in _iterate_directory(directory):
         if d['flows'] is not None and len(d['flows']) > 0:
-            out.add(Reference(d))
+            out.append(Reference(d))
     return out
 
 

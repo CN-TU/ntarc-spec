@@ -2,76 +2,249 @@ import os
 import six
 import simplejson
 import requests
+import time
+from conf import PROJECT_PATH, API_KEY
 
 
-CACHE_DIR = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/processing/.cache'
+CACHE_DIR = PROJECT_PATH + '/processing/.cache'
 
 
-class Reference(object):
-    def __init__(self, d):
-        if isinstance(d, six.string_types):
-            d = simplejson.load(open(d, 'r'))
-        ref = d['reference']
-        self._author_full = ref['author']
-        self.author = ref['author'].replace('et al.', '').strip()
-        self.title = ref['title']
-        self.year = ref['year']
+class BaseEntity(object):
+    url_base = 'https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate'
+    api_key = API_KEY
+    attrs = None
+
+    def __init__(self, id):
+        self._id = id
         self._data = None
+
+    def _query_id_attrs(self, id, attrs):
+        if not self._check_cache():
+            expr = 'Id=' + str(id)
+
+            url = self.url_base
+            url += '?expr=' + expr
+            url += '&attributes=' + attrs
+
+            r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': self.api_key})
+            data = r.json()
+            self._data = data['entities'][0]
+            self._write_cache(self._data)
+            time.sleep(1)
+        else:
+            self._load_cache()
+
+    @property
+    def id(self):
+        return self.data['Id']
+
+    @property
+    def data(self):
+        if self._data is None:
+            self._query_id_attrs(self._id, self.attrs)
+        return self._data
+
+    def _check_cache(self):
+        return os.path.isfile(self._cache_id_filename)
+
+    @property
+    def _cache_id_filename(self):
+        raise NotImplementedError
+
+    def _write_cache(self, data):
+        with open(self._cache_id_filename, 'w') as fd:
+            simplejson.dump(data, fd)
+
+    def _load_cache(self):
+        with open(self._cache_id_filename, 'r') as fd:
+            self._data = simplejson.load(fd)
+
+    def _query_id(self, id):
+        self._query_id_attrs(id, self.attrs)
+
+
+class Author(BaseEntity):
+    attrs = 'Id,AuN,DAuN,CC,ECC,E,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'author_id' + os.sep + str(self._id)
+
+
+class Affiliation(BaseEntity):
+    attrs = 'Id,AfN,DAfN,CC,ECC,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'affiliation_id' + os.sep + str(self._id)
+
+
+class Journal(BaseEntity):
+    attrs = 'Id,DJN,JN,CC,ECC,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'journal_id' + os.sep + str(self._id)
+
+
+class ConferenceSeries(BaseEntity):
+    attrs = 'Id,CN,DCN,CC,ECC,F.FId,F.FN,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'conferenceseries_id' + os.sep + str(self._id)
+
+
+class ConferenceInstance(BaseEntity):
+    attrs = 'Id,CIN,DCN,CIL,CISD,CIED,CIARD,CISDD,CIFVD,CINDD,CD.T,CD.D,PCS.CN,PCS.CId,CC,ECC,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'conferenceinstance_id' + os.sep + str(self._id)
+
+
+class FieldOfStudy(BaseEntity):
+    attrs = 'Id,FN,DFN,CC,ECC,FL,FP.FN,FP.FId,SSD'
+
+    @property
+    def _cache_id_filename(self):
+        return CACHE_DIR + os.sep + 'fieldofstudy_id' + os.sep + str(self._id)
+
+
+class Reference(BaseEntity):
+    attrs = 'Id,Ti,L,Y,D,CC,ECC,AA.AuN,AA.AuId,AA.AfN,AA.AfId,F.FN,F.FId,J.JN,J.JId,C.CN,C.CId,RId,W,E'
+
+    def __init__(self, d):
+        if isinstance(d, six.integer_types):
+            self._id = d
+            self._author = None
+            self._title = None
+            self._year = None
+            self._data = None
+            self._query_id(d)
+        else:
+            if isinstance(d, six.string_types):
+                d = simplejson.load(open(d, 'r'))
+            ref = d['reference']
+            self._author_full = ref['author']
+            self._author = ref['author'].replace('et al.', '').strip()
+            self._title = ref['title']
+            self._year = ref['year']
+            self._id = ref['id'] if 'id' in ref else None
+            self._data = None
 
     def __repr__(self):
         return self._author_full + ' ' + str(self.year)
 
     @property
+    def year(self):
+        if self._year is not None:
+            return self._year
+        else:
+            return self.data['Y']
+
+    @property
+    def title(self):
+        if self._title is not None:
+            return self._title
+        else:
+            try:
+                return self.data['E']['DN']
+            except:
+                return self.data['Ti']
+
+    @property
+    def author(self):
+        if self._author is not None:
+            return self._author
+        else:
+            return self.data['AA'][0]['AuN']
+
+    @property
     def _cache_filename(self):
-        return CACHE_DIR + os.sep + self.author + str(self.year) + self.title[:5]
+        return CACHE_DIR + os.sep + 'paper_map' + os.sep + self.author + str(self.year) + self.title[:5]
+
+    @property
+    def _cache_id_filename(self):
+        return self.get_cache_filename(self.id)
+
+    def get_cache_filename(self, id):
+        return CACHE_DIR + os.sep + 'paper_id' + os.sep + str(id)
 
     def _check_cache(self):
-        return os.path.isfile(self._cache_filename)
+        if self._author is None:
+            return os.path.isfile(self.get_cache_filename(self._id))
+        else:
+            return os.path.isfile(self._cache_filename)
 
     def _write_cache(self, data):
         with open(self._cache_filename, 'w') as fd:
+            fd.write(str(self.id))
+        with open(self._cache_id_filename, 'w') as fd:
             simplejson.dump(data, fd)
 
     def _load_cache(self):
-        with open(self._cache_filename, 'r') as fd:
+        try:
+            with open(self._cache_filename, 'r') as fd:
+                id = int(fd.read())
+        except:
+            id = self._id
+        with open(self.get_cache_filename(id), 'r') as fd:
             self._data = simplejson.load(fd)
+
+    def _query_id(self, id):
+        self._query_id_attrs(id, self.attrs)
 
     def _query(self):
         if not self._check_cache():
-            url_base = 'https://api.projectoxford.ai/academic/v1.0/evaluate'
-            url_base = 'https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate'
             title = "Ti='" + ''.join(e if e.isalnum() else ' ' for e in self.title.lower()).replace('  ', ' ') + "'"
             year = "Y=[" + str(self.year - 1) + ',' + str(self.year + 1) + ']'
             expr = "And(" + title + ', ' + year + ')'
-            attrs = 'Id,Ti,AA.AuN,ECC,E'
-            api_key = '55ebf3d7a5d04e3f91810a8cf9796d2a'
 
-            url = url_base
+            url = self.url_base
             url += '?expr=' + expr
-            url += '&attributes=' + attrs
-            r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': api_key})
+            url += '&attributes=' + self.attrs
+            r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': self.api_key})
             data = r.json()
             if 'entities' not in data or len(data['entities']) != 1:
                 print(self.author, self.title)
                 print(expr)
                 print()
-            self._data = data['entities'][0]
+            try:
+                self._data = data['entities'][0]
+            except IndexError:
+                if self._id is not None:
+                    self._query_id(self._id)
+                else:
+                    raise IndexError
             self._write_cache(self._data)
+            time.sleep(1)
         else:
             self._load_cache()
 
     @property
     def data(self):
         if self._data is None:
-            self._query()
+            if self._id is None:
+                self._query()
+            else:
+                self._query_id_attrs(self._id, self.attrs)
         return self._data
 
     @property
     def citations(self):
         return self.data['ECC']
 
+    @property
+    def bibliography(self):
+        return [Reference(id) for id in self.data['RId']] if 'RId' in self.data else []
 
-CONVERSION_FILE = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/dict.json'
+    @property
+    def affiliations(self):
+        return [Affiliation(auth['AfId']) for auth in self.data['AA'] if 'AfId' in auth]
+
+
+CONVERSION_FILE = PROJECT_PATH + '/dict.json'
 CONVERSION_D = None
 
 
@@ -88,7 +261,8 @@ def _convert_feature(feature):
 class Feature(object):
     _operations = {'features', 'mean', 'stdev', 'variance', 'minimum', 'maximum', 'argmin', 'argmax',
                   'count', 'distinct', 'apply', 'map', 'add', 'subtract', 'multiply', 'divide',
-                  'entropy', 'get', 'get_previous', 'select'}
+                  'entropy', 'get', 'get_previous', 'select', 'log', 'exp', 'slice', 'ifelse', 'basedon', 'quantile',
+                   'median', 'left_shift', 'right_shift', 'mode'}
     logic = {'geq', 'leq', 'less', 'greater', 'equal', 'and', 'or'}
     operations = _operations | logic
     def __init__(self, feature):
@@ -223,9 +397,3 @@ def _get(d, key):
         return d[key]
     except KeyError:
         return None
-
-
-if __name__ == '__main__':
-    filename = '/home/dferreira/projects/phd-df/processing_pcaps/feature_vectors/papers/tegeler2012.json'
-    ref = Reference(filename)
-    print(ref.citations)
