@@ -244,7 +244,7 @@ class Reference(BaseEntity):
         return [Affiliation(auth['AfId']) for auth in self.data['AA'] if 'AfId' in auth]
 
 
-CONVERSION_FILE = PROJECT_PATH + '/feature_vectors/dict.json'
+CONVERSION_FILE = PROJECT_PATH + '/dict.json'
 CONVERSION_D = None
 
 
