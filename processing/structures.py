@@ -3,7 +3,13 @@ import six
 import simplejson
 import requests
 import time
-from conf import PROJECT_PATH, API_KEY
+from googleplaces import GooglePlaces
+try:
+    from conf import PROJECT_PATH, API_KEY, MAPS_API_KEY
+except ImportError:
+    PROJECT_PATH = ''
+    API_KEY = ''
+    MAPS_API_KEY = ''
 
 
 CACHE_DIR = PROJECT_PATH + '/processing/.cache'
@@ -78,6 +84,42 @@ class Affiliation(BaseEntity):
     def _cache_id_filename(self):
         return CACHE_DIR + os.sep + 'affiliation_id' + os.sep + str(self._id)
 
+    @property
+    def _cache_location_filename(self):
+        return CACHE_DIR + os.sep + 'affiliation_location' + os.sep + str(self._id)
+
+    @property
+    def location(self):
+        if '_location_info' not in self.__dict__:
+            self._query_location()
+        return self._get_location()
+
+    def _get_location(self):
+        return (
+            float(self._location_info['geometry']['location']['lat']),
+            float(self._location_info['geometry']['location']['lng'])
+        )
+
+    def _check_location_cache(self):
+        return os.path.isfile(self._cache_location_filename)
+
+    def _query_location(self):
+        if not self._check_location_cache():
+            google_places = GooglePlaces(MAPS_API_KEY)
+            query_result = google_places.text_search(self.data['DAfN'])
+            self._location_info = query_result.raw_response['results'][0]
+            self._write_location_cache(self._location_info)
+            time.sleep(1)
+        else:
+            self._load_location_cache()
+
+    def _load_location_cache(self):
+        with open(self._cache_location_filename, 'r') as fd:
+            self._location_info = simplejson.load(fd)
+
+    def _write_location_cache(self, location_info):
+        with open(self._cache_location_filename, 'w') as fd:
+            simplejson.dump(location_info, fd)
 
 class Journal(BaseEntity):
     attrs = 'Id,DJN,JN,CC,ECC,SSD'

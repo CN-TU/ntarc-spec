@@ -1,9 +1,11 @@
+from os.path import expanduser
 import csv
 from parse import *
 from conf import PROJECT_PATH
 
 
 PAPERS_DIR = PROJECT_PATH + '/papers'
+HOME = expanduser("~")
 
 
 class PaperNode(object):
@@ -26,9 +28,11 @@ class PaperNode(object):
 
 
 class AffiliationNode(object):
-    def __init__(self, id, name):
+    def __init__(self, id, name, done, location):
         self.id = id
         self.name = name
+        self.done = done
+        self.location = location
 
     def __hash__(self):
         return hash(self.id)
@@ -37,7 +41,7 @@ class AffiliationNode(object):
         return self.id == other.id
 
     def __repr__(self):
-        return [self.id, self.name]
+        return [self.id, self.name, self.done, self.location[0], self.location[1]]
 
 
 def get_papers_graph():
@@ -52,6 +56,8 @@ def get_papers_graph():
         print('paper:', pap.title)
         nodes.add(node_a)
     for pap in list_references(PAPERS_DIR):
+        if len(pap.bibliography) == 0:
+            print('PROBLEM:', pap.title, pap.year)
         for c in pap.bibliography:
             try:
                 afil = c.affiliations[0].data['DAfN']
@@ -72,11 +78,15 @@ def get_affiliations_graph():
         print('paper:', pap.title)
         affils = pap.affiliations
         for affil in affils:
-            nodes.add(AffiliationNode(affil.id, affil.data['DAfN']))
+            nodes.add(AffiliationNode(affil.id, affil.data['DAfN'], 1, affil.location))
+    for pap in list_references(PAPERS_DIR):
+        affils = pap.affiliations
+        if len(pap.bibliography) == 0:
+            print('PROBLEM:', pap.title, pap.year)
         for c in pap.bibliography:
             new_affils = c.affiliations
             for new_affil in new_affils:
-                nodes.add(AffiliationNode(new_affil.id, new_affil.data['DAfN']))
+                nodes.add(AffiliationNode(new_affil.id, new_affil.data['DAfN'], 0, new_affil.location))
             for a in affils:
                 for aa in new_affils:
                     if (a, aa) in edges:
@@ -91,15 +101,15 @@ def get_affiliations_graph():
 
 
 nodes, edges = get_affiliations_graph()
-with open('~/nodes.csv', 'w') as fd:
+with open(HOME + '/nodes.csv', 'w') as fd:
     writer = csv.writer(fd)
     # writer.writerow(['Id', 'Title', 'Year', 'Author', 'Done', 'Affiliation'])
-    writer.writerow(['Id', 'Name'])
+    writer.writerow(['Id', 'Name', 'Done', 'Latitude', 'Longitude'])
     for node in nodes:
         n = node.__repr__()
         writer.writerow(n)
 
-with open('~/edges.csv', 'w') as fd:
+with open(HOME + '/edges.csv', 'w') as fd:
     writer = csv.writer(fd)
     writer.writerow(['Source', 'Target', 'Weight'])
     for edge in edges:

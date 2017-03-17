@@ -446,3 +446,85 @@ def flow_features_to_all(directory):
             d[k] = values[k][feat]
         out.append(d)
     return out
+
+
+##############################################
+#
+# Methods to...
+#
+##############################################
+
+
+def method_name_to_all(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        ref = Reference(d)
+        if 'methods' in d and d['methods'] is not None:
+            for method in d['methods']:
+                if method['name'] in values:
+                    obj = values[method['name']]
+                    obj['papers'].append(ref.title + '; ' + ref.author + '; ' + str(ref.year))
+                    obj['supervision'].add(method['supervision'])
+                    obj['type'].update(set(method['type'])
+                                       if type(method['type']) == list else {method['type']})
+                    obj['similarity_metric'].update(set(method['similarity_metric'])
+                                                    if type(method['similarity_metric']) == list
+                                                    else {method['similarity_metric']})
+                    obj['count'] += 1
+                else:
+                    values[method['name']] = {
+                        'papers': [ref.title + '; ' + ref.author + '; ' + str(ref.year)],
+                        'supervision': {method['supervision']},
+                        'type': set(method['type']) if type(method['type']) == list else {method['type']},
+                        'similarity_metric': set(method['similarity_metric'])
+                                                    if type(method['similarity_metric']) == list
+                                                    else {method['similarity_metric']},
+                        'count': 1
+                    }
+    return values
+
+
+def method_supervision_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'methods' in d and d['methods'] is not None:
+            for method in d['methods']:
+                for sup in method['supervision'] if type(method['supervision']) == list else [method['supervision']]:
+                    if sup in values:
+                        values[sup] += 1
+                    else:
+                        values[sup] = 1
+    return values
+
+
+def method_type_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'methods' in d and d['methods'] is not None:
+            for method in d['methods']:
+                for sup in method['type'] if type(method['type']) == list else [method['type']]:
+                    if sup in values:
+                        values[sup] += 1
+                    else:
+                        values[sup] = 1
+    return values
+
+
+def method_similarity_metric_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'methods' in d and d['methods'] is not None:
+            for method in d['methods']:
+                for sup in method['similarity_metric'] \
+                        if type(method['similarity_metric']) == list else [method['similarity_metric']]:
+                    if sup in values:
+                        values[sup] += 1
+                    else:
+                        values[sup] = 1
+    return values
+
+
+
+
+
+

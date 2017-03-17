@@ -1,7 +1,7 @@
 from __future__ import print_function
 import sys
 import json
-from structures import *
+from structures import Reference, Flow, Packet, FlowAggregation, Method, Evaluation, Dataset
 
 
 def _get_or_empty(d, key):
