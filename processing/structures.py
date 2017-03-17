@@ -261,7 +261,8 @@ def _convert_feature(feature):
 class Feature(object):
     _operations = {'features', 'mean', 'stdev', 'variance', 'minimum', 'maximum', 'argmin', 'argmax',
                   'count', 'distinct', 'apply', 'map', 'add', 'subtract', 'multiply', 'divide',
-                  'entropy', 'get', 'get_previous', 'select'}
+                  'entropy', 'get', 'get_previous', 'select', 'log', 'exp', 'slice', 'ifelse', 'basedon', 'quantile',
+                   'median', 'left_shift', 'right_shift', 'mode'}
     logic = {'geq', 'leq', 'less', 'greater', 'equal', 'and', 'or'}
     operations = _operations | logic
     def __init__(self, feature):

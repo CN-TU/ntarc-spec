@@ -59,7 +59,7 @@ def find_all_features(d):
 
 def find_flow_features(d):
     out = set()
-    if d['flows'] is not None:
+    if 'flows' in d and d['flows'] is not None:
         for flow in d['flows']:
             feats = flow['features']
             if feats is not None:
