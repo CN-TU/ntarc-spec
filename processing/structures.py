@@ -431,7 +431,11 @@ class Dataset(object):
             except:
                 assert False, "Error parsing datasets file!"
             assert d in parsed, "Unknown dataset %s!" % (d)
+        self._data = parsed[self.key]
 
+    @property
+    def availability(self):
+        return self._data['availability']
 
 
 def _get(d, key):

@@ -2,7 +2,7 @@ import os
 import traceback
 from collections import OrderedDict
 import simplejson
-from structures import Reference, Feature
+from structures import Reference, Feature, Dataset
 
 
 def _discounted_citations(ref):
@@ -524,7 +524,79 @@ def method_similarity_metric_count(directory):
     return values
 
 
+##############################################
+#
+# Evaluation to...
+#
+##############################################
 
 
+def evaluation_metrics_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'evaluations' in d and d['evaluations'] is not None:
+            for evaluation in d['evaluations']:
+                if 'metrics' in evaluation and evaluation['metrics'] is not None:
+                    for metric in evaluation['metrics']:
+                        if metric in values:
+                            values[metric] += 1
+                        else:
+                            values[metric] = 1
+    return values
+
+def evaluation_method_evaluation_count(directory):
+    values = {'null': 0}
+    for d in _iterate_directory(directory):
+        if 'evaluations' in d and d['evaluations'] is not None:
+            for evaluation in d['evaluations']:
+                if 'method_evaluation' not in evaluation or evaluation['method_evaluation'] is None:
+                    values['null'] += 1
+                else:
+                    if evaluation['method_evaluation'] in values:
+                        values[evaluation['method_evaluation']] += 1
+                    else:
+                        values[evaluation['method_evaluation']] = 1
+
+                if 'metrics' in evaluation and evaluation['metrics'] is not None:
+                    for metric in evaluation['metrics']:
+                        if metric in values:
+                            values[metric] += 1
+                        else:
+                            values[metric] = 1
+    return values
 
 
+##############################################
+#
+# Dataset to...
+#
+##############################################
+
+
+def dataset_availability_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'datasets' in d and d['datasets'] is not None:
+            for dd in d['datasets']:
+                dataset = Dataset(dd)
+                if dataset.availability in values:
+                    values[dataset.availability] += 1
+                else:
+                    values[dataset.availability] = 1
+    return values
+
+
+def dataset_one_public_count(directory):
+    values = {'yes': 0, 'no': 0}
+    for d in _iterate_directory(directory):
+        if 'datasets' in d and d['datasets'] is not None:
+            flag = False
+            for dd in d['datasets']:
+                dataset = Dataset(dd)
+                if dataset.availability == 'public':
+                    flag = True
+            if flag:
+                values['yes'] += 1
+            else:
+                values['no'] += 1
+    return values

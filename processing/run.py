@@ -5,6 +5,7 @@ from parse import *
 from conf import PROJECT_PATH
 
 PAPERS_DIR = PROJECT_PATH + '/papers'
+OUTPUT_DIR = PROJECT_PATH + '/csvs'
 
 
 def sort_dict(d):
@@ -71,10 +72,10 @@ print(cit_aut)
 cit_ref = features_to_references(PAPERS_DIR)
 
 all = features_to_all(PAPERS_DIR)
-list_of_dict_to_csv(all, PAPERS_DIR + '/../features_properties.csv')
+list_of_dict_to_csv(all, OUTPUT_DIR + '/features_properties.csv')
 
 flows_all = flow_features_to_all(PAPERS_DIR)
-list_of_dict_to_csv(flows_all, PAPERS_DIR + '/../flow_features_properties.csv')
+list_of_dict_to_csv(flows_all, OUTPUT_DIR + '/flow_features_properties.csv')
 
 cit_goal = goals_to_feature_usage(PAPERS_DIR)
 print(cit_goal)
