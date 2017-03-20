@@ -77,5 +77,8 @@ list_of_dict_to_csv(all, OUTPUT_DIR + '/features_properties.csv')
 flows_all = flow_features_to_all(PAPERS_DIR)
 list_of_dict_to_csv(flows_all, OUTPUT_DIR + '/flow_features_properties.csv')
 
+flow_keys = flow_key_features_to_all(PAPERS_DIR)
+list_of_dict_to_csv(flow_keys, OUTPUT_DIR + '/flow_keys_properties.csv')
+
 cit_goal = goals_to_feature_usage(PAPERS_DIR)
 print(cit_goal)

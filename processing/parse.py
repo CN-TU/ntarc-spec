@@ -448,6 +448,60 @@ def flow_features_to_all(directory):
     return out
 
 
+def flow_key_features_to_all(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'flows' in d and d['flows'] is not None and len(d['flows']) > 0:
+            ref = Reference(d)
+            for flow in d['flows']:
+                if 'key' in flow and flow['key'] is not None:
+                    if 'bidirectional' in flow['key'] and flow['key']['bidirectional'] is not None:
+                        direction = str(flow['key']['bidirectional'])
+                    else:
+                        direction = 'null'
+                    if 'key_features' in flow['key'] and flow['key']['key_features'] is not None:
+                        feats = flow['key']['key_features']
+                    else:
+                        feats = ['null']
+                    key_val = direction + ' ' + str(sorted(feats))
+                    if key_val in values:
+                        values[key_val]['nr_of_uses'] += 1
+                        values[key_val]['citations'] += ref.citations
+                        values[key_val]['discounted_citations'] += _discounted_citations(ref)
+                        values[key_val]['avg_citations'] = None
+                        values[key_val]['avg_discounted_citations'] = None
+                        values[key_val]['authors'].append(ref.author)
+                        values[key_val]['year_frequency'][ref.year] += 1
+                    else:
+                        year_dict = OrderedDict((k, 0) for k in range(2000, 2017))
+                        year_dict[ref.year] += 1
+                        values[key_val] = {
+                            'nr_of_uses': 1,
+                            'citations': ref.citations,
+                            'discounted_citations': _discounted_citations(ref),
+                            'avg_citations': None,
+                            'avg_discounted_citations': None,
+                            'authors': [ref.author],
+                            'year_frequency': year_dict
+                        }
+    out = []
+    for key, val in values.items():
+        new_dict = OrderedDict([
+            ('key', key),
+            ('nr_of_uses', val['nr_of_uses']),
+            ('citations', val['citations']),
+            ('avg_citations', val['citations'] / val['nr_of_uses']),
+            ('discounted_citations', val['discounted_citations']),
+            ('avg_discounted_citations', val['discounted_citations'] / val['nr_of_uses']),
+            ('authors', val['authors']),
+            ('year_frequency', val['year_frequency'])
+        ])
+        out.append(new_dict)
+    return out
+
+
+
+
 ##############################################
 #
 # Methods to...

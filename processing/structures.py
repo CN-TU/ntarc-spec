@@ -107,7 +107,11 @@ class Affiliation(BaseEntity):
         if not self._check_location_cache():
             google_places = GooglePlaces(MAPS_API_KEY)
             query_result = google_places.text_search(self.data['DAfN'])
-            self._location_info = query_result.raw_response['results'][0]
+            try:
+                self._location_info = query_result.raw_response['results'][0]
+            except IndexError:
+                print(query_result.raw_response)
+                raise IndexError(self.id)
             self._write_location_cache(self._location_info)
             time.sleep(1)
         else:
