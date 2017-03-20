@@ -406,7 +406,7 @@ class Method(object):
 
 
 class Evaluation(object):
-    _metrics = ['error_rate', 'classification_loss', 'error_rate_variation', 'error_distance', 'clustering_metrics',
+    _metrics = ['error_rate', 'classification_loss', 'error_rate_variation', 'error_distance', 'wavelet_score', 'clustering_metrics',
                 'time', 'space']
     _method_evaluation = ['internal', 'external', 'both']
 
