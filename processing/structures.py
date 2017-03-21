@@ -24,6 +24,12 @@ class BaseEntity(object):
         self._id = id
         self._data = None
 
+    def __hash__(self):
+        return hash(self.id)
+
+    def __eq__(self, other):
+        return self.id == other.id
+
     def _query_id_attrs(self, id, attrs):
         if not self._check_cache():
             expr = 'Id=' + str(id)
@@ -406,7 +412,7 @@ class Method(object):
 
 
 class Evaluation(object):
-    _metrics = ['error_rate', 'classification_loss', 'error_rate_variation', 'error_distance', 'wavelet_score', 'clustering_metrics',
+    _metrics = ['error_rate', 'classification_loss', 'error_rate_variation', 'error_distance', 'clustering_metrics',
                 'time', 'space']
     _method_evaluation = ['internal', 'external', 'both']
 
@@ -440,6 +446,10 @@ class Dataset(object):
     @property
     def availability(self):
         return self._data['availability']
+
+    @property
+    def type(self):
+        return self._data['type']
 
 
 def _get(d, key):
