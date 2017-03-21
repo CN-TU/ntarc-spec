@@ -9,5 +9,5 @@
 
 <dataset-key> -> <free-text>
 <data-type> -> "packet_pcap" | "packet_other" | "flow_sflow" | "flow_netflow" | "flow_ipfix" | "flow_other" | "other"
-<type> -> "real" | "synthetic" | "mixed"
+<type> -> "real" | "synthetic"
 <availability> -> "public" | "private" | "on_demand"
