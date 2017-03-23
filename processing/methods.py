@@ -47,6 +47,15 @@ with open(OUTPUT_DIR + '/methods_similarity_metric.csv', 'w') as fd:
         writer.writerow([sim, count])
 
 
+method_one_feature_selection = method_one_feature_selection_count(PAPERS_DIR)
+
+with open(OUTPUT_DIR + '/methods_one_feature_selection.csv', 'w') as fd:
+    writer = csv.writer(fd)
+    writer.writerow(['at_least_one_feature_selection_method', 'count'])
+    for ans, count in method_one_feature_selection.items():
+        writer.writerow([ans, count])
+
+
 evaluation_metrics = evaluation_metrics_count(PAPERS_DIR)
 
 with open(OUTPUT_DIR + '/evaluation_metrics.csv', 'w') as fd:
@@ -82,3 +91,20 @@ with open(OUTPUT_DIR + '/dataset_one_public.csv', 'w') as fd:
     for av, count in dataset_one_public.items():
         writer.writerow([av, count])
 
+
+dataset_type = dataset_traffic_type(PAPERS_DIR)
+
+with open(OUTPUT_DIR + '/dataset_traffic_type.csv', 'w') as fd:
+    writer = csv.writer(fd)
+    writer.writerow(['type', 'count'])
+    for t, count in dataset_type.items():
+        writer.writerow([t, count])
+
+
+dataset_counts = dataset_count(PAPERS_DIR)
+
+with open(OUTPUT_DIR + '/dataset_counts.csv', 'w') as fd:
+    writer = csv.writer(fd)
+    writer.writerow(['name', 'count'])
+    for n, count in dataset_counts.items():
+        writer.writerow([n, count])

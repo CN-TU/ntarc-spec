@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import math
 import csv
 from parse import *
+from parse import _iterate_directory
 from conf import PROJECT_PATH
 
 PAPERS_DIR = PROJECT_PATH + '/papers'
@@ -82,3 +83,21 @@ list_of_dict_to_csv(flow_keys, OUTPUT_DIR + '/flow_keys_properties.csv')
 
 cit_goal = goals_to_feature_usage(PAPERS_DIR)
 print(cit_goal)
+
+print(len(list(list_flow_references(PAPERS_DIR))), len(list(list_references(PAPERS_DIR))))
+n_flows, n_flows_w_key, n = (0, 0, 0)
+for d in _iterate_directory(PAPERS_DIR):
+    has_flow = False
+    has_flowkey = False
+    if 'flows' in d and d['flows'] is not None:
+        for f in d['flows']:
+            has_flow = True
+            if 'key' in f and f['key'] is not None and 'key_features' in f['key'] and f['key']['key_features'] is not\
+                    None:
+                has_flowkey = True
+    n += 1
+    if has_flow:
+        n_flows += 1
+        if has_flowkey:
+            n_flows_w_key += 1
+print(n_flows, n_flows_w_key, n)

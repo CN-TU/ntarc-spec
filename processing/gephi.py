@@ -126,6 +126,9 @@ def get_affiliations_collab_graph():
 
 
 def get_affiliations_collab_graph():
+    """
+    Gets usage of public datasets for affiliations
+    """
     nodes = {}
     edges = {}
     for d in _iterate_directory(PAPERS_DIR):
@@ -148,7 +151,7 @@ def get_affiliations_collab_graph():
             else:
                 nodes[affil.id] = (affil.id, affil.data['DAfN'], 1, affil.location[0],
                                    affil.location[1], int(has_public), 1)
-        for a1, a2 in combinations(affils, 2):
+        for a1, a2 in combinations(set(affils), 2):
             aff1 = min(a1.id, a2.id)
             aff2 = max(a1.id, a2.id)
             if (aff1, aff2) in edges:
@@ -158,7 +161,51 @@ def get_affiliations_collab_graph():
     out_nodes = []
     for key, val in nodes.items():
         tup = (val[0], val[1], val[2], val[3],
-               val[4], float(val[5]) / val[6])
+               val[4], float(val[5]) / val[6], val[6])
+        out_nodes.append(tup)
+
+    out_edges = []
+    for (source, target), weight in edges.items():
+        out_edges.append([source, target, weight, 'Undirected'])
+    return out_nodes, out_edges
+
+
+def get_affiliations_collab_graph():
+    """
+    Gets usage of feature selection methods for affiliations
+    """
+    nodes = {}
+    edges = {}
+    for d in _iterate_directory(PAPERS_DIR):
+        pap = Reference(d)
+        has_feat_sel = False
+        if 'methods' in d and d['methods'] is not None:
+            for dd in d['methods']:
+                if dd['type'] == 'feature_selection':
+                    has_feat_sel = True
+
+        print('paper:', pap.title)
+        affils = pap.affiliations
+        for affil in affils:
+            if affil.id in nodes:
+                tup = nodes[affil.id]
+                new_tup = (tup[0], tup[1], tup[2], tup[3],
+                           tup[4], tup[5] + int(has_feat_sel), tup[6] + 1)
+                nodes[affil.id] = new_tup
+            else:
+                nodes[affil.id] = (affil.id, affil.data['DAfN'], 1, affil.location[0],
+                                   affil.location[1], int(has_feat_sel), 1)
+        for a1, a2 in combinations(set(affils), 2):
+            aff1 = min(a1.id, a2.id)
+            aff2 = max(a1.id, a2.id)
+            if (aff1, aff2) in edges:
+                edges[aff1, aff2] += 1.
+            else:
+                edges[aff1, aff2] = 1.
+    out_nodes = []
+    for key, val in nodes.items():
+        tup = (val[0], val[1], val[2], val[3],
+               val[4], float(val[5]) / val[6], val[6])
         out_nodes.append(tup)
 
     out_edges = []
@@ -172,8 +219,8 @@ def get_affiliations_collab_graph():
 nodes, edges = get_affiliations_collab_graph()
 with open(HOME + '/nodes.csv', 'w') as fd:
     writer = csv.writer(fd)
-    # writer.writerow(['Id', 'Title', 'Year', 'Author', 'Done', 'Affiliation'])
-    writer.writerow(['Id', 'Name', 'Done', 'lat', 'lng', 'public_datasets'])
+    # writer.writerow(['Id', 'Label', 'Year', 'Author', 'Done', 'Affiliation'])
+    writer.writerow(['Id', 'Label', 'Done', 'lat', 'lng', 'feature_selection', 'paper_count'])
     for node in nodes:
         n = node.__repr__()
         n = node

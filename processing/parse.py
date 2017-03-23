@@ -130,7 +130,7 @@ def list_references(directory):
 def list_flow_references(directory):
     out = []
     for d in _iterate_directory(directory):
-        if d['flows'] is not None and len(d['flows']) > 0:
+        if 'flows' in d and d['flows'] is not None and len(d['flows']) > 0:
             out.append(Reference(d))
     return out
 
@@ -470,7 +470,7 @@ def flow_key_features_to_all(directory):
                         values[key_val]['discounted_citations'] += _discounted_citations(ref)
                         values[key_val]['avg_citations'] = None
                         values[key_val]['avg_discounted_citations'] = None
-                        values[key_val]['authors'].append(ref.author)
+                        values[key_val]['authors'].append(ref.author + ' ' + ref.title[:5] + str(ref.year))
                         values[key_val]['year_frequency'][ref.year] += 1
                     else:
                         year_dict = OrderedDict((k, 0) for k in range(2000, 2017))
@@ -481,7 +481,7 @@ def flow_key_features_to_all(directory):
                             'discounted_citations': _discounted_citations(ref),
                             'avg_citations': None,
                             'avg_discounted_citations': None,
-                            'authors': [ref.author],
+                            'authors': [ref.author + ' ' + ref.title[:5] + str(ref.year)],
                             'year_frequency': year_dict
                         }
     out = []
@@ -489,6 +489,7 @@ def flow_key_features_to_all(directory):
         new_dict = OrderedDict([
             ('key', key),
             ('nr_of_uses', val['nr_of_uses']),
+            ('nr_papers', len(set(val['authors']))),
             ('citations', val['citations']),
             ('avg_citations', val['citations'] / val['nr_of_uses']),
             ('discounted_citations', val['discounted_citations']),
@@ -578,6 +579,21 @@ def method_similarity_metric_count(directory):
     return values
 
 
+def method_one_feature_selection_count(directory):
+    values = {'yes': 0, 'no': 0}
+    for d in _iterate_directory(directory):
+        if 'methods' in d and d['methods'] is not None:
+            flag = False
+            for method in d['methods']:
+                if method['type'] == 'feature_selection':
+                    flag = True
+            if flag:
+                values['yes'] += 1
+            else:
+                values['no'] += 1
+    return values
+
+
 ##############################################
 #
 # Evaluation to...
@@ -653,4 +669,26 @@ def dataset_one_public_count(directory):
                 values['yes'] += 1
             else:
                 values['no'] += 1
+    return values
+
+
+def dataset_traffic_type(directory):
+    values = {'real': 0, 'synthetic': 0, 'mixed': 0}
+    for d in _iterate_directory(directory):
+        if 'datasets' in d and d['datasets'] is not None:
+            for dd in d['datasets']:
+                dataset = Dataset(dd)
+                values[dataset.type] += 1
+    return values
+
+
+def dataset_count(directory):
+    values = {}
+    for d in _iterate_directory(directory):
+        if 'datasets' in d and d['datasets'] is not None:
+            for dd in d['datasets']:
+                if dd in values:
+                    values[dd] += 1
+                else:
+                    values[dd] = 1
     return values
