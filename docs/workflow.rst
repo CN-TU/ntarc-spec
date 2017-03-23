@@ -12,6 +12,10 @@ The following should be the basic workflow:
 .. Note:: There are papers which look like they have features on a first look, but turn out not to have any on deeper inspection.
     If this is the case, just move onto the next paper.
 
+.. todo::
+
+    Define workflow for external people
+
 
 Verify Script
 -------------
@@ -23,6 +27,8 @@ The output of this script (when no errors are raised) is just a count of objects
 
 Common Problems
 ---------------
+
+.. todo:: Remove internal mentions from this section
 
 Problems with Features
 ~~~~~~~~~~~~~~~~~~~~~~

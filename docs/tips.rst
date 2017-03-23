@@ -1,6 +1,8 @@
 Tips
 ====
 
+.. todo:: turn this into a FAQ
+
 * METRIC TYPE: MUTUAL INFORMATION AND INFORMATION GAIN -- FIV, Mar 14, 2017
 
 As metrics, "mutual information" and "information gain" are synonyms (also "entropy differences"). It's the typical metric for decision tress and other classifiers and filters that work with nominal features.
@@ -23,6 +25,7 @@ It does not make sense saying if X-validation is "supervised" or "unsupervised".
 Therefore, I would propose, at some point, to use perhaps <learning> instead of the <supervision> field (in order not to make things more complicated, leave it like it is right now; I guess we can change it in the future automatically with some parsing tool). Anyway, the options would be:
 
 .. code-block:: none
+
 	<learning> (current <supervision>):
    		-"supervised"
    		-"unsupervised"

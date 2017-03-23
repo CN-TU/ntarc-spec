@@ -1,6 +1,8 @@
 Reference
 =========
 
+.. todo:: add extra reference information
+
 The reference part needs just enough information to uniquely identify the paper.
 This is the main author name, title of the paper, and year it was published.
 

@@ -1,7 +1,7 @@
 Features
 ========
 
-The features are obviously the most important part of this format, and also the most complex.
+The features are the main focus of this format, and also the most complex part of it.
 
 Base Features
 -------------
@@ -63,7 +63,7 @@ Definition of ``logic``:
     :start-after: # logic
     :end-before: # end
 
-For this to be useful, you also need to understand the ``compare-packet`` and ``compare-flow`` directive.
+For this to be useful, you also need to understand the ``compare-packet`` and ``compare-flow`` directives.
 In fact, they are both the same, with the only difference being that ``compare-packet`` can only refer to packet-level features, and ``compare-flow`` can only refer to flow-level features.
 
 Definition of ``compare-packet`` and ``compare-flow``:

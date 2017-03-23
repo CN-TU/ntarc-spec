@@ -1,6 +1,8 @@
 Ideas for Future Work
 =====================
 
+.. todo:: should this be public?
+
 * Check which features are more commonly used
 * Find correlations between feature sets and authors/groups of authors (or academia vs industry)
 * Allow "others" in metrics (FIV)
