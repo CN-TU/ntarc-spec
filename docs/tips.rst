@@ -1,7 +1,7 @@
 Tips
 ====
 
-.. todo:: turn this into a FAQ
+.. todo:: turn this into a FAQ (or just keep private)
 
 * METRIC TYPE: MUTUAL INFORMATION AND INFORMATION GAIN -- FIV, Mar 14, 2017
 
