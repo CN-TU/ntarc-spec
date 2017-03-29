@@ -1,10 +1,12 @@
-from os.path import expanduser
 import csv
 from itertools import combinations
-from parse import *
-from parse import _iterate_directory
-from conf import PROJECT_PATH
+from os.path import expanduser
 
+from analyze import *
+from analyze import _iterate_directory
+from conf import PROJECT_PATH
+from structures.high_level import Dataset
+from structures.metadata import Reference
 
 PAPERS_DIR = PROJECT_PATH + '/papers'
 HOME = expanduser("~")

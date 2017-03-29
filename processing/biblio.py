@@ -3,7 +3,7 @@ import six
 import csv
 import xml.etree.cElementTree as ElementTree
 from utils import XmlDictConfig
-from structures import Reference
+from structures.metadata import Reference
 from conf import PROJECT_PATH
 
 

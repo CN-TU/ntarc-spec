@@ -1,4 +1,4 @@
-from parse import *
+from analyze import *
 from conf import PROJECT_PATH
 
 
