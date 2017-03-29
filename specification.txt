@@ -110,72 +110,68 @@
 
 # features
 <features> -> [<feature>+] | null
-<feature> -> <packet-feature> | <flow-feature> | <aggregation-feature> | <operation>
+<feature> -> <value> | <base-feature>
 # end
+
+<packet-feature> -> <feature>
+<flow-feature> -> <feature>
+<aggregation-feature> -> <feature>
 
 <tool> -> <free-text>  # tool key
 
 # operation
-# <operation> always outputs a single number
-<operation> -> {"mean": [<values>]}
-<operation> -> {"stdev": [<values>]}
-<operation> -> {"variance": [<values>]}
-<operation> -> {"median": [<values>]}
-<operation> -> {"quantile": [<values>, <value>]} # second argument is a number from 0 to 1, where 0 is the minimum and 1 the maximum
-<operation> -> {"quantileRange": [<values>, <value>, <value>]} # e.g. {"quantileRange": [<values>, 0, 0.25]} returns all values in the first quartile
-<operation> -> {"minimum": [<values>]}
-<operation> -> {"maximum": [<values>]}
-<operation> -> {"argmin": [<values>]}
-<operation> -> {"argmax": [<values>]}
-<operation> -> {"mode": [<values>]} # returns the most frequent element in <values>
-<operation> -> {"count": [<selection>]}  # returns number of selected objects
-<operation> -> {"distinct": [<feature>, <selection>]}  # returns number of distinct values in <feature> in the selected objects
-<operation> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
-<operation> -> {"map": [<feature>, <selection>]}  # returns a feature value for each object in selection
-<operation> -> {"add": [<value>+]} | {"add": [<values>]}
-<operation> -> {"subtract": [<value>, <value>]}
-<operation> -> {"multiply": [<value>+]} | {"multiply": [<values>]
-<operation> -> {"divide": [<value>, <value>]}
-<operation> -> {"log": [<value>]}
-<operation> -> {"exp": [<value>]}
-<operation> -> {"entropy": [<value>]}
-<operation> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
-<operation> -> {"slice": [<value>, <value>, <values>]} | {"slice": [<value>, <value>, <value>]}  # gets third_argument[first_argument, second_argument] (if the third argument is also <value>, the elements are bits); indexing is like in Python
-<operation> -> {"ifelse": [<logic>, <value>, <value>]} # if the condition is true, return the first argument else the second
-<operation> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
-<operation> -> {"shift_left": [<value>, <value>]}  # shift the bits in the first value left by the second value
-<operation> -> {"shift_right": [<value>, <value>]}  # shift the bits in the first value right by the second value
+# <value> always outputs a single number (a <value>)
+<value> -> {"mean": [<values>]}
+<value> -> {"stdev": [<values>]}
+<value> -> {"variance": [<values>]}
+<value> -> {"median": [<values>]}
+<value> -> {"quantile": [<values>, <value>]} # second argument is a number from 0 to 1, where 0 is the minimum and 1 the maximum
+<value> -> {"minimum": [<values>]} | {"minimum": [<value>+]}
+<value> -> {"maximum": [<values>]} | {"maximum": [<value>+]}
+<value> -> {"argmin": [<values>]} | {"argmin": [<value>+]}
+<value> -> {"argmax": [<values>]} | {"argmax": [<value>+]}
+<value> -> {"mode": [<values>]} # returns the most frequent element in <values>
+<value> -> {"count": [<selection>]}  # returns number of selected objects
+<value> -> {"distinct": [<feature>, <selection>]}  # returns number of distinct values in <feature> in the selected objects
+<value> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
+<value> -> {"add": [<value>+]} | {"add": [<values>]}
+<value> -> {"subtract": [<value>, <value>]}
+<value> -> {"multiply": [<value>+]} | {"multiply": [<values>]}
+<value> -> {"divide": [<value>, <value>]}
+<value> -> {"log": [<value>]}
+<value> -> {"exp": [<value>]}
+<value> -> {"entropy": [<value>]}
+<value> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
+<value> -> {"ifelse": [<logic>, <value>, <value>]}  # if the condition is true, return the first argument else the second
+<value> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
+<value> -> {"left_shift": [<value>, <value>]}  # shift the bits in the first value left by the second value
+<value> -> {"right_shift": [<value>, <value>]}  # shift the bits in the first value right by the second value
+<value> -> <free-integer> | <base-feature>
 # end
 
 # values
-<values> -> <value>+ | UNDEFINED  # TODO define these, should be the list of feature values a particular set (in case of flows, the list of a particular packet-level feature)
-# end
-
-# value
-<value> -> <feature> | <operation> | <free-integer>
+# <values> outputs a list of <value>
+<values> -> {"map": [<feature>, <selection>]}  # returns a feature value for each object in selection
+<values> -> {"slice": [<value>, <value>, <values>]} | {"slice": [<value>, <value>, <value>]}  # gets third_argument[first_argument, second_argument] (if the third argument is also <value>, the elements are bits); indexing is like in Python
+<values> -> {"quantile_range": [<values>, <value>, <value>]} # e.g. {"quantile_range": [<values>, 0, 0.25]} returns all values in the first quartile
+<values> -> <feature>  # features from one level-down (in flows, packet features; in flow-aggregations, flow features)
 # end
 
 # selection
 # <selection> outputs a list of objects (packets, flows or aggregations, depending on what kind of feature is used)
 <selection> -> {"select": [<logic>]}
+<selection> -> {"select_slice": [<value>, <value>]} | {"select_slice": [<value>, <value>, <selection>]}  # selects a slice from the first value to the second value, with Python-like indexing (if a <selection is not provided, default to selecting everything)
 # end
 
 # logic
 # <logic> is used for selection, should be evaluated for each object
-<logic> -> {"and": [<logic>+]} | {"or": [<logic>+]}
-<logic> -> <compare-packet> | <compare-flow> | true | false
-# end
-
-# compare 
-<compare-packet> -> {"geq": [<feature-packet>, <value>]}
-<compare-packet> -> {"leq": [<feature-packet>, <value>]}
-<compare-packet> -> {"less": [<feature-packet>, <value>]}
-<compare-packet> -> {"greater": [<feature-packet>, <value>]}
-<compare-packet> -> {"equal": [<feature-packet>, <value>]}
-<compare-flow> -> {"geq": [<feature-flow>, <value>]}
-<compare-flow> -> {"leq": [<feature-flow>, <value>]}
-<compare-flow> -> {"less": [<feature-flow>, <value>]}
-<compare-flow> -> {"greater": [<feature-flow>, <value>]}
-<compare-flow> -> {"equal": [<feature-flow>, <value>]}
+<logic> -> {"and": [<logic>+]} 
+<logic> -> {"or": [<logic>+]}
+<logic> -> {"geq": [<feature>, <value>]}
+<logic> -> {"leq": [<feature>, <value>]}
+<logic> -> {"less": [<feature>, <value>]}
+<logic> -> {"greater": [<feature>, <value>]}
+<logic> -> {"equal": [<feature>, <value>]}
+<logic> -> true | false
 # end
 
