@@ -2,6 +2,9 @@ import json
 import six
 
 
+DATASETS_FILE = '../data/datasets.json'
+
+
 class Flow(object):
     def __init__(self, d):
         if isinstance(d, six.string_types):
@@ -62,7 +65,7 @@ class Evaluation(object):
 
 
 class Dataset(object):
-    _datasets_file = '../datasets.json'
+    _datasets_file = DATASETS_FILE
 
     def __init__(self, d):
         self.key = d
