@@ -228,6 +228,7 @@ class Feature(object):
     operations = _operations | _logic | _values | _selection
 
     def __init__(self, feature):
+        feature = _convert_feature(feature)
         self.feature = feature
         if type(feature) is dict:
             keys = list(feature)
