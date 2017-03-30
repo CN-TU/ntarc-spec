@@ -10,10 +10,10 @@ def copy_func(f, name=None):
         f.__defaults__, f.__closure__)
 
 
-IANA_IE_LIST = PROJECT_PATH + '/iana_ies.csv'
-OWN_IE_LIST = PROJECT_PATH + '/own_ies.csv'
+IANA_IE_LIST = PROJECT_PATH + '/data/iana_ies.csv'
+OWN_IE_LIST = PROJECT_PATH + '/data/own_ies.csv'
 SPECIFICATION_FILE = PROJECT_PATH + '/specification.txt'
-CONVERSION_FILE = PROJECT_PATH + '/dict.json'
+CONVERSION_FILE = PROJECT_PATH + '/data/feature_aliases.json'
 CONVERSION_D = None
 
 

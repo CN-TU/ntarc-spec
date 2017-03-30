@@ -3,7 +3,7 @@ from analyze import *
 from conf import PROJECT_PATH
 
 
-PAPERS_DIR = PROJECT_PATH + '/papers'
+PAPERS_DIR = PROJECT_PATH + '/data/papers'
 OUTPUT_DIR = PROJECT_PATH + '/csvs'
 
 
