@@ -26,16 +26,18 @@
   "type": <type>,
   "similarity_metric": <similarity_metric>
 }
-<supervision> -> "supervised" | "unsupervised" | "semi_supervised" | "descriptive"
-<type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
-<similarity_metric> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "exact_matching" | "probability" | "other"
+<supervision> -> "supervised" | "unsupervised" | "semi_supervised" | "descriptive" | "nest"
+<type> -> [<possible_type>+] | <possible_type>
+<possible_type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
+<similarity_metric> -> [<possible_similarity>+] | <possible_similarity>
+<possible_similarity> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "exact_matching" | "probability" | "other"
 # end
 
 # evaluation
 <evaluations> -> [<evaluation>+] | null
 <evaluation> -> {
   "metrics": [<metric>+] | null
-  "method_evaluation": [<method_evaluation>] | null  # null means no evaluation of method
+  "method_evaluation": <method_evaluation> | null  # null means no evaluation of method
 }
 <metric> -> "error_rate"   # e.g. accuracy, precision, recall, f-1, etc
 <metric> -> "classification_loss"   # e.g. log-loss, etc
@@ -44,8 +46,8 @@
 <metric> -> "clustering_metrics"  # e.g. silhouette, etc
 <metric> -> "time"  # time complexity/how much time is takes
 <metric> -> "space"  # space complexity/how much space is takes
-<method_evaluation> -> "internal"  # e.g. silhouette
-<method_evaluation> -> "external" # e.g. accuracy
+<method_evaluation> -> "internal"  # e.g. silhouette, metrics that do not depend on labels
+<method_evaluation> -> "external" # e.g. accuracy, metrics dependent on labels
 <method_evaluation> -> "both"  # both internal and external
 # end
 
@@ -71,7 +73,8 @@
 # end
 
 # traffic_type
-<traffic_type> -> "ip" | "tcp" | "udp" | "icmp" | "dns" | "http" | null
+<traffic_type> [<traffic_types>+] | <traffic_types>
+<traffic_types> -> "ip" | "tcp" | "udp" | "icmp" | "dns" | "http" | null
 # end
 
 # key
