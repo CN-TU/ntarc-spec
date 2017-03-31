@@ -1,8 +1,6 @@
 Aggregations, Flows & Packets
 =============================
 
-.. todo:: Remove "separate_directions" as soon as possible
-
 * The ``packets`` directive serves the purpose of representing feature-vectors which represent packets.
 * The ``flows`` directive allows representing aggregations of packets, according to a specific key.
 * The ``flow-aggregations`` directive is used for representing aggregations of flows, according to a specific key.

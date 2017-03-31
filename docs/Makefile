@@ -8,6 +8,9 @@ SPHINXPROJ    = feature_vectors
 SOURCEDIR     = .
 BUILDDIR      = _build
 
+default:
+	make clean html
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
