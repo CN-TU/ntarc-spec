@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd processing && python verify.py ../"$@"
+cd processing && python scripts/verify.py ../"$@"
