@@ -19,7 +19,7 @@ Key
 
 The ``key`` directive contains itself some more fields:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # key
     :end-before: # end
@@ -33,7 +33,7 @@ you will get two features, one with the octetTotalCount in the packets in one di
 
 Definition of ``bidirectional``:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # bidirectional
     :end-before: # end
@@ -59,7 +59,7 @@ Traffic Type
 The ``traffic_type`` directive is to be used when only traffic of a certain type is used.
 Its definition follows:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # traffic_type
     :end-before: # end
@@ -69,21 +69,21 @@ Definitions
 
 Definition of ``packet``:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # packets
     :end-before: # end
 
 Definition of ``flow``:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # flows
     :end-before: # end
 
 Definition of ``flow-aggregation``:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # flow-aggregations
     :end-before: # end

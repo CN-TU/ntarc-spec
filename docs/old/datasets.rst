@@ -7,5 +7,5 @@ When a new dataset is used, please add it to the list of datasets, using the spe
 Specification
 -------------
 
-.. include:: ../datasets_specification.txt
+.. include:: ../../datasets_specification.txt
     :literal:

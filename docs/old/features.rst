@@ -30,7 +30,7 @@ Operations
 
 Below is a complete list of possible operations:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # operation
     :end-before: # end
@@ -50,7 +50,7 @@ Intuitively, using selection on a flow will select packets (that is, the result 
 
 Its syntax is the following:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # selection
     :end-before: # end
@@ -58,7 +58,7 @@ Its syntax is the following:
 The ``logic`` directive contains the test to decide what gets or not filtered.
 Definition of ``logic``:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # logic
     :end-before: # end
@@ -68,7 +68,7 @@ Feature Specification
 
 The following is the specification for the ``features`` and ``feature`` directives:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # features
     :end-before: # end

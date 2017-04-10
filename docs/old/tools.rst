@@ -7,5 +7,5 @@ When a new tool is used, please add it to the list of datasets, using the specif
 Specification
 -------------
 
-.. include:: ../tools_specification.txt
+.. include:: ../../tools_specification.txt
     :literal:

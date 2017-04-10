@@ -8,7 +8,7 @@ For details on the JSON format in general, check JSON_.
 
 This is the high-level structure of a paper JSON file:
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
     :start-after: # paper
     :end-before: # end

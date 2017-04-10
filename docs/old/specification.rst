@@ -1,5 +1,5 @@
 Full Format Specification
 =========================
 
-.. include:: ../specification.txt
+.. include:: ../../specification.txt
     :literal:
