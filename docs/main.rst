@@ -29,11 +29,11 @@ Main Blocks
 ===========
 
 1. :ref:`reference`
-2. **data** 
-3. **preprocessing**
-4. **analysis_method**
-5. **evaluation**
-6. **result**
+2. :ref:`data`
+3. :ref:`preprocessing`
+4. :ref:`analysis_method`
+5. :ref:`evaluation`
+6. :ref:`result`
 
 
 JSON example (main blocks)
