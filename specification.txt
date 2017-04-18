@@ -149,7 +149,7 @@
 <value> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
 <value> -> {"left_shift": [<value>, <value>]}  # shift the bits in the first value left by the second value
 <value> -> {"right_shift": [<value>, <value>]}  # shift the bits in the first value right by the second value
-<value> -> <free-integer> | <base-feature>
+<value> -> <free-integer> | <base-feature> | <free-float>
 # end
 
 # values
