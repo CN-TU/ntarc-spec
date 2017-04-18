@@ -29,7 +29,7 @@ Analysis Method
 
 #. **tools** (see :ref:`preprocessing.tools <tools>`)
 
-#. **algorithms** (*array* of *objects*) *algorithms* can contain several *algorithm-objects*. An *algorithm-object* is composed of several fields: 
+#. *algorithms* (*array* of *objects*) *algorithms* can contain several *algorithm-objects*. An *algorithm-object* is composed of several fields: 
 
    #. **name** (*string*) The name that identifies the algorithm main family. Example:
 
@@ -37,13 +37,13 @@ Analysis Method
   
         "name": "fuzzy clustering"
 
-   #. **subname** (*string*) A subname that can be more specific and refer to algorithm specification or subclass. Example:
+   #. *subname* (*string*) A subname that can be more specific and refer to algorithm specification or subclass. Example:
 
       .. code-block:: none
   
         "subname": "gustafson-kessel"
 
-   #. **learning** (*string*) It identifies the learning approach of the algorithm. Please, consider carefully the following default labels (values): 
+   #. *learning* (*string*) It identifies the learning approach of the algorithm. Please, consider carefully the following default labels (values): 
 
       * ``"supervised"``
       * ``"unsupervised"``
@@ -61,13 +61,13 @@ Analysis Method
   
         "learning": "supervised"
 
-   #. **role** (*string*) This field is meaningful when diverse algorithms are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one algorithm is used, it is always ``"main"``. If the algorithm is used to establish a ground truth, its *role* is ``"validation"``. Example:
+   #. *role* (*string*) This field is meaningful when diverse algorithms are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one algorithm is used, it is always ``"main"``. If the algorithm is used to establish a ground truth, its *role* is ``"validation"``. Example:
 
       .. code-block:: none
   
         "role": "main"
 
-   #. **type** (*string*) It identifies the type of algorithm with regard to analysis main approaches. Please, consider carefully the following default labels (values): 
+   #. *type* (*string*) It identifies the type of algorithm with regard to analysis main approaches. Please, consider carefully the following default labels (values): 
 
       * ``"classification"``
       * ``"regression"``
@@ -86,7 +86,7 @@ Analysis Method
   
            "type": "heuristics"
 
-   #. **metric/decision_criteria** (*string*) It assesses the used metric, similarity or dissimilarity distance, also the core of the decision making criteria. Please, consider carefully the following default labels (values): 
+   #. *metric/decision_criteria* (*string*) It assesses the used metric, similarity or dissimilarity distance, also the core of the decision making criteria. Please, consider carefully the following default labels (values): 
 
        * ``"error/fitting_function"``
        * ``"euclidean"``
@@ -106,9 +106,9 @@ Analysis Method
   
             "metric/decision_criteria": "euclidean"
 
-   #. **tools** (see :ref:`preprocessing.tools <tools>`)
+   #. *tools* (see :ref:`preprocessing.tools <tools>`)
 
-   #. **source** (*string*) It identifies the origin of the algorithm. Please, consider carefully the following default labels (values): 
+   #. *source* (*string*) It identifies the origin of the algorithm. Please, consider carefully the following default labels (values): 
 
       * ``"own_proposed"``
         if authors developed and present the algorithm in the paper.
@@ -123,7 +123,7 @@ Analysis Method
   
            "source": "referenced"
 
-   #. **parameters_provided** (*boolean* or *string*) This field expresses if the required parameters for reproducing the analysis are provided. In addition to ``true`` and ``false``, ``"partially"`` is also possible when authors provide some parameters but some of them is missing or, for any reason, the experiment seems to be not reproducible. 
+   #. *parameters_provided* (*boolean* or *string*) This field expresses if the required parameters for reproducing the analysis are provided. In addition to ``true`` and ``false``, ``"partially"`` is also possible when authors provide some parameters but some of them is missing or, for any reason, the experiment seems to be not reproducible. 
 
       Example:
 

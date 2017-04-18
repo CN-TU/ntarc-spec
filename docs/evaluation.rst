@@ -58,7 +58,7 @@ Evaluation
 	"manual_verification": true
 
 
-#. **methods** (*array* of *objects*) *methods* can contain several *method-objects*. A *method-object* represents a technique used for the analysis evaluation or algorithm validation. A *method-object* is composed of several fields: 
+#. *methods* (*array* of *objects*) *methods* can contain several *method-objects*. A *method-object* represents a technique used for the analysis evaluation or algorithm validation. A *method-object* is composed of several fields: 
 
    #. **name** (*string*) The name that identifies the evaluation method. Example:
 
@@ -66,7 +66,7 @@ Evaluation
      
            "name": "normal classification metrics"
 
-   #. **type** (*string*) It identifies the type of evaluation method. Please, consider carefully the following default labels (values): 
+   #. *type* (*string*) It identifies the type of evaluation method. Please, consider carefully the following default labels (values): 
 
       * ``"external"``
       * ``"internal"``
@@ -79,7 +79,7 @@ Evaluation
   
            "type": "external"
 
-   #. **metrics** (*array* of *string*) It assesses the used metrics for the evaluation. Please, consider carefully the following default labels (values): 
+   #. *metrics* (*array* of *string*) It assesses the used metrics for the evaluation. Please, consider carefully the following default labels (values): 
 
       * ``"error_distance"``
       * ``"function_fitting"``
@@ -108,7 +108,7 @@ Evaluation
   
            "metric/decision_criteria": "euclidean"
 
-   #. **source** (*string*) It identifies the origin of the method. Please, consider carefully the following default labels (values): 
+   #. *source* (*string*) It identifies the origin of the method. Please, consider carefully the following default labels (values): 
 
       * ``"own_proposed"``
         if authors developed and present the algorithm in the paper.

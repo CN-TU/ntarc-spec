@@ -11,7 +11,7 @@ Data
    
          "dataset_name": "mawi-2015"
 
-  #. **availability** (*string*) It establishes how a normal Internet user can access the specific dataset. Please, consider carefully if the dataset-accesibility fits any of the following default labels (values):
+  #. *availability* (*string*) It establishes how a normal Internet user can access the specific dataset. Please, consider carefully if the dataset-accesibility fits any of the following default labels (values):
 
      * ``"public"``
      * ``"public_on_demand"``
@@ -25,13 +25,13 @@ Data
   
           "availability": "public"
 
-  #. **format** (*string*) It specifically addresses if the dataset contains packet or flow descriptions. Therefore, the options by default are: ``"packet"`` and ``"flow"``. Example:
+  #. *format* (*string*) It specifically addresses if the dataset contains packet or flow descriptions. Therefore, the options by default are: ``"packet"`` and ``"flow"``. Example:
 
      .. code-block:: none
 
     	"format": "flow"
 
-  #. **types** (*array* of *strings*) It specifically addresses if the dataset has been pre-filtered and only contains some types of data based on protocols, versions, etc. Consider labels (values) as filter keys (e.g., if ``"ipv4"`` is used, there is no need to add ``"tcp"`` or ``"udp"`` too). 
+  #. *types* (*array* of *strings*) It specifically addresses if the dataset has been pre-filtered and only contains some types of data based on protocols, versions, etc. Consider labels (values) as filter keys (e.g., if ``"ipv4"`` is used, there is no need to add ``"tcp"`` or ``"udp"`` too). 
      Please, check if the dataset-type fits any of the following default labels (values):
 
      ``"ip"``, ``"ipv4"``, ``"ipv6"``, ``"tcp"``, ``"http"``, ``"udp"``, ``"icmp"``, ``"dns"``
@@ -42,7 +42,7 @@ Data
 
      	"types": ["ipv4"]
 
-  #. **generation** (*string*) It contains information about how the dataset was generated.   Please, consider carefully if the dataset-generation fits any of the following default labels (values):
+  #. *generation* (*string*) It contains information about how the dataset was generated.   Please, consider carefully if the dataset-generation fits any of the following default labels (values):
 
      * ``"captured"``
        when the dataset has been directly captured from network sensors.  
@@ -65,7 +65,7 @@ Data
 
     	"generation_year": 2015
 
-  #. **covered_period** (*string*) It tries to give an approximate impression about the time covered by the used dataset during analysis. As a criterion, if the *covered_period* is below two times the unity, the selected label should be the immediately below, e.g., if the dataset covers 90 minutes, *covered_period* should be ``"minutes"``; however, if the dataset covers 120 minutes, *covered_period* should be ``"hours"``. 
+  #. *covered_period* (*string*) It tries to give an approximate impression about the time covered by the used dataset during analysis. As a criterion, if the *covered_period* is below two times the unity, the selected label should be the immediately below, e.g., if the dataset covers 90 minutes, *covered_period* should be ``"minutes"``; however, if the dataset covers 120 minutes, *covered_period* should be ``"hours"``. 
      Please, consider carefully if the covered period fits any of the following default labels (values):
  
      ``"minutes"``, ``"hours"``, ``"days"``, ``"weeks"``, ``"months"``, ``"years"``
@@ -76,7 +76,7 @@ Data
  
      	"covered_period": "hours"
 
-  #. **details** (*array* of *string*) Suitable to make a record of special characteristics of the dataset that are worth considering in meta-analysis. Please, consider carefully if  any of the following default labels (values) are applicable:
+  #. *details* (*array* of *string*) Suitable to make a record of special characteristics of the dataset that are worth considering in meta-analysis. Please, consider carefully if  any of the following default labels (values) are applicable:
 
      * ``"raw"``
         data is shown as came directly from sensors or generators with no shape/format transformation.  

@@ -44,7 +44,7 @@ Preprocessing
    
         "tool": "tshark"
 
-   #. **detail** (*string*) This field expresses important details about the referred tools (e.g., version, release). If no details are required, ``"none"`` should be written in the corresponding place. Example:
+   #. *detail* (*string*) This field expresses important details about the referred tools (e.g., version, release). If no details are required, ``"none"`` should be written in the corresponding place. Example:
 
       .. code-block:: none
     
@@ -129,7 +129,7 @@ Preprocessing
    
          "name": "forward_selection"
 
-   #. **type** (*string*) It identifies the type of feature selection method. Please, consider carefully the following default labels (values): 
+   #. *type* (*string*) It identifies the type of feature selection method. Please, consider carefully the following default labels (values): 
 
       * ``"wrapper"``
       * ``"filter"``
@@ -145,21 +145,21 @@ Preprocessing
       
            "type": "wrapper"
 
-   #. **classifier** (*string*) It identifies the wrapped classifier that is used to evaluate the subset performance. If *classifier* is not applicable (e.g., for filters), write ``"none"``. Example:
+   #. *classifier* (*string*) It identifies the wrapped classifier that is used to evaluate the subset performance. If *classifier* is not applicable (e.g., for filters), write ``"none"``. Example:
 
       .. code-block:: none
    
            "classifier": "naive_bayes"
 
-   #. **role** (*string*) This field is meaningful when diverse feature selection methods are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one feature selection method is used, it is always ``"main"``. Example:
+   #. *role* (*string*) This field is meaningful when diverse feature selection methods are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one feature selection method is used, it is always ``"main"``. Example:
 
       .. code-block:: none
    
            "role": "main"
 
-#. **packets** (*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. A *packet-object* is composed of several fields: 
+#. *packets* (*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. A *packet-object* is composed of several fields: 
 
-   #. **selection** (*string*) It identifies how the features extracted to analyze packets where selected. Please, consider carefully the following default labels (values):
+   #. *selection* (*string*) It identifies how the features extracted to analyze packets where selected. Please, consider carefully the following default labels (values):
 
       .. _selection:
 
@@ -180,7 +180,7 @@ Preprocessing
       
            "selection": "in_dataset"
    
-   #. **role** (*string*) This field is meaningful when diverse preprocessing methods are compared.
+   #. *role* (*string*) This field is meaningful when diverse preprocessing methods are compared.
 
       .. _role:
 
@@ -199,7 +199,7 @@ Preprocessing
   
         "role": "validation"
 
-   #. **main_goal** (*string*) This field saves the main goal of preparing the data according to this packet-based format. Please, consider the following possible labels (values):
+   #. *main_goal* (*string*) This field saves the main goal of preparing the data according to this packet-based format. Please, consider the following possible labels (values):
 
       .. _main_goal:
 
@@ -211,21 +211,21 @@ Preprocessing
   
            "main_goal": "traffic_classification"
 
-   #. **features** (see below)
+   #. *features* (see below)
 
 
-#. **flows** (*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. A *flow-object* is composed of several fields: 
+#. *flows* (*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. A *flow-object* is composed of several fields: 
 
-   #. **selection**
+   #. *selection*
       Like in :ref:`packet-object.selection <selection>`.
 
-   #. **role**
+   #. *role*
       Like in :ref:`packet-object.role <role>`.
  
-   #. **main_goal**
+   #. *main_goal*
       Like in :ref:`packet-object.main_goal <main_goal>`. 
 
-   #. **active_timeout** (*numerical*, in seconds) This field defines the maximum duration of a flow. Example:
+   #. *active_timeout* (*numerical*, in seconds) This field defines the maximum duration of a flow. Example:
       
       .. _active_timeout:
 
@@ -233,39 +233,39 @@ Preprocessing
   
         "active_timeout": 60
 
-   #. **idle_timeout** (*numerical*, in seconds) This field defines the time in which, if no activity has been detected, the flow is considered as finished. Example:
+   #. *idle_timeout* (*numerical*, in seconds) This field defines the time in which, if no activity has been detected, the flow is considered as finished. Example:
 
       .. code-block:: none
    
          "idle_timeout": 5
 
-   #. **bidirectional** (*boolean*) This field marks if transmissions between two devices A and B are considered monodirectional (``false``), i.e., A>B and A<B are two different flows; or bidirectional (``true``), i.e., A>B and A<B belong to the same flow . Example:
+   #. *bidirectional* (*boolean*) This field marks if transmissions between two devices A and B are considered monodirectional (``false``), i.e., A>B and A<B are two different flows; or bidirectional (``true``), i.e., A>B and A<B belong to the same flow . Example:
 
       .. code-block:: none
   
         "bidirectional": true
 
-   #. **features** (see :ref:`features <features>`)
+   #. *features* (see :ref:`features <features>`)
 
-   #. **key** (see :ref:`key <key>`)
+   #. *key* (see :ref:`key <key>`)
 
-#. **feature_aggregations** (*array* of *objects*) *feature_aggregation* can contain several *feature_aggregation-objects*. A *feature_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. A *feature_aggregation-object* is composed of several fields: 
+#. *feature_aggregations* (*array* of *objects*) *feature_aggregation* can contain several *feature_aggregation-objects*. A *feature_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. A *feature_aggregation-object* is composed of several fields: 
 
-   #. **selection**
+   #. *selection*
       Like in :ref:`packet-object.selection <selection>`.
 
-   #. **role**
+   #. *role*
       Like in :ref:`packet-object.role <role>`.
  
-   #. **main_goal**
+   #. *main_goal*
       Like in :ref:`packet-object.main_goal <main_goal>`. 
 
-   #. **active_timeout**
+   #. *active_timeout*
       Like in :ref:`flow-object.active_timeout <active_timeout>`.
 
-   #. **features** (see :ref:`features <features>`)
+   #. *features* (see :ref:`features <features>`)
 
-   #. **key** (see :ref:`key <key>`)
+   #. *key* (see :ref:`key <key>`)
 
 .. _features:
 

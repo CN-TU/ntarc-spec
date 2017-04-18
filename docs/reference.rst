@@ -52,7 +52,7 @@ Reference
  
  	"year": 2016
 
-#. **organization_publishers** (*array* of *strings*) Please, consider carefully if the publication fits one or more of the following default organizations (values):
+#. *organization_publishers* (*array* of *strings*) Please, consider carefully if the publication fits one or more of the following default organizations (values):
 
    ``"ieee"``, ``"elsevier"``, ``"acm"``, ``"springer"``, ``"wiley"``, ``"taylor_&_francis"``, ``"mdpi"``
  
@@ -63,7 +63,7 @@ Reference
  	"organization_publishers": ["acm"]
 
 
-#. **pages_number_of** (*numerical*) The total number of pages of the paper. Example:
+#. *pages_number_of* (*numerical*) The total number of pages of the paper. Example:
 
    .. code-block:: none
  
@@ -97,7 +97,7 @@ Reference
  
  	"bibtex_type": "article"
 
-#. **access_open** (*boolean*) Is the paper open access for any normal Internet user? Example:
+#. *access_open* (*boolean*) Is the paper open access for any normal Internet user? Example:
 
    .. code-block:: none
  

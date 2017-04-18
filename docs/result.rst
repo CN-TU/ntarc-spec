@@ -17,7 +17,7 @@ Result
 
          "main_goal": "traffic_classification"
 
-#. **subgoals** (*array* of *strings*) Here additional paper goals are collected. Goals are usually aimed in the *abstract* and must be understood as the *motivations* that inspire and justify the research. Please, repeat the main goal in this array and consider the following possible labels (values):
+#. *subgoals* (*array* of *strings*) Here additional paper goals are collected. Goals are usually aimed in the *abstract* and must be understood as the *motivations* that inspire and justify the research. Please, repeat the main goal in this array and consider the following possible labels (values):
 
     ``"anomaly_detection"``, ``"traffic_classification"``, ``"botnet_detection"``, ``"specific_malware_detection"``, ``"network_properties_monitoring"``, ``"dos_detection"``, ``"ddos_detection"``, ``"user_to_root_detection"``, ``"probe_detection"``, ``"p2p_traffic_classification"``, ``"application_classification"``, ``"remote_to_local_detection"``, ``"attack_classification"``, ``"p2p_botnet_detection"``, ``"application_protocol_detection"``, ``"classification_of_encrypted_traffic"``, ``"traffic_rate_prediction"``, ``"traffic_visualization"``, ``"classification_for_qos"``, ``"http_intrusion_detection"``
 
@@ -76,7 +76,7 @@ Result
   
         "claimed_improvements": ["improved_detection_rates","reduced_computational_resources"]
 
-#. **reproducibility** (*string*) This field states if, based on the opinion of the paper data curator, the experiments and analysis can be reproduced or repeated. Please, consider carefully the following default terms (values):
+#. *reproducibility* (*string*) This field states if, based on the opinion of the paper data curator, the experiments and analysis can be reproduced or repeated. Please, consider carefully the following default terms (values):
 
     * ``"reproducible"``
       experiments are fully reproducible by a different team after reading the paper. The setup, all parameters, tools and datasets are described and/or provided (references to valid links) in a clear and open way. Results are expected to be the same or very similar.

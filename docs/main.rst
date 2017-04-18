@@ -4,10 +4,10 @@ Global rules
 
 In order to keep data curation homogeneity, some global rules must be defined. They are:
 
-* *null* is a default value for fields that have not been checked in the curation process. 
-* *"missing"* replaces *null* when the required information for a specific fields has been checked but not found in the paper.
+* ``null`` is a default value for fields that have not been checked in the curation process. 
+* ``"missing"`` replaces ``null`` when the required information for a specific fields has been checked but not found in the paper.
 * To avoid confusion, everything should be written in lower cases, even names and acronyms that are usually written in capitals; e.g., "tcp", "shakespeare". A relevant exception is the set of IANA IPFIX features.
-* Any value that is not common or included among the predefined options must be preceded by '_', e.g., *_new_approach*.
+* Any value that is not common or included among the predefined options must be preceded by '_', e.g., ``"_new_approach"``.
 * Curated files must be named according to the following nomenclature: [first_author_surname]_[first_paper_title_word].json; e.g., *iglesias_time-activity.json*. More words can be added to avoid matching. 
 * Whenever a field allows an array of values, the name finishes with *s*. Otherwise, it only allows one value. For example:
 
