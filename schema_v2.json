@@ -1,0 +1,1259 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Paper",
+  "required": [
+    "reference",
+    "datasets",
+    "preprocessing",
+    "analysis",
+    "evaluation",
+    "results"
+  ],
+  "definitions": {
+    "feature": {
+      "title": "feature",
+      "type": [
+        "object",
+        "string",
+        "number",
+        "boolean"
+      ],
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/feature"
+        },
+        "minItems": 1
+      }
+    },
+    "key": {
+      "type": "array",
+      "title": "key_features",
+      "items": {
+        "$ref": "#/definitions/features"
+      }
+    },
+    "features": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/feature"
+      }
+    },
+    "goals": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "title": "goal",
+        "type": "string"
+      }
+    },
+    "tool": {
+      "type": "object",
+      "properties": {
+        "tool": {
+          "title": "tool",
+          "type": "string"
+        },
+        "detail": {
+          "title": "detail",
+          "type": "string"
+        },
+        "availability": {
+          "title": "availability",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "public",
+                "private",
+                "public_on_demand",
+                "commercial"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tool",
+        "availability"
+      ]
+    },
+    "traffic_type": {
+      "type": [
+        "string",
+        "null",
+        "array"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "title": "dataset",
+      "properties": {
+        "dataset_name": {
+          "title": "dataset_name",
+          "type": "string"
+        },
+        "availability": {
+          "title": "availability",
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "public",
+                "public_on_demand",
+                "private",
+                "lost_source"
+              ],
+              "title": "default values"
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "format": {
+          "title": "format",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "packet",
+                "flow"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "types": {
+          "title": "types",
+          "type": "array",
+          "oneOf": [
+            {
+              "enum": [
+                "ip",
+                "ipv4",
+                "ipv6",
+                "tcp",
+                "http",
+                "udp",
+                "icmp",
+                "dns"
+              ],
+              "title": "default values"
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "generation": {
+          "title": "generation",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "captured",
+                "synthetic",
+                "altered_captured",
+                "mixed"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "generation_year": {
+          "title": "generation_year",
+          "oneOf": [
+            {
+              "title": "year",
+              "type": "integer",
+              "minimum": 1900
+            },
+            {
+              "title": "years",
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "title": "year",
+                "minimum": 1900
+              }
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "covered_period": {
+          "title": "covered_period",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "minutes",
+                "hours",
+                "days",
+                "weeks",
+                "years"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "details": {
+          "title": "details",
+          "type": "array",
+          "items": {
+            "title": "detail",
+            "type": "string",
+            "oneOf": [
+              {
+                "title": "default values",
+                "enum": [
+                  "raw",
+                  "preprocessed",
+                  "no_payload"
+                ]
+              },
+              {
+                "$ref": "#/definitions/other"
+              }
+            ]
+          }
+        },
+        "subsets": {
+          "title": "subsets",
+          "type": "array",
+          "items": {
+            "title": "subset",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dataset_name",
+        "generation_year",
+        "subsets"
+      ]
+    },
+    "feature_selection": {
+      "title": "feature_selection",
+      "type": "string",
+      "oneOf": [
+        {
+          "title": "default values",
+          "enum": [
+            "in_dataset",
+            "feature_selection",
+            "study_based",
+            "tool_based",
+            "expert_knowledge"
+          ]
+        },
+        {
+          "$ref": "#/definitions/other"
+        },
+        {
+          "$ref": "#/definitions/missing"
+        }
+      ]
+    },
+    "role": {
+      "title": "role",
+      "type": "string",
+      "enum": [
+        "main",
+        "competitor",
+        "validation"
+      ]
+    },
+    "goal": {
+      "title": "main_goal",
+      "type": "string",
+      "oneOf": [
+        {
+          "title": "default values",
+          "enum": [
+            "anomaly_detection",
+            "traffic_classification",
+            "botnet_detection",
+            "specific_malware_detection",
+            "network_properties_monitoring",
+            "dos_detection",
+            "ddos_detection",
+            "user_to_root_detection",
+            "probe_detection",
+            "p2p_traffic_classification",
+            "application_classification",
+            "remote_to_local_detection",
+            "attack_classification",
+            "p2p_botnet_detection",
+            "application_protocol_detection",
+            "classification_of_encrypted_traffic",
+            "traffic_rate_prediction",
+            "traffic_visualization",
+            "classification_for_qos",
+            "http_intrusion_detection"
+          ]
+        },
+        {
+          "$ref": "#/definitions/other"
+        },
+        {
+          "$ref": "#/definitions/missing"
+        }
+      ]
+    },
+    "time": {
+      "type": [
+        "number",
+        "string"
+      ],
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "missing"
+          ]
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "title": "time"
+    },
+    "other": {
+      "type": "string",
+      "pattern": "^_[A-Za-z0-9-_]+",
+      "title": "other"
+    },
+    "missing": {
+      "title": "missing",
+      "type": "string",
+      "enum": [
+        "missing"
+      ]
+    }
+  },
+  "properties": {
+    "reference": {
+      "title": "reference",
+      "type": "object",
+      "properties": {
+        "title": {
+          "title": "title",
+          "type": "string"
+        },
+        "1st_author": {
+          "title": "1st_author",
+          "type": "string"
+        },
+        "authors": {
+          "title": "authors",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "title": "author"
+          }
+        },
+        "publication_name": {
+          "title": "publication_name",
+          "type": "string"
+        },
+        "publication_type": {
+          "title": "publication_type",
+          "type": "string",
+          "oneOf": [
+            {
+              "enum": [
+                "peer_reviewed_journal",
+                "peer_reviewed_conference",
+                "technical_report",
+                "arxiv"
+              ],
+              "title": "default values"
+            },
+            {
+              "$ref": "#/definitions/other"
+            }
+          ]
+        },
+        "year": {
+          "title": "year",
+          "type": "integer",
+          "minimum": 1900
+        },
+        "organization_publishers": {
+          "title": "organization_publishers",
+          "type": "array",
+          "items": {
+              "title": "organization_publisher",
+              "type": "string",
+              "oneOf": [
+                {
+                  "title": "default values",
+                  "enum": [
+                    "ieee",
+                    "elsevier",
+                    "acm",
+                    "springer",
+                    "wiley",
+                    "taylor_&_francis",
+                    "mdpi"
+                  ]
+                },
+                {
+                  "$ref": "#/definitions/other"
+                }
+              ]
+          }
+        },
+        "pages_number_of": {
+          "title": "pages_number_of",
+          "type": "integer",
+          "minimum": 0
+        },
+        "bibtex_volume": {
+          "title": "bibtex_volume",
+          "type": "string",
+          "pattern": "[0-9]+--[0-9]+"
+        },
+        "bibtex_issue": {
+          "title": "bibtex_issue",
+          "type": "string"
+        },
+        "bibtex_page_range": {
+          "title": "bibtex_page_range",
+          "type": "string",
+          "pattern": "^[0-9]+--[0-9]+$|missing"
+        },
+        "bibtex_type": {
+          "title": "bibtex_type",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "article",
+                "inproceedings",
+                "techreport",
+                "inbook",
+                "misc"
+              ]
+            },
+            {
+              "title": "other",
+              "type": "string"
+            }
+          ]
+        },
+        "access_open": {
+          "title": "access_open",
+          "type": "boolean"
+        },
+        "curated_by": {
+          "title": "curated_by",
+          "type": "string"
+        },
+        "curated_last_revision": {
+          "title": "curated_last_revision",
+          "type": "string",
+          "pattern": "^[0-9]{2}-[0-9]{2}-[0-9]{4}$",
+          "description": "format: dd-mm-yyyy"
+        },
+        "curated_revision_number": {
+          "title": "curated_revision_number",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "title",
+        "1st_author",
+        "authors",
+        "publication_name",
+        "publication_type",
+        "year",
+        "bibtex_volume",
+        "bibtex_issue",
+        "bibtex_page_range",
+        "bibtex_type",
+        "curated_by",
+        "curated_last_revision",
+        "curated_revision_number"
+      ]
+    },
+    "datasets": {
+      "title": "datasets",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/dataset"
+      }
+    },
+    "preprocessing": {
+      "title": "preprocessing",
+      "type": "object",
+      "properties": {
+        "performed_feature_selection": {
+          "title": "performed_feature_selection",
+          "type": "boolean"
+        },
+        "packet_analysis_oriented": {
+          "title": "packet_analysis_oriented",
+          "type": "boolean"
+        },
+        "flow_analysis_oriented": {
+          "title": "flow_analysis_oriented",
+          "type": "boolean"
+        },
+        "flow_aggregation_analysis_oriented": {
+          "title": "flow_aggregation_analysis_oriented",
+          "type": "boolean"
+        },
+        "tools": {
+          "title": "tools",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tool"
+          }
+        },
+        "normalization_type": {
+          "title": "normalization_type",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "no",
+                "not_applicable",
+                "range",
+                "zscore",
+                "decimal_scaling",
+                "quartile"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "transformations": {
+          "title": "transformations",
+          "type": "array",
+          "items": {
+            "title": "transformation",
+            "type": "string",
+            "oneOf": [
+              {
+                "title": "default values",
+                "enum": [
+                  "no",
+                  "sampling",
+                  "filtering",
+                  "log",
+                  "map",
+                  "graph",
+                  "feature_aggregation",
+                  "flow_extraction",
+                  "entropy",
+                  "time_series",
+                  "feature_operation",
+                  "class_separation"
+                ]
+              },
+              {
+                "$ref": "#/definitions/other"
+              },
+              {
+                "$ref": "#/definitions/missing"
+              }
+            ]
+          }
+        },
+        "final_data_format": {
+          "title": "final_data_format",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "numerical_vectors",
+                "nominal_vectors",
+                "mixed_vectors",
+                "strings",
+                "time_series"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "feature_selections": {
+          "title": "feature_selections",
+          "type": "array",
+          "items": {
+            "title": "feature_selection",
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "name",
+                "type": "string"
+              },
+              "type": {
+                "title": "type",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "wrapper",
+                      "filter",
+                      "hybrid",
+                      "nest",
+                      "feature_reduction"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "classifier": {
+                "title": "classifier",
+                "type": "string"
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        },
+        "packets": {
+          "title": "packets",
+          "type": "array",
+          "items": {
+            "title": "packet",
+            "type": "object",
+            "properties": {
+              "selection": {
+                "$ref": "#/definitions/feature_selection"
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "main_goal": {
+                "$ref": "#/definitions/goal"
+              },
+              "features": {
+                "$ref": "#/definitions/features"
+              }
+            }
+          }
+        },
+        "flows": {
+          "title": "flows",
+          "type": "array",
+          "items": {
+            "title": "flow",
+            "type": "object",
+            "properties": {
+              "selection": {
+                "$ref": "#/definitions/feature_selection"
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "main_goal": {
+                "$ref": "#/definitions/goal"
+              },
+              "active_timeout": {
+                "title": "active_timeout",
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/time"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/time"
+                    },
+                    "title": "times"
+                  }
+                ]
+              },
+              "idle_timeout": {
+                "title": "idle_timeout",
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/time"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/time"
+                    },
+                    "title": "times"
+                  }
+                ]
+              },
+              "bidirectional": {
+                "title": "bidirectional",
+                "type": "boolean"
+              },
+              "features": {
+                "$ref": "#/definitions/features"
+              },
+              "key_features": {
+                "$ref": "#/definitions/key"
+              }
+            }
+          }
+        },
+        "flow_aggregations": {
+          "title": "flow_aggregations",
+          "type": "array",
+          "items": {
+            "title": "flow_aggregation",
+            "type": "object",
+            "properties": {
+              "selection": {
+                "$ref": "#/definitions/feature_selection"
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "main_goal": {
+                "$ref": "#/definitions/goal"
+              },
+              "active_timeout": {
+                "title": "active_timeout",
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/time"
+                  },
+                  {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/time"
+                    },
+                    "title": "times"
+                  }
+                ]
+              },
+              "features": {
+                "$ref": "#/definitions/features"
+              },
+              "key_features": {
+                "$ref": "#/definitions/key"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "performed_feature_selection",
+        "packet_analysis_oriented",
+        "flow_analysis_oriented",
+        "flow_aggregation_analysis_oriented",
+        "tools",
+        "normalization_type",
+        "transformations",
+        "final_data_format"
+      ]
+    },
+    "analysis": {
+      "title": "analysis",
+      "type": "object",
+      "properties": {
+        "supervised_learning": {
+          "title": "supervised_learning",
+          "type": "boolean"
+        },
+        "unsupervised_learning": {
+          "title": "unsupervised_learning",
+          "type": "boolean"
+        },
+        "semisupevised_learning": {
+          "title": "semisupervised_learning",
+          "type": "boolean"
+        },
+        "anomaly_detection": {
+          "title": "anomaly_detection",
+          "type": "boolean"
+        },
+        "tools": {
+          "title": "tools",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/tool"
+          }
+        },
+        "algorithms": {
+          "title": "algorithms",
+          "type": "array",
+          "items": {
+            "title": "algorithm",
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "name",
+                "type": "string"
+              },
+              "subname": {
+                "title": "subname",
+                "type": "string"
+              },
+              "learning": {
+                "title": "learning",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "supervised",
+                      "unsupervised",
+                      "semisupervised",
+                      "statistics/model_fit",
+                      "nest",
+                      "no"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "role": {
+                "$ref": "#/definitions/role"
+              },
+              "type": {
+                "title": "type",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "classification",
+                      "regression",
+                      "clustering",
+                      "heuristics",
+                      "anomaly_detection",
+                      "statistics",
+                      "text_matching"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "metric/decision_criteria": {
+                "title": "metric/decision_criteria",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "error/fitting_function",
+                      "euclidean",
+                      "mutual_information",
+                      "correlation",
+                      "jaccard",
+                      "mahalanobis",
+                      "hamming",
+                      "exact_matching",
+                      "manhattan",
+                      "probabilistic",
+                      "vote",
+                      "no"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "tools": {
+                "title": "tools",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/tool"
+                }
+              },
+              "source": {
+                "title": "source",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "own_proposed",
+                      "own_referenced",
+                      "referenced"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "parameters_provided": {
+                "title": "parameters_provided",
+                "oneOf": [
+                  {
+                    "title": "boolean",
+                    "type": "boolean"
+                  },
+                  {
+                    "title": "partially",
+                    "enum": [
+                      "partially"
+                    ]
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "supervised_learning",
+        "unsupervised_learning",
+        "semisupervised_learning",
+        "anomaly_detection",
+        "tools"
+      ]
+    },
+    "evaluation": {
+      "title": "evaluation",
+      "type": "object",
+      "properties": {
+        "algorithm_comparison": {
+          "title": "algorithm_comparison",
+          "type": "boolean"
+        },
+        "internal_validation": {
+          "title": "internal_validation",
+          "type": "boolean"
+        },
+        "external_validation": {
+          "title": "external_validation",
+          "type": "boolean"
+        },
+        "dpi-based_validation": {
+          "title": "dpi-based_validation",
+          "type": "boolean"
+        },
+        "port-based_validation": {
+          "title": "port-based_validation",
+          "type": "boolean"
+        },
+        "pre-knowledge-based_validation": {
+          "title": "pre-knowledge-based_validation",
+          "type": "boolean"
+        },
+        "manual_verification": {
+          "title": "manual_verification",
+          "type": "boolean"
+        },
+        "implementation_in_real_scenario": {
+          "title": "implementation_in_real_scenario",
+          "type": "boolean"
+        },
+        "train_test_separation": {
+          "title": "train_test_separation",
+          "type": "boolean"
+        },
+        "methods": {
+          "title": "methods",
+          "type": "array",
+          "items": {
+            "title": "evaluation_method",
+            "type": "object",
+            "properties": {
+              "name": {
+                "title": "name",
+                "type": "string"
+              },
+              "type": {
+                "title": "type",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "external",
+                      "internal",
+                      "external_and_internal",
+                      "nest"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              },
+              "metrics": {
+                "title": "metrics",
+                "type": "array",
+                "items": {
+                  "title": "metric",
+                  "type": "string",
+                  "oneOf": [
+                    {
+                      "title": "default values",
+                      "enum": [
+                        "error_distance",
+                        "function_fitting",
+                        "precision",
+                        "accuracy",
+                        "f-1",
+                        "roc/uac",
+                        "complete_confusion_matrix",
+                        "incomplete_confusion_matrix",
+                        "classification_loss",
+                        "clustering_metrics",
+                        "time-based",
+                        "computing_resources-based",
+                        "granularity-based",
+                        "heuristic",
+                        "vote"
+                      ]
+                    },
+                    {
+                      "$ref": "#/definitions/other"
+                    },
+                    {
+                      "$ref": "#/definitions/missing"
+                    }
+                  ]
+                }
+              },
+              "source": {
+                "title": "source",
+                "type": "string",
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "own_proposed",
+                      "own_referenced",
+                      "referenced",
+                      "popular"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      },
+      "required": [
+        "algorithm_comparison",
+        "internal_validation",
+        "external_validation",
+        "dpi-based_validation",
+        "implementation_in_real_scenario",
+        "manual_verification",
+        "train_test_separation",
+        "port-based_validation",
+        "pre-knowledge-based_validation",
+        "manual_verification"
+      ]
+    },
+    "result": {
+      "title": "result",
+      "type": "object",
+      "properties": {
+        "main_goal": {
+          "title": "main_goal",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "anomaly_detection",
+                "traffic_classification",
+                "botnet_detection",
+                "specific_malware_detection",
+                "network_properties_monitoring"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "subgoals": {
+          "title": "subgoals",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/goal"
+          }
+        },
+        "focus_main": {
+          "title": "focus_main",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "algorithm",
+                "methodology/framework",
+                "features",
+                "pattern_analysis",
+                "outlier_analysis",
+                "data_description"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        },
+        "claimed_improvements": {
+          "title": "claimed_improvements",
+          "type": "array",
+          "items": {
+            "title": "improvement",
+            "type": "string",
+            "oneOf": [
+              {
+                "title": "default values",
+                "enum": [
+                  "improved_detection_rates",
+                  "improved_traffic_classification",
+                  "new_phenomena_disclosed",
+                  "fast_processing",
+                  "reduced_computational_resources",
+                  "good_transportability",
+                  "enhanced_functionality",
+                  "improved_data_description",
+                  "parallelization_oriented",
+                  "big_data_oriented",
+                  "data_stream_oriented"
+                ]
+              },
+              {
+                "$ref": "#/definitions/other"
+              },
+              {
+                "$ref": "#definitions/missing"
+              }
+            ]
+          }
+        },
+        "reproducibility": {
+          "title": "reproducibility",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "default values",
+              "enum": [
+                "reproducible",
+                "replicable",
+                "repeatable",
+                "no"
+              ]
+            },
+            {
+              "$ref": "#/definitions/other"
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
+        }
+      },
+      "required": [
+        "main_goal",
+        "focus_main",
+        "claimed_improvements"
+      ]
+    }
+  }
+}
