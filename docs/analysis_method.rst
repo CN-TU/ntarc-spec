@@ -78,11 +78,11 @@ learning (*optional*)
 * ``"unsupervised"``
 * ``"semisupervised"``
 * ``"statistics/model_fit"``
-   the method uses predefined models, distributions and statistics and tries to check how real data fit such assumed models, i.e., it finds model parameters, gives summary values or discovers outliers based on distances to models. 
+  the method uses predefined models, distributions and statistics and tries to check how real data fit such assumed models, i.e., it finds model parameters, gives summary values or discovers outliers based on distances to models. 
 * ``"nest"``
-   when it embeds or operates in a higher level than other nested methods. 
+  when it embeds or operates in a higher level than other nested methods. 
 * ``"no"``
-   it is somehow not possible to apply the word *learning* to the used algorithm        
+  it is somehow not possible to apply the word *learning* to the used algorithm        
 
 Example:
 

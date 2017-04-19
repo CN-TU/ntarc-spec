@@ -83,7 +83,7 @@ Example:
 generation_year
 ---------------
 
-(*numerical*) The year the dataset was captured or generated. Example:
+(*numerical* or *array* of *numberical*) The year the dataset was captured or generated. Example:
 
 .. code-block:: none
 
@@ -109,11 +109,11 @@ details (*optional*)
 (*array* of *string*) Suitable to make a record of special characteristics of the dataset that are worth considering in meta-analysis. Please, consider carefully if  any of the following default labels (values) are applicable:
 
 * ``"raw"``
-   data is shown as came directly from sensors or generators with no shape/format transformation.  
+  data is shown as came directly from sensors or generators with no shape/format transformation.  
 * ``"preprocessed"`` 
-   data has been transformed/mapped during a preprocessing step. Such preprocessing must have changed somehow the data format, for example, transforming it in structured vectors (i.e., filtered data is still ``"raw"``).  
+  data has been transformed/mapped during a preprocessing step. Such preprocessing must have changed somehow the data format, for example, transforming it in structured vectors (i.e., filtered data is still ``"raw"``).  
 * ``"no_payload"``
-   when payload has been removed from data. Payload removal does not make data *preprocessed*.  
+  when payload has been removed from data. Payload removal does not make data *preprocessed*.  
 
 Example:
 

@@ -90,8 +90,8 @@ Example:
  
    	"final_data_format": "numerical_vectors"
 
-feature_selections
-~~~~~~~~~~~~~~~~~~
+feature_selections (*optional*)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 (*array* of *objects*) *feature_selections* can contain several *feature_selection-objects*. A *feature_selection-object* is composed of several fields: 
 
@@ -149,7 +149,7 @@ packets (*optional*)
 selection (*optional*)
 ----------------------
 
-(*string*) It identifies how the features extracted to analyze packets where selected. Please, consider carefully the following default labels (values):
+(*string*) It identifies how the features extracted to analyze packets were selected. Please, consider carefully the following default labels (values):
 
 .. _selection:
 

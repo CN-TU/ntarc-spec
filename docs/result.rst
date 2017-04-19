@@ -6,8 +6,8 @@ Result
 Properties
 ``````````
 
-main_goals
-~~~~~~~~~~
+main_goal
+~~~~~~~~~
 
 (*string*) This field should contain the main paper goal. In case of doubt, abstract and conclusion sections should help to establish this value. Please, consider carefully the following default labels (values):
 

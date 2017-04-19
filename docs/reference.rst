@@ -155,7 +155,7 @@ curated_by
 curated_last_revision
 ~~~~~~~~~~~~~~~~~~~~~
 
-(*string*, format: *dd-mm-yy*) Date of the last revision/modification of this JSON file. Example:
+(*string*, format: *dd-mm-yyyy*) Date of the last revision/modification of this JSON file. Example:
 
 .. code-block:: none
  

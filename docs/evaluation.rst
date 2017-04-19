@@ -123,7 +123,7 @@ metrics (*optional*)
 * ``"accuracy"``
 * ``"recall"``
 * ``"f-1"``
-* ``"ROC/UAC"``
+* ``"roc/uac"``
 * ``"complete_confusion_matrix"``
   all information regarding the confusion matrix is provided.
 * ``"incomplete_confusion_matrix"``
@@ -142,7 +142,7 @@ Example:
 
 .. code-block:: none
 
-     "metric/decision_criteria": "euclidean"
+     "metrics": ["error_distance"]
 
 source (*optional*)
 -------------------
@@ -183,43 +183,43 @@ JSON example (evaluation, complete)
         {
             "name": "manual verification",
             "type": "external",
-            "metric": "heuristics",
+            "metrics": ["heuristics"],
             "source": "popular"
         },
         {
             "name": "weighted vote",
             "type": "nest",
-            "metric": "vote",
+            "metrics": ["vote"],
             "source": "popular"
         },
         {
             "name": "classification entropy",
             "type": "internal",
-            "metric_distance": "clustering_metrics",
+            "metrics": ["clustering_metrics"[,
             "source": "referenced"
         },
         {
             "name": "partition index",
             "type": "internal",
-            "metric": "clustering_metrics",
+            "metrics": ["clustering_metrics"],
             "source": "referenced"
         },
         {
             "name": "xie and benix index",
             "type": "internal",
-            "metric": "clustering_metrics",
+            "metrics": ["clustering_metrics"],
             "source": "referenced"
         },
         {
             "name": "clustering gain",
             "type": "internal",
-            "metric": "clustering_metrics",
+            "metrics": ["clustering_metrics"],
             "source": "referenced"
         },
         {
             "name": "own cluster validity",
             "type": "internal",
-            "metric": "clustering_metrics",
+            "metrics": ["clustering_metrics"],
             "source": "missing"
         }
     ]
