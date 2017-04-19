@@ -3,138 +3,183 @@
 Analysis Method
 ===============
 
-#. **supervised_learning** (*boolean*) It marks if a classification or regression algorithm (or any technique known as supervised learning) was used during the analysis part (e.g., a decision tree). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+Properties
+``````````
 
-   .. code-block:: none
+supervised_learning
+~~~~~~~~~~~~~~~~~~~
+
+(*boolean*) It marks if a classification or regression algorithm (or any technique known as supervised learning) was used during the analysis part (e.g., a decision tree). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+
+.. code-block:: none
 
 	"supervised_learning": true
 
-#. **unsupervised_learning** (*boolean*) It marks if a clustering algorithm (or any technique known as unsupervised learning) was used during the analysis part (e.g., DBSCAN). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+unsupervised_learning
+~~~~~~~~~~~~~~~~~~~~~
 
-   .. code-block:: none
+(*boolean*) It marks if a clustering algorithm (or any technique known as unsupervised learning) was used during the analysis part (e.g., DBSCAN). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+
+.. code-block:: none
 
 	"unsupervised_learning": false
 
-#. **semisupervised_learning** (*boolean*) It marks if a algorithm known as semisupervised learning was used during the analysis part (e.g., Transductive SVM). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+semisupervised_learning
+~~~~~~~~~~~~~~~~~~~~~~~
 
-   .. code-block:: none
+(*boolean*) It marks if a algorithm known as semisupervised learning was used during the analysis part (e.g., Transductive SVM). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+
+.. code-block:: none
 
 	"semisupervised_learning": true
 
-#. **anomaly_detection** (*boolean*) It marks if a algorithm known as an anomaly detection technique was used during the analysis part (e.g., LOF). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+anomaly_detection
+~~~~~~~~~~~~~~~~~
 
-   .. code-block:: none
+(*boolean*) It marks if a algorithm known as an anomaly detection technique was used during the analysis part (e.g., LOF). This field specifically refers to algorithms, not methodologies or frameworks. Example:
+
+.. code-block:: none
 
 	"anomaly_detection": true
 
-#. **tools** (see :ref:`preprocessing.tools <tools>`)
+.. _tools_tag: 
 
-#. *algorithms* (*array* of *objects*) *algorithms* can contain several *algorithm-objects*. An *algorithm-object* is composed of several fields: 
+.. include:: tools.rst
 
-   #. **name** (*string*) The name that identifies the algorithm main family. Example:
+algorithms (*optional*)
+~~~~~~~~~~~~~~~~~~~~~~~
 
-      .. code-block:: none
+(*array* of *objects*) *algorithms* can contain several *algorithm-objects*. An *algorithm-object* is composed of several fields: 
+
+name
+----
+
+(*string*) The name that identifies the algorithm main family. Example:
+
+.. code-block:: none
+
+  "name": "fuzzy clustering"
+
+subname (*optional*)
+--------------------
+
+(*string*) A subname that can be more specific and refer to algorithm specification or subclass. Example:
+
+.. code-block:: none
   
-        "name": "fuzzy clustering"
+    "subname": "gustafson-kessel"
 
-   #. *subname* (*string*) A subname that can be more specific and refer to algorithm specification or subclass. Example:
+learning (*optional*)
+---------------------
 
-      .. code-block:: none
-  
-        "subname": "gustafson-kessel"
+(*string*) It identifies the learning approach of the algorithm. Please, consider carefully the following default labels (values): 
 
-   #. *learning* (*string*) It identifies the learning approach of the algorithm. Please, consider carefully the following default labels (values): 
+* ``"supervised"``
+* ``"unsupervised"``
+* ``"semisupervised"``
+* ``"statistics/model_fit"``
+   the method uses predefined models, distributions and statistics and tries to check how real data fit such assumed models, i.e., it finds model parameters, gives summary values or discovers outliers based on distances to models. 
+* ``"nest"``
+   when it embeds or operates in a higher level than other nested methods. 
+* ``"no"``
+   it is somehow not possible to apply the word *learning* to the used algorithm        
 
-      * ``"supervised"``
-      * ``"unsupervised"``
-      * ``"semisupervised"``
-      * ``"statistics/model_fit"``
-         the method uses predefined models, distributions and statistics and tries to check how real data fit such assumed models, i.e., it finds model parameters, gives summary values or discovers outliers based on distances to models. 
-      * ``"nest"``
-         when it embeds or operates in a higher level than other nested methods. 
-      * ``"no"``
-         it is somehow not possible to apply the word *learning* to the used algorithm        
+Example:
 
-      Example:
+.. code-block:: none
 
-      .. code-block:: none
-  
-        "learning": "supervised"
+  "learning": "supervised"
 
-   #. *role* (*string*) This field is meaningful when diverse algorithms are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one algorithm is used, it is always ``"main"``. If the algorithm is used to establish a ground truth, its *role* is ``"validation"``. Example:
+role (*optional*)
+-----------------
 
-      .. code-block:: none
-  
-        "role": "main"
+(*string*) This field is meaningful when diverse algorithms are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one algorithm is used, it is always ``"main"``. If the algorithm is used to establish a ground truth, its *role* is ``"validation"``. Example:
 
-   #. *type* (*string*) It identifies the type of algorithm with regard to analysis main approaches. Please, consider carefully the following default labels (values): 
+.. code-block:: none
 
-      * ``"classification"``
-      * ``"regression"``
-      * ``"clustering"``
-      * ``"anomaly_detection"``
-      * ``"heuristics"``
-        the algorithm is quite ad-hoc and based on rules and equations defined by the authors' expert knowledge.
-      * ``"statistics"``
-        the algorithm belongs to the statistics domain and uses parametric or non-parametric models to explain the data.
-      * ``"text_matching"``
-        the algorithm bases its classification and decisions on searching for specific text strings or comparing text strings.
+  "role": "main"
 
-      Example:
+type (*optional*)
+-----------------
 
-      .. code-block:: none
-  
-           "type": "heuristics"
+(*string*) It identifies the type of algorithm with regard to analysis main approaches. Please, consider carefully the following default labels (values): 
 
-   #. *metric/decision_criteria* (*string*) It assesses the used metric, similarity or dissimilarity distance, also the core of the decision making criteria. Please, consider carefully the following default labels (values): 
+* ``"classification"``
+* ``"regression"``
+* ``"clustering"``
+* ``"anomaly_detection"``
+* ``"heuristics"``
+  the algorithm is quite ad-hoc and based on rules and equations defined by the authors' expert knowledge.
+* ``"statistics"``
+  the algorithm belongs to the statistics domain and uses parametric or non-parametric models to explain the data.
+* ``"text_matching"``
+  the algorithm bases its classification and decisions on searching for specific text strings or comparing text strings.
 
-       * ``"error/fitting_function"``
-       * ``"euclidean"``
-       * ``"mutual_information"``
-       * ``"correlation"``
-       * ``"jaccard"``
-       * ``"mahalanobis"``
-       * ``"hamming"``
-       * ``"exact_matching"``
-       * ``"manhattan"``
-       * ``"probabilistic"``
-       * ``"vote"``
+Example:
 
-       Example:
+.. code-block:: none
 
-       .. code-block:: none
-  
-            "metric/decision_criteria": "euclidean"
+     "type": "heuristics"
 
-   #. *tools* (see :ref:`preprocessing.tools <tools>`)
+metric/decision_criteria (*optional*)
+-------------------------------------
 
-   #. *source* (*string*) It identifies the origin of the algorithm. Please, consider carefully the following default labels (values): 
+(*string*) It assesses the used metric, similarity or dissimilarity distance, also the core of the decision making criteria. Please, consider carefully the following default labels (values): 
 
-      * ``"own_proposed"``
-        if authors developed and present the algorithm in the paper.
-      * ``"own_referenced"``
-        if authors developed the algorithm but presented it in a previous publication.
-      * ``"referenced"``
-        if authors took the method from the literature or known sources. 
- 
-      Example:
+* ``"error/fitting_function"``
+* ``"euclidean"``
+* ``"mutual_information"``
+* ``"correlation"``
+* ``"jaccard"``
+* ``"mahalanobis"``
+* ``"hamming"``
+* ``"exact_matching"``
+* ``"manhattan"``
+* ``"probabilistic"``
+* ``"vote"``
 
-      .. code-block:: none
-  
-           "source": "referenced"
+Example:
 
-   #. *parameters_provided* (*boolean* or *string*) This field expresses if the required parameters for reproducing the analysis are provided. In addition to ``true`` and ``false``, ``"partially"`` is also possible when authors provide some parameters but some of them is missing or, for any reason, the experiment seems to be not reproducible. 
+.. code-block:: none
 
-      Example:
+     "metric/decision_criteria": "euclidean"
 
-      .. code-block:: none
-  
-           "parameters_provided": "partially"
+tools (*optional*)
+------------------
 
+(see :ref:`tools <tools_tag>`)
 
+source (*optional*)
+-------------------
+
+(*string*) It identifies the origin of the algorithm. Please, consider carefully the following default labels (values): 
+
+* ``"own_proposed"``
+  if authors developed and present the algorithm in the paper.
+* ``"own_referenced"``
+  if authors developed the algorithm but presented it in a previous publication.
+* ``"referenced"``
+  if authors took the method from the literature or known sources. 
+
+Example:
+
+.. code-block:: none
+
+     "source": "referenced"
+
+parameters_provided (*optional*)
+--------------------------------
+
+(*boolean* or *string*) This field expresses if the required parameters for reproducing the analysis are provided. In addition to ``true`` and ``false``, ``"partially"`` is also possible when authors provide some parameters but some of them is missing or, for any reason, the experiment seems to be not reproducible. 
+
+Example:
+
+.. code-block:: none
+
+     "parameters_provided": "partially"
 
 JSON example (analysis_method, complete)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+````````````````````````````````````````
 
 .. code-block:: none
 
