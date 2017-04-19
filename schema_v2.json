@@ -7,7 +7,7 @@
     "preprocessing",
     "analysis",
     "evaluation",
-    "results"
+    "result"
   ],
   "definitions": {
     "feature": {
