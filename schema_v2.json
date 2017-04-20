@@ -30,7 +30,7 @@
       "type": "array",
       "title": "key_features",
       "items": {
-        "$ref": "#/definitions/features"
+        "$ref": "#/definitions/feature"
       }
     },
     "features": {
@@ -43,6 +43,7 @@
       }
     },
     "tool": {
+      "title": "tool",
       "type": "object",
       "properties": {
         "tool": {
@@ -80,8 +81,8 @@
         "availability"
       ]
     },
-    "feature_selection": {
-      "title": "feature_selection",
+    "selection": {
+      "title": "selection",
       "type": "string", "minLength": 1,
       "oneOf": [
         {
@@ -384,27 +385,31 @@
                     "types": {
                       "title": "types",
                       "type": "array",
-                      "oneOf": [
-                        {
-                          "enum": [
-                            "ip",
-                            "ipv4",
-                            "ipv6",
-                            "tcp",
-                            "http",
-                            "udp",
-                            "icmp",
-                            "dns"
-                          ],
-                          "title": "default values"
-                        },
-                        {
-                          "$ref": "#/definitions/other"
-                        },
-                        {
-                          "$ref": "#/definitions/missing"
-                        }
-                      ]
+                      "items": {
+                        "title": "type",
+                        "type": "string",
+                        "oneOf": [
+                          {
+                            "enum": [
+                              "ip",
+                              "ipv4",
+                              "ipv6",
+                              "tcp",
+                              "http",
+                              "udp",
+                              "icmp",
+                              "dns"
+                            ],
+                            "title": "default values"
+                          },
+                          {
+                            "$ref": "#/definitions/other"
+                          },
+                          {
+                            "$ref": "#/definitions/missing"
+                          }
+                        ]
+                      }
                     },
                     "generation": {
                       "title": "generation",
@@ -669,7 +674,7 @@
             "type": "object",
             "properties": {
               "selection": {
-                "$ref": "#/definitions/feature_selection"
+                "$ref": "#/definitions/selection"
               },
               "role": {
                 "$ref": "#/definitions/role"
@@ -691,7 +696,7 @@
             "type": "object",
             "properties": {
               "selection": {
-                "$ref": "#/definitions/feature_selection"
+                "$ref": "#/definitions/selection"
               },
               "role": {
                 "$ref": "#/definitions/role"
@@ -750,7 +755,7 @@
             "type": "object",
             "properties": {
               "selection": {
-                "$ref": "#/definitions/feature_selection"
+                "$ref": "#/definitions/selection"
               },
               "role": {
                 "$ref": "#/definitions/role"
