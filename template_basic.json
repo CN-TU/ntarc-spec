@@ -1,0 +1,70 @@
+{
+  "reference": {
+    "title": "paper title", 
+    "1st_author": "surname, n.", 
+    "authors": ["surname, n.", "surname, n."],
+    "publication_name": null,
+    "publication_type": null,
+    "year": null,
+    "bibtex_volume": null,
+    "bibtex_issue": null,
+    "bibtex_page_range": null,
+    "bibtex_type": null,
+    "curated_by": null",
+    "curated_last_revision": "dd-mm-yyyy",
+    "curated_last_revision": null
+  }, 
+  "data": {
+    "dataset": [
+      {
+        "dataset_name": "dataset name",
+        "availability": null,
+        "generation_year": null,
+        "subsets": [null]
+      } 
+    ]
+  },
+  "preprocessing": {
+    "performed_feature_selection": null,
+    "packet_analysis_oriented": null,
+    "flow_analysis_oriented": null,
+    "flow_aggregation_analysis_oriented": null,
+    "tools": [
+        {
+            "tool": null,
+            "availability": null
+        }
+    ],
+    "normalization_type": null,
+    "transformations": [null],
+    "final_data_format": null
+  },
+  "analysis_method": {
+    "supervised_learning": null,
+    "unsupervised_learning": null,
+    "semisupervised_learning": null,
+    "anomaly_detection": null,
+    "tools": [
+        {
+            "tool": null,
+            "availability": null
+        }
+    ]
+  },
+  "evaluation": {
+    "algorithm_comparison": null,
+    "internal_validation": null,
+    "external_validation": null,
+    "dpi-based_validation": null,
+    "port-based_validation": null,
+    "pre-knowledge-based_validation": null,
+    "manual_verification": null,
+    "implementation_in_real_scenario": null,
+    "train_test_separation": null
+  },
+  "result": {
+    "main_goal": null,
+    "focus_main": null,
+    "claimed_improvements": [null]
+  }
+}

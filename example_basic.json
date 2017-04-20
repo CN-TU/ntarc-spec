@@ -1,0 +1,88 @@
+{
+  "reference": {
+    "title": "time-activity footprints in ip traffic",
+    "1st_author": "iglesias, f.",
+    "authors": ["iglesias, f.", "tzeby, t."],
+    "publication_name": "computer networks",
+    "publication_type": "peer_reviewed_journal",
+    "year": 2016,
+    "bibtex_volume": "107, Part 1",
+    "bibtex_issue": "missing",
+    "bibtex_page_range": "64--75",
+    "bibtex_type": "article",
+    "curated_by": "felix",
+    "curated_last_revision": "10-04-2017",
+    "curated_revision_number": 1
+  },
+  "data": {
+    "datasets": [
+      {
+        "dataset_name": "mawi-2015",
+        "generation_year": 2015,
+        "subsets": [          "01-01-2015",          "15-04-2015",          "31-07-2015"]
+      }
+    ]
+  },
+  "preprocessing": {
+    "performed_feature_selection": true,
+    "packet_analysis_oriented": false,
+    "flow_analysis_oriented": true,
+    "flow_aggregation_analysis_oriented": false,
+    "tools": [
+      {
+        "tool": "tshark",
+        "availability": "public"
+      },
+      {
+        "tool": "own_perl_scripts",
+        "availability": "private"
+      }
+    ],
+    "normalization_type": "range",
+    "transformations": [
+      "flow_extraction",
+      "log",
+      "time_series",
+      "feature_operation",
+      "class_separation"
+    ],
+    "final_data_format": "numerical_vectors"
+  },
+  "analysis_method": {
+    "supervised_learning": false,
+    "unsupervised_learning": true,
+    "semisupervised_learning": true,
+    "anomaly_detection": true,
+    "tools": [
+      {
+        "tool": "matlab_fuzzyclusteringtoolbox",
+        "availability": "public"
+      },
+      {
+        "tool": "own_matlab_scripts",
+        "availability": "private"
+      }
+    ]
+  },
+  "evaluation": {
+    "algorithm_comparison": false,
+    "internal_validation": true,
+    "external_validation": true,
+    "dpi-based_validation": false,
+    "port-based_validation": false,
+    "pre-knowledge-based_validation": false,
+    "manual_verification": true,
+    "implementation_in_real_scenario": false,
+    "train_test_separation": false
+  },
+  "result": {
+    "main_goal": "traffic_classification",
+    "focus_main": "methodology/framework",
+    "claimed_improvements": [
+      "improved_data_description",
+      "improved_traffic_classification",
+      "fast_processing",
+      "_flaw_detection"
+    ]
+  }
+}
