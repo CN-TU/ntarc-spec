@@ -231,6 +231,7 @@
         "organization_publishers": {
           "title": "organization_publishers",
           "type": "array",
+          "minItems": 1,
           "items": {
               "title": "organization_publisher",
               "type": "string", "minLength": 1,
