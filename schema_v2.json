@@ -457,7 +457,7 @@
         "bibtex_type": {
           "title": "bibtex_type",
           "type": "string", "minLength": 1,
-          "oneOf": [
+          "anyOf": [
             {
               "title": "default values",
               "enum": [
@@ -1211,7 +1211,7 @@
                 "$ref": "#/definitions/other"
               },
               {
-                "$ref": "#definitions/missing"
+                "$ref": "#/definitions/missing"
               }
             ]
           }
@@ -1246,3 +1246,4 @@
     }
   }
 }
+
