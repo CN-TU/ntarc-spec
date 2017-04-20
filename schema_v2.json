@@ -5,7 +5,7 @@
     "reference",
     "datasets",
     "preprocessing",
-    "analysis",
+    "analysis_method",
     "evaluation",
     "result"
   ],
@@ -801,8 +801,8 @@
         "final_data_format"
       ]
     },
-    "analysis": {
-      "title": "analysis",
+    "analysis_method": {
+      "title": "analysis_method",
       "type": "object",
       "properties": {
         "supervised_learning": {
@@ -813,7 +813,7 @@
           "title": "unsupervised_learning",
           "type": "boolean"
         },
-        "semisupevised_learning": {
+        "semisupervised_learning": {
           "title": "semisupervised_learning",
           "type": "boolean"
         },
