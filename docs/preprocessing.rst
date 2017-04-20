@@ -361,7 +361,7 @@ JSON example (preprocessing, complete)
             "main_goal": "traffic_classification",
             "active_timeout": 60,
             "idle_timeout": 60,
-            "bidirectional": "false",
+            "bidirectional": false,
             "features": [
                 {"log": ["octetTotalCount"]},
                 {"log": ["packetTotalCount"]},
@@ -386,7 +386,7 @@ JSON example (preprocessing, complete)
             "main_goal": "traffic_classification",
             "active_timeout": 60,
             "idle_timeout": 60,
-            "bidirectional": "false",
+            "bidirectional": false,
             "features": [
                 {"log": ["octetTotalCount"]},
                 {"log": [{"divide": ["octetTotalCount", "_activeForSeconds"]}]},

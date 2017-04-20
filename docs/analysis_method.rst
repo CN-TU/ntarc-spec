@@ -216,7 +216,7 @@ JSON example (analysis_method, complete)
                 }
             ],
             "source": "referenced",
-            "parameters_provided": "false"
+            "parameters_provided": false
         },
         {
             "name": "mad-based outlier removal",
@@ -233,7 +233,7 @@ JSON example (analysis_method, complete)
                 }
             ],
             "source": "referenced",
-            "parameters_provided": "false"
+            "parameters_provided": false
         }
     ]
   },

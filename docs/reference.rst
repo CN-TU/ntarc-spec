@@ -141,7 +141,7 @@ access_open (*optional*)
 
 .. code-block:: none
  
- 	"access_open": "true"
+ 	"access_open": true
 
 curated_by
 ~~~~~~~~~~
@@ -164,7 +164,7 @@ curated_last_revision
 curated_revision_number
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-(*numerical*) Number of the total revisions/modification/updates carried out on this specific JSON file. Example:
+(*numerical*) Number of the total revisions/modification/updates carried out on this specific JSON file. Minimum number is 1. Example:
 
 .. code-block:: none
  
@@ -190,7 +190,7 @@ JSON example (reference, complete)
     "bibtex_issue": "missing",
     "bibtex_page_range": "64--75",
     "bibtex_type": "article",
-    "access_open": "false",
+    "access_open": false,
     "curated_by": "iglesias, f.",
     "curated_last_revision": "10-04-2017",
     "curated_revision_number": 2
