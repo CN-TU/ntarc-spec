@@ -3,7 +3,7 @@
   "title": "Paper",
   "required": [
     "reference",
-    "datasets",
+    "data",
     "preprocessing",
     "analysis_method",
     "evaluation",
@@ -78,190 +78,6 @@
       "required": [
         "tool",
         "availability"
-      ]
-    },
-    "traffic_type": {
-      "type": [
-        "string",
-        "null",
-        "array"
-      ],
-      "items": {
-        "type": "string", "minLength": 1
-      }
-    },
-    "dataset": {
-      "type": "object",
-      "title": "dataset",
-      "properties": {
-        "dataset_name": {
-          "title": "dataset_name",
-          "type": "string", "minLength": 1
-        },
-        "availability": {
-          "title": "availability",
-          "type": "string", "minLength": 1,
-          "oneOf": [
-            {
-              "enum": [
-                "public",
-                "public_on_demand",
-                "private",
-                "lost_source"
-              ],
-              "title": "default values"
-            },
-            {
-              "$ref": "#/definitions/other"
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "format": {
-          "title": "format",
-          "type": "string", "minLength": 1,
-          "oneOf": [
-            {
-              "title": "default values",
-              "enum": [
-                "packet",
-                "flow"
-              ]
-            },
-            {
-              "$ref": "#/definitions/other"
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "types": {
-          "title": "types",
-          "type": "array",
-          "oneOf": [
-            {
-              "enum": [
-                "ip",
-                "ipv4",
-                "ipv6",
-                "tcp",
-                "http",
-                "udp",
-                "icmp",
-                "dns"
-              ],
-              "title": "default values"
-            },
-            {
-              "$ref": "#/definitions/other"
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "generation": {
-          "title": "generation",
-          "type": "string", "minLength": 1,
-          "oneOf": [
-            {
-              "title": "default values",
-              "enum": [
-                "captured",
-                "synthetic",
-                "altered_captured",
-                "mixed"
-              ]
-            },
-            {
-              "$ref": "#/definitions/other"
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "generation_year": {
-          "title": "generation_year",
-          "oneOf": [
-            {
-              "title": "year",
-              "type": "integer",
-              "minimum": 1900
-            },
-            {
-              "title": "years",
-              "type": "array",
-              "items": {
-                "type": "integer",
-                "title": "year",
-                "minimum": 1900
-              }
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "covered_period": {
-          "title": "covered_period",
-          "type": "string", "minLength": 1,
-          "oneOf": [
-            {
-              "title": "default values",
-              "enum": [
-                "minutes",
-                "hours",
-                "days",
-                "weeks",
-                "years"
-              ]
-            },
-            {
-              "$ref": "#/definitions/other"
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
-        },
-        "details": {
-          "title": "details",
-          "type": "array",
-          "items": {
-            "title": "detail",
-            "type": "string", "minLength": 1,
-            "oneOf": [
-              {
-                "title": "default values",
-                "enum": [
-                  "raw",
-                  "preprocessed",
-                  "no_payload"
-                ]
-              },
-              {
-                "$ref": "#/definitions/other"
-              }
-            ]
-          }
-        },
-        "subsets": {
-          "title": "subsets",
-          "type": "array",
-          "items": {
-            "title": "subset",
-            "type": "string", "minLength": 1
-          }
-        }
-      },
-      "required": [
-        "dataset_name",
-        "generation_year",
-        "subsets"
       ]
     },
     "feature_selection": {
@@ -510,12 +326,189 @@
         "curated_revision_number"
       ]
     },
-    "datasets": {
-      "title": "datasets",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/dataset"
-      }
+    "data": {
+        "title": "data",
+        "type": "object",
+        "properties": {
+            "datasets": {
+              "type": "array",
+              "title": "datasets",
+              "items": {
+                  "title": "dataset",
+                  "type": "object",
+                  "properties": {
+                    "dataset_name": {
+                      "title": "dataset_name",
+                      "type": "string", "minLength": 1
+                    },
+                    "availability": {
+                      "title": "availability",
+                      "type": "string", "minLength": 1,
+                      "oneOf": [
+                        {
+                          "enum": [
+                            "public",
+                            "public_on_demand",
+                            "private",
+                            "lost_source"
+                          ],
+                          "title": "default values"
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "format": {
+                      "title": "format",
+                      "type": "string", "minLength": 1,
+                      "oneOf": [
+                        {
+                          "title": "default values",
+                          "enum": [
+                            "packet",
+                            "flow"
+                          ]
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "types": {
+                      "title": "types",
+                      "type": "array",
+                      "oneOf": [
+                        {
+                          "enum": [
+                            "ip",
+                            "ipv4",
+                            "ipv6",
+                            "tcp",
+                            "http",
+                            "udp",
+                            "icmp",
+                            "dns"
+                          ],
+                          "title": "default values"
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "generation": {
+                      "title": "generation",
+                      "type": "string", "minLength": 1,
+                      "oneOf": [
+                        {
+                          "title": "default values",
+                          "enum": [
+                            "captured",
+                            "synthetic",
+                            "altered_captured",
+                            "mixed"
+                          ]
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "generation_year": {
+                      "title": "generation_year",
+                      "oneOf": [
+                        {
+                          "title": "year",
+                          "type": "integer",
+                          "minimum": 1900
+                        },
+                        {
+                          "title": "years",
+                          "type": "array",
+                          "items": {
+                            "type": "integer",
+                            "title": "year",
+                            "minimum": 1900
+                          }
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "covered_period": {
+                      "title": "covered_period",
+                      "type": "string", "minLength": 1,
+                      "oneOf": [
+                        {
+                          "title": "default values",
+                          "enum": [
+                            "minutes",
+                            "hours",
+                            "days",
+                            "weeks",
+                            "years"
+                          ]
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
+                        }
+                      ]
+                    },
+                    "details": {
+                      "title": "details",
+                      "type": "array",
+                      "items": {
+                        "title": "detail",
+                        "type": "string", "minLength": 1,
+                        "oneOf": [
+                          {
+                            "title": "default values",
+                            "enum": [
+                              "raw",
+                              "preprocessed",
+                              "no_payload"
+                            ]
+                          },
+                          {
+                            "$ref": "#/definitions/other"
+                          }
+                        ]
+                      }
+                    },
+                    "subsets": {
+                      "title": "subsets",
+                      "type": "array",
+                      "items": {
+                        "title": "subset",
+                        "type": "string", "minLength": 1
+                      }
+                    }
+                  },
+                  "required": [
+                    "dataset_name",
+                    "generation_year",
+                    "subsets"
+                  ]
+                }
+            }
+        }
     },
     "preprocessing": {
       "title": "preprocessing",
@@ -1244,6 +1237,6 @@
         "claimed_improvements"
       ]
     }
-  }
+  },
+  "additionalProperties": false
 }
-
