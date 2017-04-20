@@ -443,8 +443,7 @@
         },
         "bibtex_volume": {
           "title": "bibtex_volume",
-          "type": "string", "minLength": 1,
-          "pattern": "^[0-9]+--[0-9]+$"
+          "type": "string", "minLength": 1
         },
         "bibtex_issue": {
           "title": "bibtex_issue",
