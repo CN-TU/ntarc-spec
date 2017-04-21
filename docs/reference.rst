@@ -53,9 +53,13 @@ publication_type
 (*string*) It marks the type of publication. Please, consider carefully if the publication fits any of the following default labels (values):
 
 * ``"peer_reviewed_journal"``
+  journal with a peer review process.
 * ``"peer_reviewed_conference"``
+  conference with a peer review process.
 * ``"arxiv"``
+  paper is published only in arxiv.
 * ``"technical_report"``
+  technical report, usually without peer review, and published in the author's/university's page.
 
 Example:
 
@@ -76,7 +80,13 @@ organization_publishers (*optional*)
 
 (*array* of *strings*) Please, consider carefully if the publication fits one or more of the following default organizations (values):
 
-``"ieee"``, ``"elsevier"``, ``"acm"``, ``"springer"``, ``"wiley"``, ``"taylor_&_francis"``, ``"mdpi"``
+* ``"ieee"``
+* ``"elsevier"``
+* ``"acm"``
+* ``"springer"``
+* ``"wiley"``
+* ``"taylor_&_francis"``
+* ``"mdpi"``
 
 Example:
 
@@ -126,7 +136,11 @@ bibtex_type
 
 (*string*, for *bibtex* citation compatibility) Please, consider carefully if the publication fits one or more of the following default bibtex types (values):
 
-``"article"``, ``"inproceedings"``, ``"techreport"``, ``"inbook"``, ``"misc"``
+* ``"article"``
+* ``"inproceedings"``
+* ``"techreport"``
+* ``"inbook"``
+* ``"misc"``
 
 Example:
 

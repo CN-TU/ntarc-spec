@@ -93,7 +93,19 @@ Example:
 role (*optional*)
 -----------------
 
-(*string*) This field is meaningful when diverse algorithms are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one algorithm is used, it is always ``"main"``. If the algorithm is used to establish a ground truth, its *role* is ``"validation"``. Example:
+(*string*) This field is meaningful when diverse algorithms are compared.
+Default values are:
+
+* ``"main"``
+  the method led to the best solution.
+* ``"validation"``
+  the algorithm is used to establish a ground truth.
+* ``"competitor"``
+  for all other cases.
+
+If only one algorithm is used, it is always ``"main"``.
+
+Example:
 
 .. code-block:: none
 

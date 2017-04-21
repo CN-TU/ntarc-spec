@@ -52,7 +52,14 @@ types (*optional*)
 (*array* of *strings*) It specifically addresses if the dataset has been pre-filtered and only contains some types of data based on protocols, versions, etc. Consider labels (values) as filter keys (e.g., if ``"ipv4"`` is used, there is no need to add ``"tcp"`` or ``"udp"`` too). 
 Please, check if the dataset-type fits any of the following default labels (values):
 
-``"ip"``, ``"ipv4"``, ``"ipv6"``, ``"tcp"``, ``"http"``, ``"udp"``, ``"icmp"``, ``"dns"``
+* ``"ip"``
+* ``"ipv4"``
+* ``"ipv6"``
+* ``"tcp"``
+* ``"http"``
+* ``"udp"``
+* ``"icmp"``
+* ``"dns"``
 
 Example:
 
@@ -95,7 +102,12 @@ covered_period (*optional*)
 (*string*) It tries to give an approximate impression about the time covered by the used dataset during analysis. As a criterion, if the *covered_period* is below two times the unity, the selected label should be the immediately below, e.g., if the dataset covers 90 minutes, *covered_period* should be ``"minutes"``; however, if the dataset covers 120 minutes, *covered_period* should be ``"hours"``. 
 Please, consider carefully if the covered period fits any of the following default labels (values):
 
-``"minutes"``, ``"hours"``, ``"days"``, ``"weeks"``, ``"months"``, ``"years"``
+* ``"minutes"``
+* ``"hours"``
+* ``"days"``
+* ``"weeks"``
+* ``"months"``
+* ``"years"``
 
 Example:
 

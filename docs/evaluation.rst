@@ -103,9 +103,14 @@ type (*optional*)
 (*string*) It identifies the type of evaluation method. Please, consider carefully the following default labels (values): 
 
 * ``"external"``
+  the evaluation depends on labels or some other form of external ground truth.
 * ``"internal"``
+  the evaluation does not depend on any ground truth (e.g. silhouette coefficient).
 * ``"external_and_internal"``
+  both external and internal.
 * ``"nest"``
+
+.. todo:: what exactly is nest in this context?
 
 Example:
 
@@ -118,25 +123,39 @@ metrics (*optional*)
 (*array* of *string*) It assesses the used metrics for the evaluation. Please, consider carefully the following default labels (values): 
 
 * ``"error_distance"``
+  e.g. sum of squared error, absolute error, r^2, etc
 * ``"function_fitting"``
 * ``"precision"``
+  precision metric
 * ``"accuracy"``
+  accuracy metric
 * ``"recall"``
+  recall metric
 * ``"f-1"``
-* ``"roc/uac"``
+  f-1 metric
+* ``"roc/auc"``
+  roc-based metrics
 * ``"complete_confusion_matrix"``
   all information regarding the confusion matrix is provided.
 * ``"incomplete_confusion_matrix"``
   some information regarding the confusion matrix is missing and it is relevant for evaluating the quality of the classifier.
 * ``"classification_loss"``
+  e.g. logistic regression loss function
 * ``"clustering_metrics"``
+  e.g. silhouette coefficient
 * ``"time-based"``
 * ``"computing_resources-based"``
+  e.g. worst case bounds (big-O notation), measures of computer resources
 * ``"granularity-based"``
-  e.g., an algorithm provides more detailed information (classes, traffic types) than other algorithm.
+  e.g. an algorithm provides more detailed information (classes, traffic types) than other algorithm.
 * ``"heuristic"``
+  the metric is an heuristic developed specifically for the problem
 * ``"vote"``
   for nest methods (usually). The nest method integrates diverse validation techniques and the best result/algorithm is decided by means of consensus. 
+
+.. todo:: function_fitting? is it different from error_distance?
+
+.. todo:: time-based? is this not included in computing_resources-based?
 
 Example:
 

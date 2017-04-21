@@ -12,10 +12,10 @@ main_goal
 (*string*) This field should contain the main paper goal. In case of doubt, abstract and conclusion sections should help to establish this value. Please, consider carefully the following default labels (values):
 
 * ``"anomaly_detection"``
-* ``"traffic_classification"``
 * ``"botnet_detection"``
-* ``"specific_malware_detection"``
 * ``"network_properties_monitoring"``
+* ``"specific_malware_detection"``
+* ``"traffic_classification"``
 
 Example:
 
@@ -28,7 +28,26 @@ subgoals (*optional*)
 
 (*array* of *strings*) Here additional paper goals are collected. Goals are usually aimed in the *abstract* and must be understood as the *motivations* that inspire and justify the research. Please, repeat the main goal in this array and consider the following possible labels (values):
 
-``"anomaly_detection"``, ``"traffic_classification"``, ``"botnet_detection"``, ``"specific_malware_detection"``, ``"network_properties_monitoring"``, ``"dos_detection"``, ``"ddos_detection"``, ``"user_to_root_detection"``, ``"probe_detection"``, ``"p2p_traffic_classification"``, ``"application_classification"``, ``"remote_to_local_detection"``, ``"attack_classification"``, ``"p2p_botnet_detection"``, ``"application_protocol_detection"``, ``"classification_of_encrypted_traffic"``, ``"traffic_rate_prediction"``, ``"traffic_visualization"``, ``"classification_for_qos"``, ``"http_intrusion_detection"``
+* ``"anomaly_detection"``
+* ``"application_classification"``
+* ``"application_protocol_detection"``
+* ``"attack_classification"``
+* ``"botnet_detection"``
+* ``"classification_for_qos"``
+* ``"classification_of_encrypted_traffic"``
+* ``"ddos_detection"``
+* ``"dos_detection"``
+* ``"http_intrusion_detection"``
+* ``"network_properties_monitoring"``
+* ``"p2p_botnet_detection"``
+* ``"p2p_traffic_classification"``
+* ``"probe_detection"``
+* ``"remote_to_local_detection"``
+* ``"specific_malware_detection"``
+* ``"traffic_classification"``
+* ``"traffic_rate_prediction"``
+* ``"traffic_visualization"``
+* ``"user_to_root_detection"``
 
 Example:
 
@@ -66,12 +85,15 @@ claimed_improvements
 (*array* of *strings*) We specifically refer to improvements claimed in the *conclusions* section. Please, consider carefully if the claimed improvements appear in the following default list:
 
 * ``"improved_detection_rates"``
-* ``"improved_traffic_classification"``  
+  the proposed method is better at detecting its objective (e.g. attacks) than previous methods.
+* ``"improved_traffic_classification"``
+  the proposed method is better at identifying its objective (e.g. attacks, applications) than previous methods.
 * ``"new_phenomena_disclosed"``
+  new traffic phenomena was disclosed.
 * ``"fast_processing"``
   also referred as: lightweight approach, low time-complexity, etc. 
 * ``"reduced_computational_resources"``
-  in terms of memory, storage or dependencies 
+  in terms of memory, storage or dependencies.
 * ``"good_transportability"``
   as the capability of being integrated in diverse environments and structures, also compatibility, portability or usability.  
 * ``"enhanced_functionality"``

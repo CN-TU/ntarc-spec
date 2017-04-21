@@ -55,7 +55,10 @@ availability
 
 (*strings*) This field expresses the availability of the referred tool. Please, consider carefully the following default labels (values):
    
-``"public"``, ``"private"``, ``"public_on_demand"``, ``"commercial"``
+* ``"public"``
+* ``"private"``
+* ``"public_on_demand"``
+* ``"commercial"``
 
 Example:
 
