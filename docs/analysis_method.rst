@@ -173,6 +173,8 @@ source (*optional*)
 * ``"referenced"``
   if authors took the method from the literature or known sources. 
 
+.. todo:: do we need to distinguish between own_referenced and referenced? I think they should be the same
+
 Example:
 
 .. code-block:: none
@@ -183,6 +185,8 @@ parameters_provided (*optional*)
 --------------------------------
 
 (*boolean* or *string*) This field expresses if the required parameters for reproducing the analysis are provided. In addition to ``true`` and ``false``, ``"partially"`` is also possible when authors provide some parameters but some of them is missing or, for any reason, the experiment seems to be not reproducible. 
+
+.. todo:: what about methods without parameters?
 
 Example:
 

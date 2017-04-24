@@ -73,6 +73,8 @@ focus_main
 * ``"data_description"``
   the nature of the paper is mostly descriptive. Authors try to explain the Internet, network traffic or a significant part of it by exploring and depicting one or some datasets. 
 
+.. todo:: what is exactly the difference between algorithm and methodology/framework?
+
 Example:
 
 .. code-block:: none

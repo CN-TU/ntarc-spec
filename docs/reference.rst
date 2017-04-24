@@ -209,3 +209,5 @@ JSON example (reference, complete)
     "curated_last_revision": "10-04-2017",
     "curated_revision_number": 2
   } 
+
+.. todo:: should we move all the bibtex fields into a single object?

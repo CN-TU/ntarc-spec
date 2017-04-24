@@ -80,9 +80,11 @@ train_test_separation
 
 (*boolean*) It marks if datasets were clearly separated in independent train and test sets for the analysis. In other words, ``true`` if none of the testing data was used in training, ``false`` otherwise. Example:
 
+.. todo:: what about methods that do not have training data (unsupervised)? should we put false or something different to distinguish?
+
 .. code-block:: none
 
-	"manual_verification": true
+	"train_test_separation": true
 
 
 methods (*optional*)
