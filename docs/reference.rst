@@ -18,26 +18,26 @@ title
 1st_author
 ~~~~~~~~~~
 
-(*string*) First author name and surname with format: *surname, n.*; compound (or more-than-one-word) names and surnames are joined by using '_'.
+(*string*) First author name and surname with format: *surname, n.*.
 
 .. code-block:: none
 
-     "1st_author": "chejov, a."
+     "1st_author": "chekhov, a."
  
 authors
 ~~~~~~~
 
-(*array* of *strings*)  Array with the authors' list. Same rules as in (1.2). Example with three authors:
+(*array* of *strings*)  Array with the authors' list. Format as in BibTeX. Check `https://tex.stackexchange.com/questions/557/how-should-i-type-author-names-in-a-bib-file`_ for details.
 
 .. code-block:: none
 
-     "authors": ["chejov, a.","de_maupassant, g.","stifter, a."]
+     "authors": ["Chekhov, Anton", "de Maupassant, Guy", "Stifter, Adalbert"]
 
 Example with only one author:
 
 .. code-block:: none
  
- 	"authors": ["chejov, a."]
+ 	"authors": ["Chekhov, Anton"]
 
 publication_name
 ~~~~~~~~~~~~~~~~
@@ -194,7 +194,7 @@ JSON example (reference, complete)
   "reference": {
     "title": "time-activity footprints in ip traffic", 
     "1st_author": "iglesias, f.", 
-    "authors": ["iglesias, f.", "tzeby, t."],
+    "authors": ["Iglesias, F\'elix", "Zseby, Tanja"],
     "publication_name": "computer networks",
     "publication_type": "peer_reviewed_journal",
     "year": 2016,
