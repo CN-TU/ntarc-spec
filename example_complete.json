@@ -10,10 +10,12 @@
       "elsevier"
     ],
     "pages_number_of": 12,
-    "bibtex_volume": "107, Part 1",
-    "bibtex_issue": "missing",
-    "bibtex_page_range": "64--75",
-    "bibtex_type": "article",
+    "bibtex": {
+        "type": "article",
+        "volume": "107, Part 1",
+        "issue": "missing",
+        "pages": "64-75"
+    },
     "access_open": false,
     "curated_by": "felix",
     "curated_last_revision": "10-04-2017",

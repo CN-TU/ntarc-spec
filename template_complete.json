@@ -8,10 +8,12 @@
     "year": null,
     "organization_publishers": [null],
     "pages_number_of": null,
-    "bibtex_volume": null,
-    "bibtex_issue": null,
-    "bibtex_page_range": null,
-    "bibtex_type": null,
+    "bibtex": {
+        "type": null,
+        "volume": null,
+        "issue": null,
+        "pages": null
+    },
     "access_open": null,
     "curated_by": null,
     "curated_last_revision": null,

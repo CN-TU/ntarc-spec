@@ -6,6 +6,12 @@
     "publication_name": null,
     "publication_type": null,
     "year": null,
+    "bibtex": {
+        "type": null,
+        "volume": null,
+        "issue": null,
+        "pages": null
+    },
     "bibtex_volume": null,
     "bibtex_issue": null,
     "bibtex_page_range": null,

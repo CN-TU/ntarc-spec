@@ -104,35 +104,13 @@ pages_number_of (*optional*)
  
  	"pages_number_of": 8
 
-bibtex_volume
-~~~~~~~~~~~~~
+bibtex
+~~~~~~
 
-(*string*, for *bibtex* citation compatibility) The volume of the related multi-volume publication or book. If there is no volume, write ``"missing"``. Example:
+(*object*) Various BibTeX-related fields. This object supports extra fields, so you are free to add other BibTeX properties. All fields in this object are strings.
 
-.. code-block:: none
- 
- 	"bibtex_volume": "8"
-
-bibtex_issue
-~~~~~~~~~~~~
-
-(*string*, for *bibtex* citation compatibility) The issue or number of the related publication or book. If there is no issue or number, write ``"missing"``. Example:
-
-.. code-block:: none
- 
- 	"bibtex_issue": "5"
-
-bibtex_page_range
-~~~~~~~~~~~~~~~~~
-
-(*string*, for *bibtex* citation compatibility) The page range of the paper. If there is no page range, write ``"missing"``. Write "--" between page numbers. Example:
-
-.. code-block:: none
- 
- 	"bibtex_page_range": "102--114"
-
-bibtex_type
-~~~~~~~~~~~
+type
+````
 
 (*string*, for *bibtex* citation compatibility) Please, consider carefully if the publication fits one or more of the following default bibtex types (values):
 
@@ -146,7 +124,35 @@ Example:
 
 .. code-block:: none
  
- 	"bibtex_type": "article"
+ 	"type": "article"
+
+
+volume
+``````
+
+(*string*, for *bibtex* citation compatibility) The volume of the related multi-volume publication or book. If there is no volume, write ``"missing"``. Example:
+
+.. code-block:: none
+ 
+ 	"volume": "8"
+
+issue
+`````
+
+(*string*, for *bibtex* citation compatibility) The issue or number of the related publication or book. If there is no issue or number, write ``"missing"``. Example:
+
+.. code-block:: none
+ 
+ 	"issue": "5"
+
+pages
+`````
+
+(*string*, for *bibtex* citation compatibility) The page range of the paper. If there is no page range, write ``"missing"``. Write "--" between page numbers. Example:
+
+.. code-block:: none
+ 
+ 	"pages": "102--114"
 
 access_open (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -200,14 +206,15 @@ JSON example (reference, complete)
     "year": 2016,
     "organization_publishers": ["elsevier"],
     "pages_number_of": "12",
-    "bibtex_volume": "107, Part 1",
-    "bibtex_issue": "missing",
-    "bibtex_page_range": "64--75",
-    "bibtex_type": "article",
+    "bibtex": {
+      "type": "article",
+      "volume": "107, Part 1",
+      "issue": "missing",
+      "pages": "64--75"
+    },
     "access_open": false,
     "curated_by": "iglesias, f.",
     "curated_last_revision": "10-04-2017",
     "curated_revision_number": 2
   } 
 
-.. todo:: should we move all the bibtex fields into a single object?
