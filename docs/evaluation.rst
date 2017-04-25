@@ -111,6 +111,7 @@ type (*optional*)
 * ``"external_and_internal"``
   both external and internal.
 * ``"nest"``
+  the evaluation is a method that embeds other methods, or carries out some kind of bootstrapping (e.g. cross-validation analysis, ensemble learning
 
 .. todo:: what exactly is nest in this context?
 
@@ -125,8 +126,9 @@ metrics (*optional*)
 (*array* of *string*) It assesses the used metrics for the evaluation. Please, consider carefully the following default labels (values): 
 
 * ``"error_distance"``
-  e.g. sum of squared error, absolute error, r^2, etc
+  metric depends on the distance from the model to the data points. e.g. sum of squared error, absolute error, r^2, etc
 * ``"function_fitting"``
+  metric does not depend on the actual data points, but on their (sample) distribution. e.g. Kolmogorov-Smirnov test, Shapiro-Wilk test, etc.
 * ``"precision"``
   precision metric
 * ``"accuracy"``
@@ -154,8 +156,6 @@ metrics (*optional*)
   the metric is an heuristic developed specifically for the problem
 * ``"vote"``
   for nest methods (usually). The nest method integrates diverse validation techniques and the best result/algorithm is decided by means of consensus. 
-
-.. todo:: function_fitting? is it different from error_distance?
 
 .. todo:: time-based? is this not included in computing_resources-based?
 
