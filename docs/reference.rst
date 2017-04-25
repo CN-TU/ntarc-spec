@@ -27,7 +27,7 @@ title
 authors
 ~~~~~~~
 
-(*array* of *strings*)  Array with the authors' list. Format as in BibTeX. Check `https://tex.stackexchange.com/questions/557/how-should-i-type-author-names-in-a-bib-file`_ for details.
+(*array* of *strings*)  Array with the authors' list. Format as in BibTeX. Check `this StackExchange thread <https://tex.stackexchange.com/questions/557/how-should-i-type-author-names-in-a-bib-file>`_ for details.
 
 .. code-block:: none
 
