@@ -1,8 +1,7 @@
 {
   "reference": {
     "title": "paper title", 
-    "1st_author": "surname, n.", 
-    "authors": ["surname, n.", "surname, n."],
+    "authors": ["Surname, Name", "Surname, Name"],
     "publication_name": null,
     "publication_type": null,
     "year": null,

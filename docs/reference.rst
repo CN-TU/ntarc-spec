@@ -15,19 +15,14 @@ title
 
      "title": "time-activity footprints in ip traffic"
 
-1st_author
-~~~~~~~~~~
-
-(*string*) First author name and surname with format: *surname, n.*.
-
-.. code-block:: none
-
-     "1st_author": "chekhov, a."
- 
 authors
 ~~~~~~~
 
 (*array* of *strings*)  Array with the authors' list. Format as in BibTeX. Check `this StackExchange thread <https://tex.stackexchange.com/questions/557/how-should-i-type-author-names-in-a-bib-file>`_ for details.
+
+.. warning:: Make sure to keep the order of the names the same as the paper!
+
+Example:
 
 .. code-block:: none
 

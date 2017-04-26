@@ -200,11 +200,6 @@
           "type": "string",
           "minLength": 1
         },
-        "1st_author": {
-          "title": "1st_author",
-          "type": "string",
-          "minLength": 1
-        },
         "authors": {
           "title": "authors",
           "type": "array",
@@ -327,7 +322,6 @@
       },
       "required": [
         "title",
-        "1st_author",
         "authors",
         "publication_name",
         "publication_type",
