@@ -127,8 +127,6 @@ metrics (*optional*)
 
 * ``"error_distance"``
   metric depends on the distance from the model to the data points. e.g. sum of squared error, absolute error, r^2, etc
-* ``"function_fitting"``
-  metric does not depend on the actual data points, but on their (sample) distribution. e.g. Kolmogorov-Smirnov test, Shapiro-Wilk test, etc.
 * ``"precision"``
   precision metric
 * ``"accuracy"``
@@ -157,8 +155,6 @@ metrics (*optional*)
   the metric is an heuristic developed specifically for the problem
 * ``"vote"``
   for nest methods (usually). The nest method integrates diverse validation techniques and the best result/algorithm is decided by means of consensus. 
-
-.. todo:: clarify function_fitting
 
 Example:
 
