@@ -67,13 +67,20 @@ focus_main
 * ``"features"``
   the main contribution of the paper is on the selected features, the preprocessing or the methods presented to select features. 
 * ``"pattern_analysis"`` 
-  authors insist and describe the shape of a set of discovered patterns that represent traffic classes or attacks. 
+  authors describe normal behavior in the data (either by textual descriptions or numerical estimates)
 * ``"outlier_analysis"`` 
-  authors focuses on describing discovered anomalies and offer a complete dissection of such anomalies and their peculiarities.  
+  authors describe abnormal behavior in the data (either by textual descriptions or numerical estimates)
 * ``"data_description"``
-  the nature of the paper is mostly descriptive. Authors try to explain the Internet, network traffic or a significant part of it by exploring and depicting one or some datasets. 
+  the nature of the paper is mostly descriptive, in a formal way. Authors try to explain the Internet, network traffic or a significant part of it by exploring and depicting one or some datasets, and presenting numbers/scores from mathematical analysis/statistics.
 
-.. todo:: what is exactly the difference between algorithm and methodology/framework?
+.. note::
+    ``"algorithm"`` and ``"methodology/framework"`` are very similar concepts.
+    In general, a methodology/framework is a composition of algorithms (and of how they interact with one another), in which each algorithm can easily be replaced by some other with the same input/output.
+    However, this distinction is not always clear.
+
+    A good way to distinguish between algorithm and methodology/framework is that usually an algorithm is limited to one of the Main Blocks (data/preprocessing/methods/evaluation), while a methodology/framework usually crosses the boundaries between the Main Blocks.
+    Common sense should be enough to make the distinction.
+    If not, consensus among experts is required.
 
 Example:
 

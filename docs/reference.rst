@@ -110,7 +110,7 @@ bibtex
 (*object*) Various BibTeX-related fields. This object supports extra fields, so you are free to add other BibTeX properties. All fields in this object are strings.
 
 type
-````
+----
 
 (*string*, for *bibtex* citation compatibility) Please, consider carefully if the publication fits one or more of the following default bibtex types (values):
 
@@ -128,7 +128,7 @@ Example:
 
 
 volume
-``````
+------
 
 (*string*, for *bibtex* citation compatibility) The volume of the related multi-volume publication or book. If there is no volume, write ``"missing"``. Example:
 
@@ -137,7 +137,7 @@ volume
  	"volume": "8"
 
 issue
-`````
+-----
 
 (*string*, for *bibtex* citation compatibility) The issue or number of the related publication or book. If there is no issue or number, write ``"missing"``. Example:
 
@@ -146,7 +146,7 @@ issue
  	"issue": "5"
 
 pages
-`````
+-----
 
 (*string*, for *bibtex* citation compatibility) The page range of the paper. If there is no page range, write ``"missing"``. Write "--" between page numbers. Example:
 

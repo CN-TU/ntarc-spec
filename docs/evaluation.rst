@@ -80,8 +80,6 @@ train_test_separation
 
 (*boolean*) It marks if datasets were clearly separated in independent train and test sets for the analysis. In other words, ``true`` if none of the testing data was used in training, ``false`` otherwise. Example:
 
-.. todo:: what about methods that do not have training data (unsupervised)? should we put false or something different to distinguish?
-
 .. code-block:: none
 
 	"train_test_separation": true
@@ -113,7 +111,9 @@ type (*optional*)
 * ``"nest"``
   the evaluation is a method that embeds other methods, or carries out some kind of bootstrapping (e.g. cross-validation analysis, ensemble learning
 
-.. todo:: what exactly is nest in this context?
+.. note::
+    In a particular paper, the usage of cross-validation could depend on the labels of the data.
+    However, since cross-validation method itself is independent from the score used (you can do both supervised and unsupervised cross-validation, or even a mix of both), cross-validation is considered ``"nest"``.
 
 Example:
 
@@ -148,8 +148,9 @@ metrics (*optional*)
 * ``"clustering_metrics"``
   e.g. silhouette coefficient
 * ``"time-based"``
-* ``"computing_resources-based"``
-  e.g. worst case bounds (big-O notation), measures of computer resources
+  evaluation on the required time for running the method
+* ``"other_computing_resources-based"``
+  evaluation of required computing resources (excluding time) for running the method (e.g. memory, cpu)
 * ``"granularity-based"``
   e.g. an algorithm provides more detailed information (classes, traffic types) than other algorithm.
 * ``"heuristic"``
@@ -157,7 +158,7 @@ metrics (*optional*)
 * ``"vote"``
   for nest methods (usually). The nest method integrates diverse validation techniques and the best result/algorithm is decided by means of consensus. 
 
-.. todo:: time-based? is this not included in computing_resources-based?
+.. todo:: clarify function_fitting
 
 Example:
 
