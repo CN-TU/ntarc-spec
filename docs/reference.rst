@@ -102,7 +102,9 @@ pages_number_of (*optional*)
 bibtex
 ~~~~~~
 
-(*object*) Various BibTeX-related fields. This object supports extra fields, so you are free to add other BibTeX properties. All fields in this object are strings.
+(*object*) Various BibTeX-related fields. All fields in this object are strings.
+
+.. note:: This object supports extra fields, so you are free to add other BibTeX properties. 
 
 type
 ----
