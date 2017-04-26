@@ -101,9 +101,11 @@
           ]
         },
         {
+          "title": "other",
           "$ref": "#/definitions/other"
         },
         {
+          "title": "missing",
           "$ref": "#/definitions/missing"
         }
       ]
@@ -149,9 +151,11 @@
           ]
         },
         {
+          "title": "other",
           "$ref": "#/definitions/other"
         },
         {
+          "title": "missing",
           "$ref": "#/definitions/missing"
         }
       ]
