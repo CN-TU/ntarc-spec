@@ -290,6 +290,7 @@
           "type": "object",
           "title": "bibtex",
           "format": "grid",
+          "description": "Feel free to add as many other BibTeX fields as you want here. To add new fields, use the \"Properties\" button above.",
           "propertyOrder": 80,
           "properties": {
             "type": {
