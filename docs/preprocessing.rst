@@ -67,6 +67,8 @@ transformations
 
 ``"no"``, ``"sampling"``, ``"filtering"``, ``"log"``, ``"map"``, ``"graph"``, ``"feature_aggregation"``, ``"flow_extraction"``, ``"entropy"``, ``"time_series"``, ``"feature_operation"``, ``"class_separation"``
 
+.. note:: This field is redundant with the features in the packets/flows/flow aggregations. However, this field is mandatory while the feature fields are optionals.
+
 Example:
 
 .. code-block:: none
