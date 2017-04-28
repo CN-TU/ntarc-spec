@@ -165,6 +165,9 @@
 <selection> -> {"select": [<logic>]}
 <selection> -> {"select_slice": [<value>, <value>]} | {"select_slice": [<value>, <value>, <selection>]}  # selects a slice from the first value to the second value, with Python-like indexing (if a <selection is not provided, default to selecting everything)
 <selection> -> "forward" | "backward"  # special cases for selection; select objects in the forward (or backward) direction
+<selection> -> {"select_flows": [<logic>]}  # same as "select", but outputs flows; only valid when used in flow aggregations
+<selection> -> {"select_slice_flows": [<value>, <value>]} | {"select_slice_flows": [<value>, <value>, <selection>]}  # same as "select_slice", but outputs flows; only valid when used in flow aggregations
+<selection> -> "forward_flows" | "backward_flows"  # same as "forward"/"backward", but outputs flows; only valid when used in flow aggregations
 # end
 
 # logic
