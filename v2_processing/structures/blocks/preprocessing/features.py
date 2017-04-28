@@ -248,16 +248,13 @@ class Feature(object):
             else:
                 raise ValueError('No such operation defined: ' + key)
         elif isinstance(feature, six.string_types):
-            self.type = FeatureType('base-feature')
-            self.key = None
-            assert feature in self._base_features or feature[:2] == '__', 'Unknown base feature ' + feature
-            # if feature in {"forward", "backward"}:  # TODO find a better way to put forward/backward
-            #     self.key = None
-            #     self.type = FeatureType('selection')
-            # else:
-            #     self.type = FeatureType('base-feature')
-            #     self.key = None
-            #     assert feature in self._base_features or feature[:2] == '__', 'Unknown base feature ' + feature
+            if feature in {"forward", "backward"}:  # TODO find a better way to put forward/backward
+                self.key = None
+                self.type = FeatureType('selection')
+            else:
+                self.type = FeatureType('base-feature')
+                self.key = None
+                assert feature in self._base_features or feature[:2] == '__', 'Unknown base feature ' + feature
         elif isinstance(feature, bool):
             self.type = FeatureType('logic')
             self.key = None
