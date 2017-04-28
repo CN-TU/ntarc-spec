@@ -235,7 +235,7 @@ features (*optional*)
 
 (*array* of *objects*)
 
-Describes the features used in the paper. See the feature specification file for complete information.
+Describes the features used in the paper. See :doc:`features` for complete information.
 
 
 flows (*optional*)
