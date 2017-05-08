@@ -507,6 +507,7 @@
                       "hours",
                       "days",
                       "weeks",
+                      "months",
                       "years"
                     ]
                   },
