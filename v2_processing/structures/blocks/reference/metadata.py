@@ -2,7 +2,10 @@ import json
 import os
 import time
 import requests
-from googleplaces import GooglePlaces
+try:
+    from googleplaces import GooglePlaces
+except ImportError:
+    GooglePlaces = None
 from ... import PROJECT_PATH, API_KEY, MAPS_API_KEY
 
 CACHE_DIR = PROJECT_PATH + '/processing/.cache'
