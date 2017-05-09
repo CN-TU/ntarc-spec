@@ -1,9 +1,11 @@
 try:
     from conf import PROJECT_PATH, API_KEY, MAPS_API_KEY, CACHE_DIR
 except ImportError:
-    PROJECT_PATH = ''
+    import os
+    PROJECT_PATH = os.environ['PYTHONPATH'] + '/..'
     API_KEY = ''
     MAPS_API_KEY = ''
+    CACHE_DIR = None
 from .tool import Tool
 
 
