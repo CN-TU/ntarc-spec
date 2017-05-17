@@ -561,6 +561,11 @@
                   "type": "string",
                   "minLength": 1
                 }
+              },
+              "anonymized": {
+                "title": "anynimized",
+                "type": "boolean",
+                "propertyOrder": 100
               }
             },
             "required": [

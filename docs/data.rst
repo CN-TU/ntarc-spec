@@ -154,6 +154,17 @@ subsets
  
   	"subsets": ["03-11-2014", "30-06-2015", "27-12-2016"]
 
+anonymized (*optional*)
+-----------------------
+
+(*boolean*) Whether the dataset is anonymized or not.
+
+Example:
+
+.. code-block:: none
+    
+    "anonymized": true
+
 
 JSON example (data, complete)
 `````````````````````````````
@@ -182,7 +193,8 @@ JSON example (data, complete)
         "generation_year": 1999,
         "covered_period": "missing",
         "details": ["preprocessed"],
-        "subsets": ["original","original_10_percent","corrected"]
+        "subsets": ["original","original_10_percent","corrected"],
+        "anonymized": true
       }  
     ]
   }
