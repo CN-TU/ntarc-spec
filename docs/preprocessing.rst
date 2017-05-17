@@ -203,7 +203,6 @@ main_goal (*optional*)
 
 * ``"anomaly_detection"``
 * ``"application_classification"``
-* ``"application_protocol_detection"``
 * ``"attack_classification"``
 * ``"botnet_detection"``
 * ``"classification_for_qos"``

@@ -4,6 +4,7 @@ Global rules
 
 In order to keep data curation homogeneity, some global rules must be defined. They are:
 
+* The JSON files must use utf-8 encoding.
 * ``null`` is a default value for fields that have not been checked in the curation process. 
 * ``"missing"`` replaces ``null`` when the required information for a specific fields has been checked but not found in the paper.
 * To avoid confusion, everything should be written in lower cases, even names and acronyms that are usually written in capitals; e.g., "tcp", "shakespeare". A relevant exception is the set of IANA IPFIX features.

@@ -22,6 +22,8 @@ The **Evaluation** block contains in information about how the performance of th
 The **Result** block contains information about the conclusions of the paper.
 The information for this block is usually completely contained in the conclusion section of the paper.
 
+Additionally to the main blocks, in order to avoid confusion with past/future versions of the format, there is a mandatory field for version (which is always "v2").
+
 
 JSON example
 ~~~~~~~~~~~~
@@ -31,6 +33,7 @@ Summary with only the main blocks:
 .. code-block:: none
 
  {
+   "version": "v2",
    "reference": {
      ...
    }, 

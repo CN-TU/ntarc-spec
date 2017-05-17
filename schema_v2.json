@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Paper",
   "required": [
+    "version",
     "reference",
     "data",
     "preprocessing",
@@ -131,7 +132,6 @@
           "enum": [
             "anomaly_detection",
             "application_classification",
-            "application_protocol_detection",
             "attack_classification",
             "botnet_detection",
             "classification_for_qos",
@@ -196,6 +196,12 @@
     }
   },
   "properties": {
+    "version": {
+      "title": "version",
+      "type": "string",
+      "propertyOrder": 1,
+      "enum": ["v2"]
+    },
     "reference": {
       "title": "reference",
       "type": "object",
@@ -435,7 +441,9 @@
                         "http",
                         "udp",
                         "icmp",
-                        "dns"
+                        "dns",
+                        "tls",
+                        "ipsec"
                       ],
                       "title": "default values"
                     },
@@ -553,6 +561,11 @@
                   "type": "string",
                   "minLength": 1
                 }
+              },
+              "anonymized": {
+                "title": "anynimized",
+                "type": "boolean",
+                "propertyOrder": 100
               }
             },
             "required": [

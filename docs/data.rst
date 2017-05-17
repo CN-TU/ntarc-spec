@@ -60,6 +60,11 @@ Please, check if the dataset-type fits any of the following default labels (valu
 * ``"udp"``
 * ``"icmp"``
 * ``"dns"``
+* ``"tls"``
+* ``"ipsec"``
+
+.. note:: The most general should be used when all of its subsets are used.
+    For example, ``["ipv4", "ipv6"]`` is the same as ``["ip"]``.
 
 Example:
 
@@ -143,9 +148,22 @@ subsets
 
 (*array* of *strings*) The dataset might consist of diverse subsets. Here we specify which subsets have been used during the analysis. If it is not clearly specified in the paper with a proper name, the default nomenclature of the subsets refer to the date if possible (format: *hh-dd-mm-yyyy*). Example:
 
+.. note:: You can also use this field when a dataset has been divided into constant time pieces (for example, when a one-hour long dataset was divided into 60 1-second long datasets)
+
 .. code-block:: none
  
   	"subsets": ["03-11-2014", "30-06-2015", "27-12-2016"]
+
+anonymized (*optional*)
+-----------------------
+
+(*boolean*) Whether the dataset is anonymized or not.
+
+Example:
+
+.. code-block:: none
+    
+    "anonymized": true
 
 
 JSON example (data, complete)
@@ -175,7 +193,8 @@ JSON example (data, complete)
         "generation_year": 1999,
         "covered_period": "missing",
         "details": ["preprocessed"],
-        "subsets": ["original","original_10_percent","corrected"]
+        "subsets": ["original","original_10_percent","corrected"],
+        "anonymized": true
       }  
     ]
   }
