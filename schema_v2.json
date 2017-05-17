@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Paper",
   "required": [
+    "version",
     "reference",
     "data",
     "preprocessing",
@@ -196,6 +197,12 @@
     }
   },
   "properties": {
+    "version": {
+      "title": "version",
+      "type": "string",
+      "propertyOrder": 1,
+      "enum": ["v2"]
+    },
     "reference": {
       "title": "reference",
       "type": "object",
