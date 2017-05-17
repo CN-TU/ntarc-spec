@@ -441,7 +441,9 @@
                         "http",
                         "udp",
                         "icmp",
-                        "dns"
+                        "dns",
+                        "tls",
+                        "ipsec"
                       ],
                       "title": "default values"
                     },
