@@ -61,6 +61,9 @@ Please, check if the dataset-type fits any of the following default labels (valu
 * ``"icmp"``
 * ``"dns"``
 
+.. note:: The most general should be used when all of its subsets are used.
+    For example, ``["ipv4", "ipv6"]`` is the same as ``["ip"]``.
+
 Example:
 
 .. code-block:: none
