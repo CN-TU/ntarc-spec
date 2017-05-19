@@ -12,7 +12,8 @@ _transportPayloadLength, INSERT DESCRIPTION
 _durationSeconds, Duration of a flow aggregation in seconds (maybe we can use _flowDurationSeconds for this??)
 _icmpTotalCount, Number of ICMP packets
 _interPacketLengthVariation, INSERT DESCRIPTION
-_interFlowTimeSeconds, Time between flows with the same key (in flow aggregations), in seconds
+_interFlowTimeSeconds, "Time between flows with the same key (in flow aggregations), in seconds"
+_flowStartHours, Hour in which the flow started
 _age, Age of a packet in seconds (maybe there's another way to get this?)
 _activeForSeconds, Number of bins of one second in which there was at least one packet
 _KDD_connectionFlag, KDD connection flag

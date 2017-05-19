@@ -67,6 +67,8 @@ transformations
 
 ``"no"``, ``"sampling"``, ``"filtering"``, ``"log"``, ``"map"``, ``"graph"``, ``"feature_aggregation"``, ``"flow_extraction"``, ``"entropy"``, ``"time_series"``, ``"feature_operation"``, ``"class_separation"``
 
+.. note:: This field is redundant with the features in the packets/flows/flow aggregations. However, this field is mandatory while the feature fields are optionals.
+
 Example:
 
 .. code-block:: none
@@ -201,7 +203,6 @@ main_goal (*optional*)
 
 * ``"anomaly_detection"``
 * ``"application_classification"``
-* ``"application_protocol_detection"``
 * ``"attack_classification"``
 * ``"botnet_detection"``
 * ``"classification_for_qos"``
@@ -233,7 +234,7 @@ features (*optional*)
 
 (*array* of *objects*)
 
-Describes the features used in the paper. See the feature specification file for complete information.
+Describes the features used in the paper. See :doc:`features` for complete information.
 
 
 flows (*optional*)
