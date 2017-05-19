@@ -18,6 +18,7 @@ In order to keep data curation homogeneity, some global rules must be defined. T
 	"authors": ["Chekhov, Anton", "de Maupassant, Guy", "Stifter, Adalbert"]
 
 * Fields are established according to two granularity levels for the curation process: *basic* and *complete*. Second level fields are distinguished by an "(*optional*)" next to their name. First level fields (basic, priority) are all the remaining fields, which are mandatory.
+* Additional fields for human readability can be added (e.g., for leaving comments), and the name of this field should be preceded by '_', e.g., ``"_comment"``.
 * The information in each main block is always to be taken in its context.
   For example, when looking at whether the data is ``"raw"`` or ``"preprocessed"`` in the Data block, consider the state of the data before the preprocessing phase.
 * In addition to the documentation, please check the supporting examples and templates for clarification:
