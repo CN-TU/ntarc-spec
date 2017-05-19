@@ -7,7 +7,7 @@
 "_KDD3": "ipClassOfService",
 "_KDD4": "_KDD_connectionFlag",
 "_KDD5": {"apply": ["octetTotalCount", "forward"]},
-"_KDD5": {"apply": ["octetTotalCount", "backward"]},
+"_KDD6": {"apply": ["octetTotalCount", "backward"]},
 "_KDD7": "_KDD_land",
 "_KDD8": "_KDD_wrongFragment",
 "_KDD9": "_KDD_urgent",
