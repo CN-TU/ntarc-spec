@@ -564,7 +564,7 @@
                 }
               },
               "anonymized": {
-                "title": "anynimized",
+                "title": "anonymized",
                 "type": "boolean",
                 "propertyOrder": 100
               }
