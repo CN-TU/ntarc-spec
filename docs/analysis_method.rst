@@ -173,8 +173,6 @@ source (*optional*)
 * ``"referenced"``
   if authors took the method from the literature or known sources. 
 
-.. todo:: do we need to distinguish between own_referenced and referenced? I think they should be the same
-
 Example:
 
 .. code-block:: none
