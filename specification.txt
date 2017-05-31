@@ -133,6 +133,8 @@
 <value> -> {"maximum": [<values>]} | {"maximum": [<value>+]}
 <value> -> {"argmin": [<values>]} | {"argmin": [<value>+]}
 <value> -> {"argmax": [<values>]} | {"argmax": [<value>+]}
+<value> -> {"floor": [<value>]}
+<value> -> {"ceil": [<value>]}
 <value> -> {"mode": [<values>]} # returns the most frequent element in <values>
 <value> -> {"count": [<selection>]} | {"count": [<values>]}  # returns number of selected objects
 <value> -> {"distinct": [<values>]}  # returns number of distinct values in <feature> in the selected objects
