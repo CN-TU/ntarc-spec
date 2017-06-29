@@ -196,8 +196,7 @@ JSON example (reference, complete)
 
   "reference": {
     "title": "time-activity footprints in ip traffic", 
-    "1st_author": "iglesias, f.", 
-    "authors": ["Iglesias, F\'elix", "Zseby, Tanja"],
+    "authors": ["Iglesias, Félix", "Zseby, Tanja"],
     "publication_name": "computer networks",
     "publication_type": "peer_reviewed_journal",
     "year": 2016,
