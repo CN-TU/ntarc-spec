@@ -1,0 +1,6 @@
+docs/**/_*
+processing/.*
+__pycache__/*
+processing/conf.py
+*.swp
+*.pyc
