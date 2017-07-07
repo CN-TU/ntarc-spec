@@ -226,7 +226,7 @@ class Feature(object):
     _operations = set(_operations_dict.keys()) | set(["basedon"])
     _logic = set(_logic_dict.keys())
     _values = set(_values_dict.keys())
-    _selection = set(_selection_dict.keys()) | {"forward", "backward"}  # TODO find better way for forward/backward
+    _selection = set(_selection_dict.keys()) | {"forward", "backward", "forward_flows", "backward_flows"}  # TODO find better way for forward/backward
     operations = _operations | _logic | _values | _selection
 
     def __init__(self, feature):
@@ -248,7 +248,7 @@ class Feature(object):
             else:
                 raise ValueError('No such operation defined: ' + key)
         elif isinstance(feature, six.string_types):
-            if feature in {"forward", "backward"}:  # TODO find a better way to put forward/backward
+            if feature in {"forward", "backward", "forward_flows", "backward_flows"}:  # TODO find a better way to put forward/backward
                 self.key = None
                 self.type = FeatureType('selection')
             else:
