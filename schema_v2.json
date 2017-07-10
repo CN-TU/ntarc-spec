@@ -301,14 +301,17 @@
           "properties": {
             "type": {
               "title": "type",
+              "minLength": 1,
               "type": "string"
             },
             "volume": {
               "title": "volume",
+              "minLength": 1,
               "type": "string"
             },
             "issue": {
               "type": "string",
+              "minLength": 1,
               "title": "issue"
             },
             "pages": {
