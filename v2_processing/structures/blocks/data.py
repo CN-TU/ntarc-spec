@@ -13,7 +13,7 @@ class Dataset(object):
         self.format = optional(obj, 'format')
         self.types = optional(obj, 'types')
         self.generation = optional(obj, 'generation')
-        self.generation_year = obj['generation_year']
+        self.generation_year = str(obj['generation_year'])
         self.covered_period = optional(obj, 'covered_period')
         self.details = optional(obj, 'details')
         self.subsets = obj['subsets']
