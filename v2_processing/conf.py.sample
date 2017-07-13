@@ -1,3 +1,3 @@
 PROJECT_PATH='/home/username/path/to/repository'  # path to root of git repo
 API_KEY='INSERT API KEY HERE'  # API key for Microsoft Academic Knowledge API https://www.microsoft.com/cognitive-services/en-us/academic-knowledge-api
-MAPS_API_KEY='INSERT API KEY HERE'  # API key for Google Maps API
+MAPS_API_KEY='INSERT API KEY HERE'  # API key for Google Places API
