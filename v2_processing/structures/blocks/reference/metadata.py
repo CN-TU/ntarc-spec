@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 import os
 import time
 import requests
@@ -8,13 +8,13 @@ except ImportError:
     GooglePlaces = None
 from ... import PROJECT_PATH, API_KEY, MAPS_API_KEY
 
-CACHE_DIR = PROJECT_PATH + '/processing/.cache'
+CACHE_DIR = PROJECT_PATH + '/v2_processing/.cache'
 
 
 class BaseEntity(object):
-    url_base = 'https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate'
-    api_key = API_KEY
-    attrs = None
+    _url_base = 'https://westus.api.cognitive.microsoft.com/academic/v1.0/evaluate'
+    _api_key = API_KEY
+    _attrs = None
 
     def __init__(self, id):
         self._id = id
@@ -30,13 +30,15 @@ class BaseEntity(object):
         if not self._check_cache():
             expr = 'Id=' + str(id)
 
-            url = self.url_base
+            url = self._url_base
             url += '?expr=' + expr
             url += '&attributes=' + attrs
 
-            r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': self.api_key})
+            r = requests.get(url, headers={'Ocp-Apim-Subscription-Key': self._api_key})
             data = r.json()
-            self._data = data['entities'][0]
+            if self._data is None:
+                self._data = {}
+            self._data['microsoft_api'] = data['entities'][0]
             self._write_cache(self._data)
             time.sleep(1)
         else:
@@ -44,12 +46,12 @@ class BaseEntity(object):
 
     @property
     def id(self):
-        return self.data['Id']
+        return self._saved_data['microsoft_api']['Id']
 
     @property
-    def data(self):
+    def _saved_data(self):
         if self._data is None:
-            self._query_id_attrs(self._id, self.attrs)
+            self._query_id_attrs(self._id, self._attrs)
         return self._data
 
     def _check_cache(self):
@@ -60,6 +62,13 @@ class BaseEntity(object):
         raise NotImplementedError
 
     def _write_cache(self, data):
+        try:
+            with open(self._cache_id_filename, 'r') as fd:
+                old_data = json.load(fd)
+                old_data.update(data)
+                data = old_data
+        except FileNotFoundError:
+            pass
         with open(self._cache_id_filename, 'w') as fd:
             json.dump(data, fd)
 
@@ -68,27 +77,33 @@ class BaseEntity(object):
             self._data = json.load(fd)
 
     def _query_id(self, id):
-        self._query_id_attrs(id, self.attrs)
+        self._query_id_attrs(id, self._attrs)
 
 
 class Author(BaseEntity):
-    attrs = 'Id,AuN,DAuN,CC,ECC,E,SSD'
+    _attrs = 'Id,AuN,DAuN,CC,ECC,E,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'author_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'author_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
 
 class Affiliation(BaseEntity):
-    attrs = 'Id,AfN,DAfN,CC,ECC,SSD'
+    _attrs = 'Id,AfN,DAfN,CC,ECC,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'affiliation_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'affiliation_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
     @property
     def _cache_location_filename(self):
-        return CACHE_DIR + os.sep + 'affiliation_location' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'affiliation_location'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
     @property
     def location(self):
@@ -108,7 +123,7 @@ class Affiliation(BaseEntity):
     def _query_location(self):
         if not self._check_location_cache():
             google_places = GooglePlaces(MAPS_API_KEY)
-            query_result = google_places.text_search(self.data['DAfN'])
+            query_result = google_places.text_search(self._saved_data['microsoft_api']['DAfN'])
             try:
                 self._location_info = query_result.raw_response['results'][0]
             except IndexError:
@@ -127,37 +142,49 @@ class Affiliation(BaseEntity):
         with open(self._cache_location_filename, 'w') as fd:
             json.dump(location_info, fd)
 
+    @property
+    def name(self):
+        return self._saved_data['microsoft_api']['DAfN']
+
 
 class Journal(BaseEntity):
-    attrs = 'Id,DJN,JN,CC,ECC,SSD'
+    _attrs = 'Id,DJN,JN,CC,ECC,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'journal_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'journal_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
 
 class ConferenceSeries(BaseEntity):
-    attrs = 'Id,CN,DCN,CC,ECC,F.FId,F.FN,SSD'
+    _attrs = 'Id,CN,DCN,CC,ECC,F.FId,F.FN,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'conferenceseries_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'conferenceseries_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
 
 class ConferenceInstance(BaseEntity):
-    attrs = 'Id,CIN,DCN,CIL,CISD,CIED,CIARD,CISDD,CIFVD,CINDD,CD.T,CD.D,PCS.CN,PCS.CId,CC,ECC,SSD'
+    _attrs = 'Id,CIN,DCN,CIL,CISD,CIED,CIARD,CISDD,CIFVD,CINDD,CD.T,CD.D,PCS.CN,PCS.CId,CC,ECC,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'conferenceinstance_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'conferenceinstance_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
 
 class FieldOfStudy(BaseEntity):
-    attrs = 'Id,FN,DFN,CC,ECC,FL,FP.FN,FP.FId,SSD'
+    _attrs = 'Id,FN,DFN,CC,ECC,FL,FP.FN,FP.FId,SSD'
 
     @property
     def _cache_id_filename(self):
-        return CACHE_DIR + os.sep + 'fieldofstudy_id' + os.sep + str(self._id)
+        dirname = CACHE_DIR + os.sep + 'fieldofstudy_id'
+        os.makedirs(dirname, exist_ok=True)
+        return dirname + os.sep + str(self._id)
 
 
 def _get_list(d, key):
