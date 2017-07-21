@@ -324,6 +324,11 @@ active_timeout (*optional*)
 
 Like in :ref:`flow-object.active_timeout <active_timeout>`.
 
+bidirectional (*optional*)
+--------------------------
+
+Like in :ref:`flow-object.bidirectional <bidirectional>`.
+
 features (*optional*)
 ---------------------
 

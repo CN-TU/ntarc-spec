@@ -124,8 +124,8 @@ Example:
  	"type": "article"
 
 
-volume
-------
+volume (*optional*)
+-------------------
 
 (*string*, for *bibtex* citation compatibility) The volume of the related multi-volume publication or book. If there is no volume, write ``"missing"``. Example:
 
@@ -133,8 +133,8 @@ volume
  
  	"volume": "8"
 
-issue
------
+issue (*optional*)
+------------------
 
 (*string*, for *bibtex* citation compatibility) The issue or number of the related publication or book. If there is no issue or number, write ``"missing"``. Example:
 
@@ -142,8 +142,8 @@ issue
  
  	"issue": "5"
 
-pages
------
+pages (*optional*)
+------------------
 
 (*string*, for *bibtex* citation compatibility) The page range of the paper. If there is no page range, write ``"missing"``. Write "--" between page numbers. Example:
 

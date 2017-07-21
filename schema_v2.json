@@ -49,8 +49,8 @@
       "type": "object",
       "format": "grid",
       "properties": {
-        "tool": {
-          "title": "tool",
+        "name": {
+          "title": "name",
           "type": "string",
           "minLength": 1
         },
@@ -83,7 +83,7 @@
         }
       },
       "required": [
-        "tool",
+        "name",
         "availability"
       ]
     },
@@ -200,7 +200,7 @@
       "title": "version",
       "type": "string",
       "propertyOrder": 1,
-      "enum": ["v2"]
+      "enum": ["v2.1"]
     },
     "reference": {
       "title": "reference",
@@ -324,7 +324,7 @@
             "type": "string"
           },
           "required": [
-            "type", "volume", "issue", "pages"
+            "type"
           ]
         },
         "access_open": {
@@ -377,8 +377,8 @@
             "title": "dataset",
             "type": "object",
             "properties": {
-              "dataset_name": {
-                "title": "dataset_name",
+              "name": {
+                "title": "name",
                 "type": "string",
                 "propertyOrder": 10,
                 "minLength": 1
@@ -573,7 +573,7 @@
               }
             },
             "required": [
-              "dataset_name",
+              "name",
               "generation_year",
               "subsets"
             ]

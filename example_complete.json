@@ -1,5 +1,5 @@
 {
-  "version": "v2",
+  "version": "v2.1",
   "reference": {
     "title": "time-activity footprints in ip traffic",
     "authors": ["Iglesias, Félix", "Zseby, Tanja"],
@@ -24,7 +24,7 @@
   "data": {
     "datasets": [
       {
-        "dataset_name": "mawi-2015",
+        "name": "mawi-2015",
         "availability": "public",
         "format": "packet",
         "types": [
@@ -53,12 +53,12 @@
     "flow_aggregation_analysis_oriented": false,
     "tools": [
       {
-        "tool": "tshark",
+        "name": "tshark",
         "detail": "v2.0.0",
         "availability": "public"
       },
       {
-        "tool": "own_perl_scripts",
+        "name": "own_perl_scripts",
         "detail": "none",
         "availability": "private"
       }
@@ -189,12 +189,12 @@
     "anomaly_detection": true,
     "tools": [
       {
-        "tool": "matlab_fuzzyclusteringtoolbox",
+        "name": "matlab_fuzzyclusteringtoolbox",
         "availability": "public",
         "detail": "none"
       },
       {
-        "tool": "own_matlab_scripts",
+        "name": "own_matlab_scripts",
         "availability": "private",
         "detail": "none"
       }
@@ -209,7 +209,7 @@
         "metric/decision_criteria": "mahalanobis",
         "tools": [
           {
-            "tool": "matlab_fuzzyclusteringtoolbox",
+            "name": "matlab_fuzzyclusteringtoolbox",
             "detail": "none",
             "availability": "public"
           }
@@ -226,7 +226,7 @@
         "metric/decision_criteria": "mahalanobis",
         "tools": [
           {
-            "tool": "own_matlab_scripts",
+            "name": "own_matlab_scripts",
             "detail": "none",
             "availability": "private"
           }

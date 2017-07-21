@@ -11,17 +11,17 @@ datasets
 
 (*array* of *objects*) *datasets* can contain several *dataset-objects*. A *dataset-object* is composed of several fields. 
 
-dataset_name
+name
 ------------
 
 (*string*) The name that identifies the dataset. By default we use a *source_year* nomenclature. Example:
 
 .. code-block:: none
 
-    "dataset_name": "mawi-2015"
+    "name": "mawi-2015"
 
-availability (*optional*)
--------------------------
+availability
+------------
 
 (*string*) It establishes how a normal Internet user can access the specific dataset. Please, consider carefully if the dataset-accesibility fits any of the following default labels (values):
 
@@ -172,9 +172,9 @@ JSON example (data, complete)
 .. code-block:: none
 
   "data": {
-    "dataset": [
+    "datasets": [
       {
-        "dataset_name": "mawi-2015",
+        "name": "mawi-2015",
         "availability": "public",
         "format": "packet",
         "types": "ip",
@@ -185,7 +185,7 @@ JSON example (data, complete)
         "subsets": ["01-01-2015","15-04-2015","31-07-2015"]
       },
       {
-        "dataset_name": "kddcup-1999",
+        "name": "kddcup-1999",
         "availability": "public",
         "format": "packet",
         "types": "ipv4",

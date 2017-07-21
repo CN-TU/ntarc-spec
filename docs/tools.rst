@@ -9,23 +9,23 @@ Example:
 
      "tools": [
          {
-             "tool": "tshark",
+             "name": "tshark",
              "detail": "v2.0.0",
              "availability": "public"
          },
          {
-             "tool": "own_python_scripts",
+             "name": "own_python_scripts",
              "detail": "none",
              "availability": "private"
          },
          {
-             "tool": "own_perl_scripts",
+             "name": "own_perl_scripts",
              "detail": "none",
              "availability": "private"
          }
      ]
 
-tool
+name
 ----
 (*string*) We use the following keys for the nomenclature:
   
@@ -38,7 +38,7 @@ Example:
 
 .. code-block:: none
 
-  "tool": "tshark"
+  "name": "tshark"
 
 detail (*optional*)
 -------------------

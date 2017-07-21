@@ -33,7 +33,7 @@ Summary with only the main blocks:
 .. code-block:: none
 
  {
-   "version": "v2",
+   "version": "v2.1",
    "reference": {
      ...
    }, 
