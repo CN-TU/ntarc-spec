@@ -52,3 +52,5 @@ _KDD_dstHostSerrorRate, KDD destination host send error rate
 _KDD_dstHostSrvSerrorRate, KDD destination host server send error rate
 _KDD_dstHostRerrorRate, KDD destination host receive error rate
 _KDD_dstHostSrvRerrorRate, KDD destination host server receive error rate
+_ingressRouter, ""
+_egressRouter, ""
