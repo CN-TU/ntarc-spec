@@ -7,7 +7,7 @@ _interPacketTimeMicroseconds, Times between packets (in microseconds)
 _segmentSize, INSERT DESCRIPTION
 _transportHeaderLength, INSERT DESCRIPTION
 _push_pkts, INSERT DESCRIPTION
-_flowTotalCount, Number of flows (in a flow aggregation, for example)
+_flowTotalCount, "Number of flows (in a flow aggregation, for example)"
 _transportPayloadLength, INSERT DESCRIPTION
 _durationSeconds, Duration of a flow aggregation in seconds (maybe we can use _flowDurationSeconds for this??)
 _icmpTotalCount, Number of ICMP packets
