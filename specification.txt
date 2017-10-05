@@ -136,6 +136,8 @@
 <value> -> {"floor": [<value>]}
 <value> -> {"ceil": [<value>]}
 <value> -> {"mode": [<values>]} # returns the most frequent element in <values>
+<value> -> {"mad": [<values>]} # returns the mean absolute deviation of <values>
+<value> -> {"moment": [<values>, <value>]} # returns the <value>-th standardized moment of <values>
 <value> -> {"count": [<selection>]} | {"count": [<values>]}  # returns number of selected objects
 <value> -> {"distinct": [<values>]}  # returns number of distinct values in <feature> in the selected objects
 <value> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
