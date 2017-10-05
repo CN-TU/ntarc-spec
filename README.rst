@@ -9,7 +9,7 @@ More information about this work can be found here: https://www.cn.tuwien.ac.at/
 
 Additionally, documentation for this repository can be found here: https://nta-meta-analysis.readthedocs.io/en/latest/
 
-.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
+.. |docs| image:: https://readthedocs.org/projects/nta-meta-analysis/badge/?version=latest
     :alt: Documentation Status
     :scale: 100%
-    :target: https://docs.readthedocs.io/en/latest/?badge=latest
+    :target: https://nta-meta-analysis.readthedocs.io/en/latest/?badge=latest
