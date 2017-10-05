@@ -8,7 +8,7 @@ class Data(object):
 
 class Dataset(object):
     def __init__(self, obj):
-        self.name = obj['dataset_name']
+        self.name = obj['name']
         self.availability = optional(obj, 'availability')
         self.format = optional(obj, 'format')
         self.types = optional(obj, 'types')
