@@ -274,6 +274,8 @@ idle_timeout (*optional*)
 
    "idle_timeout": 5
 
+.. _bidirectional:
+
 bidirectional (*optional*)
 --------------------------
 
