@@ -40,7 +40,7 @@ flow_aggregation_analysis_oriented
 
 .. code-block:: none
 
-	"feature_aggregation_analysis_oriented": false
+	"flow_aggregation_analysis_oriented": false
 
 .. include:: tools.rst 
 
@@ -355,7 +355,7 @@ JSON example (preprocessing, complete)
     "performed_feature_selection": true,
     "packet_analysis_oriented": false,
     "flow_analysis_oriented": true,
-    "feature_aggregation_analysis_oriented": false,
+    "flow_aggregation_analysis_oriented": false,
     "tools": [
         {
             "tool": "tshark",
