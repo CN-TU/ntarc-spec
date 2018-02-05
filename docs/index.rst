@@ -27,10 +27,15 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: Tools:
+
+   tools/editor
+
+.. toctree::
+   :maxdepth: 2
    :caption: V1 Content:
 
    v1/overview.rst
-   v1/_workflow.rst
    v1/reference.rst
    v1/structures.rst
    v1/features.rst
@@ -38,8 +43,6 @@
    v1/evaluation.rst
    v1/datasets.rst
    v1/tools.rst
-   v1/_tips.rst
-   v1/_ideas.rst
    v1/naming.rst
    v1/specification.rst
 

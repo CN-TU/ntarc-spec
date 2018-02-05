@@ -4,8 +4,6 @@ Features
 The features are the hardest part of this format, as they are the most complex.
 However, having a complete description of the feature-set used in a paper in this format allows the use of an extractor tool to automatically reproduce the feature vectors used in the paper.
 
-.. todo:: link Gernot's tool
-
 Concepts
 --------
 
@@ -38,7 +36,7 @@ We try to use the names of the IPFIX information elements defined by `IANA <http
 For features that we can not get out of combining IANA features with our limited set of operations, we have two naming options:
 
     * if the feature is expected to be used many times (e.g.: there are some KDD '99 features which we cannot represent using IANA features and operations, but they are used in many papers), use a ``_`` as prefix to a descriptive feature name.
-      This features are listed in :download:`data/own_ies.csv <../data/own_ies.csv>`.
+      This features are listed in :download:`own_ies.csv <../own_ies.csv>`.
       If you want to specify a new ``_`` feature, you need to add it there.
     * if the feature is very specific to this paper, use ``__`` (double ``_``) as prefix to a descriptive feature name
 
@@ -48,7 +46,7 @@ This means that **all base features that do not start with** ``_`` **have to be 
 
 There is still another case, which is features that are repeated often, and are a combination of IANA features.
 In this case, use a descriptive feature name which starts with ``_`` as an alias for it.
-A complete list of aliases is in :download:`data/feature_aliases.json <../data/feature_aliases.json>`; please add additional aliases there.
+A complete list of aliases is in :download:`feature_aliases.json <../feature_aliases.json>`; please add additional aliases there.
 
 
 Operations
