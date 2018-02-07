@@ -873,6 +873,11 @@
                 "propertyOrder": 30,
                 "$ref": "#/definitions/goal"
               },
+              "bidirectional": {
+                "propertyOrder": 35,
+                "title": "bidirectional",
+                "type": "boolean"
+              },
               "active_timeout": {
                 "propertyOrder": 40,
                 "title": "active_timeout",
