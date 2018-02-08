@@ -1238,6 +1238,7 @@
                         "error_distance",
                         "precision",
                         "accuracy",
+                        "recall",
                         "f-1",
                         "roc/uac",
                         "complete_confusion_matrix",
