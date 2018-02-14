@@ -1,100 +1,203 @@
-import json
-import numbers
-import six
 import re
-import types
+import json
 from ... import PROJECT_PATH
-def copy_func(f, name=None):
-    return types.FunctionType(f.__code__, f.__globals__, name or f.__name__,
-        f.__defaults__, f.__closure__)
 
 
 IANA_IE_LIST = PROJECT_PATH + '/iana_ies.csv'
 OWN_IE_LIST = PROJECT_PATH + '/own_ies.csv'
 SPECIFICATION_FILE = PROJECT_PATH + '/specification.txt'
 CONVERSION_FILE = PROJECT_PATH + '/feature_aliases.json'
-CONVERSION_D = None
 
 
-def _generate_argument_checker(funcs):
-    def check(x):
-        ii = 0
-        for ff in funcs:
-            try:
-                res = ff(x[ii:])
-            except:
-                return False
-            if res:
-                if res == 'star':
-                    continue
-                ii += res
-        if ii < len(x):
-            return False
+specification = open(SPECIFICATION_FILE).readlines()
+
+
+class FeatureError(Exception):
+    def __init__(self, input_argument, attempt, message):
+        self.input_argument = input_argument
+        self.attempt = attempt
+        self.message = message
+
+
+def get_rules(target):
+    out = []
+    match_line = re.compile('^<'+target+'> -> ')
+    for line in specification:
+        if match_line.match(line):  # check if line has rule for target
+            options = [x.strip() for x in line.split('->')[-1].split('#')[0].split('|')]
+            out.extend(options)
+    return out
+
+
+def get_operations(rules):
+    out = {}
+    op_regex = re.compile('^\{\s*"\w+":\s*\[.*\]\s*\}$')
+    for rule in rules:
+        if op_regex.match(rule):  # check if rule is an operation
+            key = rule.split('"')[1]
+            arguments = [x for x in rule.split('[')[-1].split(']')[0].split(',')]
+            if key not in out:
+                out[key] = []
+            out[key].append(arguments)
+    return out
+
+
+def get_non_term_symbols(rules):
+    out = []
+    symb_regex = re.compile('^\s*\<[\w-]+\>\s*$')
+    for rule in rules:
+        if symb_regex.match(rule):
+            out.append(rule)
+    return out
+
+
+def get_term_symbols(rules):
+    out = []
+    symb_regex = re.compile('^\s*"\w+"\s*$')
+    non_quoted_regex = re.compile('^\w*$')
+    for rule in rules:
+        if symb_regex.match(rule) or non_quoted_regex.match(rule):
+            out.append(rule)
+    return out
+
+
+def match_arguments(op_args, input_args):
+    if len(op_args) != len(input_args) and ('+' not in op_args and '*' not in op_args):
+        raise FeatureError(input_args, op_args, 'Wrong size!')  # check for basic input structure
+    out = []
+    idx = 0
+    for arg in op_args:
+        arg = arg.strip()
+        if arg[-1] in ['+', '*']:
+            parsed_args = []
+            while idx < len(input_args):
+                try:
+                    parsed_args.append(parse_as(input_args[idx], arg[:-1]))
+                    idx += 1
+                except FeatureError:
+                    break
+            if arg[-1] == '+' and len(parsed_args) <= 0:
+                raise FeatureError(input_args[idx:], arg, 'Need to consume at least one argument (consumed 0)!')
+            out.extend(parsed_args)
         else:
-            return True
-    return check
+            out.append(parse_as(input_args[idx], arg))
+            idx += 1
+    if len(out) != len(input_args):
+        raise FeatureError(input_args, op_args, 'Not all arguments were consumed!')
+
+    return out
 
 
-def _generate_type_comparison(n):
-    def check(x):
-        return x.type == n
-    return check
+def parse_as(argument, name):
+    return possible_types[name.strip('<>')](argument)
 
 
-def _generate_plus_f(n):
-    def plus_f(x, new_i=0):
-        while new_i < len(x) and _generate_type_comparison(n)(x[new_i]):
-            new_i += 1
-        return new_i
-    return plus_f
+class Base(object):
+    name = None
+    rules = None
+    ops = None
+    non_term = None
+    term = None
+    leaf = False
+
+    def __init__(self, d):
+        self.key = None
+        self.arguments = None
+        self.possible_parses = []
+        self.basefeat = None
+
+        self.parse(d)
+
+    def parse(self, d):
+        try:
+            self.parse_as_self(d)
+        except FeatureError:
+            self.parse_non_terminal(d)
+
+    def parse_as_self(self, d):
+        # op
+        if type(d) == dict:
+            # check if op exists
+            assert len(d.keys()) == 1, 'Only one operation at a time is allowed!'
+            self.key = list(d.keys())[0]
+            if self.key not in self.ops:
+                raise FeatureError(d, self.name, 'No such operation!')
+            self.arguments = d[self.key]
+
+            # validate arguments
+            for op in self.ops[self.key]:
+                try:
+                    args = match_arguments(op, self.arguments)
+                    self.possible_parses.append(args)
+                except FeatureError:
+                    continue
+            if len(self.possible_parses) == 0:
+                raise FeatureError(d, self.name, "Can't parse directly!")
+
+        elif type(d) in [str, int, float, bool]:
+            # terminal symbol
+            for symbol in self.term:
+                if symbol == d:
+                    self.possible_parses = [symbol]
+            if len(self.possible_parses) == 0:
+                raise FeatureError(d, self.name, 'Doesn\'t match any terminal symbol.')
+        else:
+            raise FeatureError(d, self.name, "Can't parse (wrong type)!")
 
 
-def _generate_times_f(n):
-    def times_f(x, new_i=0):
-        while new_i < len(x) and _generate_type_comparison(n)(x[new_i]):
-            new_i += 1
-        return new_i if new_i > 0 else 'star'
-    return times_f
-
-
-def _generate_one_f(n):
-    def one_f(x):
-        return _generate_type_comparison(n)(x[0])
-    return one_f
-
-
-class Operation(object):
-    def __init__(self, line):
-        line = line.split(' #')[0]
-        self.type = line.split('>')[0].split('<')[-1]
-        self.name = line.split('":')[0].split('"')[-1]
-        possibilities = line.split('->')[-1].split('|')
-        self.argument_possibilities = []
-        for arg in possibilities:
-            if '"' not in arg:  # skip lines that don't have operations
+    def parse_non_terminal(self, d):
+        # non-terminal symbol
+        for symbol in self.non_term:
+            try:
+                arg = parse_as(d, symbol)
+                self.possible_parses.append(arg)
+            except FeatureError as e:
                 continue
-            new_arg = re.sub(r'>([+*]*)', r'>\1"', arg.replace('<', '"<'))
-            d = json.loads(new_arg)
-            args = d[self.name]
-            funcs = []
-            for aa in args:
-                n = FeatureType(aa.split('>')[0].split('<')[-1])
-                if aa[-1] == '+':  # allow multiple arguments, require at least 1
-                    f = _generate_plus_f(n)
-                elif aa[-1] == '*':  # allow multiple arguments (or none)
-                    f = _generate_times_f(n)
-                else:
-                    f = _generate_one_f(n)
-                funcs.append(f)
-            final_f = _generate_argument_checker(funcs)
-            self.argument_possibilities.append(final_f)
+        if len(self.possible_parses) == 0:
+            raise FeatureError(d, self.name, "Doesn't match any non-terminal symbol.")
 
-    def __hash__(self):
-        return hash(self.name)
+    def iterate_operations(self):
+        if self.key is not None:
+            yield self.key
+        elif not self.leaf:
+            if type(self.possible_parses[0]) == list: # TODO continue
+                for arg in self.possible_parses[0]:
+                    for op in arg.iterate_operations():
+                        yield op
+            else:
+                for op in self.possible_parses[0].iterate_operations():
+                    yield op
 
-    def __eq__(self, other):
-        return self.name == other.name
+    def iterate_base_features(self):
+        if self.basefeat is not None:
+            yield self.basefeat
+        elif not self.leaf:
+            if type(self.possible_parses[0]) == list:
+                for arg in self.possible_parses[0]:
+                    for feat in arg.iterate_base_features():
+                        yield feat
+            else:
+                for feat in self.possible_parses[0].iterate_base_features():
+                    yield feat
 
+
+def get_type(inp_name):
+    rules = get_rules(inp_name)
+    ops = get_operations(rules)
+    non_term = get_non_term_symbols(rules)
+    term = get_term_symbols(rules)
+
+    new_class = type(inp_name.capitalize(),
+                     (Base,),
+                     {
+                         'name': inp_name,
+                         'rules': rules,
+                         'ops': ops,
+                         'non_term': non_term,
+                         'term': term
+                     })
+
+    return new_class
 
 
 def _get_iana_ies(filename):
@@ -123,174 +226,85 @@ def _get_aliases(filename):
         out = set(list(d.keys()))
     return out
 
+class BaseFeature(Base):
+    name = 'base-feature'
+    iana_ies = _get_iana_ies(IANA_IE_LIST)
+    own_ies = _get_own_ies(OWN_IE_LIST)
+    aliases = _get_aliases(CONVERSION_FILE)
+    rare_feature = re.compile('^__[a-z0-9]+([A-Z][a-z0-9]*)+$')
+    leaf = True
 
-def _get_arguments_dict_from_specification(filename, keyword):
-    out = {}
-    l = len(keyword)
-    with open(filename) as fd:
-        for line in fd:
-            if line[1:(l + 1)] == keyword:
-                try:  # TODO this is only necessary because of backward/forward, need to find a better way
-                    op = Operation(line)
-                except:
-                    continue
-                out[op.name] = op
-    return out
-
-
-class FeatureType(object):
-    try:
-        _specification = open(SPECIFICATION_FILE).readlines()
-    except:
-        _specification = None
-
-    def __init__(self, name):
-        self.name = name
-        self.parents = self._get_parents(name)
-
-    @staticmethod
-    def _get_parents(name):
-        if FeatureType._specification is None:
-            raise ValueError('Please define PROJECT_PATH in config file!')
-
-        out = set()
-        for line in FeatureType._specification:
-            line = line.split('#')[0] if line[0] != '#' else ''  # remove comments
-            if '"' in line or '<' + name + '>' not in line.split('->')[-1]:  # skip if name isn't there
-                continue
-            line = line.split('->')
-            out.add(line[0].split('>')[0].split('<')[-1])
-
-        new_out = set()
-        for t in out:
-            new_out.add(t)
-            new_out.update(FeatureType._get_parents(t))
-
-        return new_out
-
-    def __eq__(self, other):
-        return self.name == other.name or other.name in self.parents or self.name in other.parents
+    def parse(self, d):
+        if type(d) != str:
+            raise FeatureError(d, self.name, 'Base features need to be strings!')
+        if not self.rare_feature.match(d) and \
+                        d not in self.aliases and \
+                        d not in self.own_ies and \
+                        d not in self.iana_ies:
+            raise FeatureError(d, self.name, 'Base feature doesn\'t exist or has invalid name!')
+        self.basefeat = d
 
 
-def _convert_feature(feature):
-    global CONVERSION_D
-    if CONVERSION_D is None:
-        CONVERSION_D = json.load(open(CONVERSION_FILE, 'r'))
-    if isinstance(feature, six.string_types) and feature in CONVERSION_D:
-        return _convert_feature(CONVERSION_D[feature])
-    else:
-        return feature
+class Number(Base):
+    name = 'free-number'
+    leaf = True
+
+    def parse(self, d):
+        if type(d) not in [int, float]:
+            raise FeatureError(d, self.name, 'Not a number!')
+
+
+possible_types = {k: get_type(k) for k in ['value', 'values', 'selection', 'feature', 'logic']}
+possible_types['base-feature'] = BaseFeature
+possible_types['free-integer'] = Number
+possible_types['free-float'] = Number
 
 
 class Features(object):
     def __init__(self, d):
-        self.features = [Feature(f) for f in d]
+        self.features = [possible_types['feature'](f) for f in d]
 
     def iterate_features(self):
-        return Features._iterate_base_features(self.features)
+        return self.iterate_base_features()
 
     def get_base_feature_names(self):
-        return set([f.feature for f in self.iterate_features()])
+        return set(self.iterate_features())
 
     def get_operation_names(self):
-        ops = set([f.key for f in Features._iterate_operations(self.features)])
+        ops = set(self.iterate_operations())
         return ops
 
-    @staticmethod
-    def _iterate_operations(features):
-        for f in features:
-            for ff in Feature._iterate_operations(f):
+    def iterate_operations(self):
+        for f in self.features:
+            for ff in f.iterate_operations():
                 yield ff
 
-    @staticmethod
-    def _iterate_base_features(features):
-        for f in features:
-            for ff in Feature._iterate_base_features(f):
+    def iterate_base_features(self):
+        for f in self.features:
+            for ff in f.iterate_base_features():
                 yield ff
 
-
-class Feature(object):
-    _iana_ies = _get_iana_ies(IANA_IE_LIST)
-    _own_features = _get_own_ies(OWN_IE_LIST)
-    _aliases = _get_aliases(CONVERSION_FILE)
-    _base_features = _iana_ies | _own_features | _aliases
-
-    _operations_dict = _get_arguments_dict_from_specification(SPECIFICATION_FILE, 'value')
-    _logic_dict = _get_arguments_dict_from_specification(SPECIFICATION_FILE, 'logic')
-    _values_dict = _get_arguments_dict_from_specification(SPECIFICATION_FILE, 'values')
-    _selection_dict = _get_arguments_dict_from_specification(SPECIFICATION_FILE, 'selection')
-    _all_operations_dict = {"value": _operations_dict, "logic": _logic_dict, "values": _values_dict,
-                            "selection": _selection_dict}
-
-
-    _operations = set(_operations_dict.keys()) | set(["basedon"])
-    _logic = set(_logic_dict.keys())
-    _values = set(_values_dict.keys())
-    _selection = set(_selection_dict.keys()) | {"forward", "backward", "forward_flows", "backward_flows"}  # TODO find better way for forward/backward
-    operations = _operations | _logic | _values | _selection
-
-    def __init__(self, feature):
-        feature = _convert_feature(feature)
-        self.feature = feature
-        if type(feature) is dict:
-            keys = list(feature)
-            assert len(keys) == 1, 'There should only be one key! Keys are: ' + str(keys)
-            key = keys[0]
-            self.key = key
-            if key in self._operations:
-                self.type = FeatureType('value')
-            elif key in self._logic:
-                self.type = FeatureType('logic')
-            elif key in self._values:
-                self.type = FeatureType('values')
-            elif key in self._selection:
-                self.type = FeatureType('selection')
-            else:
-                raise ValueError('No such operation defined: ' + key)
-        elif isinstance(feature, six.string_types):
-            if feature in {"forward", "backward", "forward_flows", "backward_flows"}:  # TODO find a better way to put forward/backward
-                self.key = None
-                self.type = FeatureType('selection')
-            else:
-                self.type = FeatureType('base-feature')
-                self.key = None
-                assert feature in self._base_features or feature[:2] == '__', 'Unknown base feature ' + feature
-        elif isinstance(feature, bool):
-            self.type = FeatureType('logic')
-            self.key = None
-        elif isinstance(feature, numbers.Number):
-            self.type = FeatureType('value')
-            self.key = None
-        else:
-            raise ValueError('Invalid feature ' + feature)
-
-        if self.key is not None:
-            assert type(feature[self.key]) is list, 'Arguments need to be in a list! Fail in ' + feature
-            self.arguments = [Feature(f) for f in feature[self.key]]
-        else:
-            self.arguments = None
-
-        # test arguments
-        if self.arguments is not None and 'basedon' not in self.feature:
-            op = self._all_operations_dict[self.type.name][self.key]
-            res = any([test(self.arguments) for test in op.argument_possibilities])
-            if not res:
-                print('Error!', json.dumps(self.feature), ', Received arguments to "' + self.key + '":',
-                      str([arg.type.name for arg in self.arguments]))
-
-    @staticmethod
-    def _iterate_base_features(feature):
-        if feature.type.name == 'base-feature':
-            yield feature
-        elif feature.arguments is not None:
-            for arg in feature.arguments:
-                for feat in Feature._iterate_base_features(arg):
-                    yield feat
-
-    @staticmethod
-    def _iterate_operations(feature):
-        if feature.arguments is not None:
-            yield feature
-            for f in feature.arguments:
-                for k in Feature._iterate_operations(f):
-                    yield k
+# # TODO tmp
+# if __name__ == '__main__':
+#     example = {
+#             "count": [
+#               {
+#                 "quantile_range": [
+#                   "_flowStartHours",
+#                   0,
+#                   0.05
+#                 ]
+#               }
+#             ]
+#           }
+#     # [print(x) for x in get_rules('value')]
+#     # [print(x) for x in get_rules('feature')]
+#     # print(get_operations(get_rules('value'))['add'])
+#     vv = possible_types['feature']
+#     i = vv(example)
+#     f = Features([example])
+#     print(f.get_base_feature_names())
+#     print(f.get_operation_names())
+#     # print(i)
+#
+#     # Value = type(ValueMeta)
