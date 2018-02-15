@@ -46,7 +46,7 @@
 
 # selection
 # <selection> outputs a list of objects (packets, flows or aggregations, depending on what kind of feature is used)
-<selection> -> {"select": [<logic>]}
+<selection> -> {"select": [<logic-down>]}
 <selection> -> {"select_slice": [<value>, <value>]} | {"select_slice": [<value>, <value>, <selection>]}  # selects a slice from the first value to the second value, with Python-like indexing (if a <selection is not provided, default to selecting everything)
 <selection> -> "forward" | "backward"  # special cases for selection; select objects in the forward (or backward) direction
 # end
@@ -55,11 +55,19 @@
 # <logic> is used for selection, should be evaluated for each object
 <logic> -> {"and": [<logic>+]} 
 <logic> -> {"or": [<logic>+]}
-<logic> -> {"geq": [<down>, <value>]}
-<logic> -> {"leq": [<down>, <value>]}
-<logic> -> {"less": [<down>, <value>]}
-<logic> -> {"greater": [<down>, <value>]}
-<logic> -> {"equal": [<down>, <value>]}
+<logic> -> {"geq": [<value>, <value>]}
+<logic> -> {"leq": [<value>, <value>]}
+<logic> -> {"less": [<value>, <value>]}
+<logic> -> {"greater": [<value>, <value>]}
+<logic> -> {"equal": [<value>, <value>]}
 <logic> -> true | false
+<logic-down> -> {"and": [<logic-down>+]} 
+<logic-down> -> {"or": [<logic-down>+]}
+<logic-down> -> {"geq": [<down>, <value>]}
+<logic-down> -> {"leq": [<down>, <value>]}
+<logic-down> -> {"less": [<down>, <value>]}
+<logic-down> -> {"greater": [<down>, <value>]}
+<logic-down> -> {"equal": [<down>, <value>]}
+<logic-down> -> true | false
 # end
 
