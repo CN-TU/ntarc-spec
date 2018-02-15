@@ -10,10 +10,10 @@
 <value> -> {"variance": [<values>]}
 <value> -> {"median": [<values>]}
 <value> -> {"quantile": [<values>, <value>]} # second argument is a number from 0 to 1, where 0 is the minimum and 1 the maximum
-<value> -> {"minimum": [<values>]} | {"minimum": [<value>+]}
-<value> -> {"maximum": [<values>]} | {"maximum": [<value>+]}
-<value> -> {"argmin": [<values>]} | {"argmin": [<value>+]}
-<value> -> {"argmax": [<values>]} | {"argmax": [<value>+]}
+<value> -> {"minimum": [<values>]} | {"minimum": [<value>, <value>+]}
+<value> -> {"maximum": [<values>]} | {"maximum": [<value>, <value>+]}
+<value> -> {"argmin": [<values>]} | {"argmin": [<value>, <value>+]}
+<value> -> {"argmax": [<values>]} | {"argmax": [<value>, <value>+]}
 <value> -> {"floor": [<value>]}
 <value> -> {"ceil": [<value>]}
 <value> -> {"mode": [<values>]} # returns the most frequent element in <values>
@@ -22,9 +22,9 @@
 <value> -> {"count": [<selection>]}  # returns number of selected objects
 <value> -> {"distinct": [<values>]}  # returns number of distinct values in <values> in the selected objects
 <value> -> {"apply": [<value>, <selection>]}  # returns a single feature value for the selection of objects
-<value> -> {"add": [<value>+]} | {"add": [<values>]}
+<value> -> {"add": [<value>, <value>+]} | {"add": [<values>]}
 <value> -> {"subtract": [<value>, <value>]}
-<value> -> {"multiply": [<value>+]} | {"multiply": [<values>]}
+<value> -> {"multiply": [<value>, <value>+]} | {"multiply": [<values>]}
 <value> -> {"divide": [<value>, <value>]}
 <value> -> {"log": [<value>]}
 <value> -> {"exp": [<value>]}
