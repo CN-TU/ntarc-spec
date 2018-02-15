@@ -19,7 +19,7 @@
 <value> -> {"mode": [<values>]} # returns the most frequent element in <values>
 <value> -> {"mad": [<values>]} # returns the mean absolute deviation of <values>
 <value> -> {"moment": [<values>, <value>]} # returns the <value>-th standardized moment of <values>
-<value> -> {"count": [<selection>]} | {"count": [<values>]}  # returns number of selected objects
+<value> -> {"count": [<selection>]}  # returns number of selected objects
 <value> -> {"distinct": [<values>]}  # returns number of distinct values in <values> in the selected objects
 <value> -> {"apply": [<value>, <selection>]}  # returns a single feature value for the selection of objects
 <value> -> {"add": [<value>+]} | {"add": [<values>]}
