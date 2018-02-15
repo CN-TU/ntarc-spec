@@ -28,7 +28,7 @@
 <value> -> {"divide": [<value>, <value>]}
 <value> -> {"log": [<value>]}
 <value> -> {"exp": [<value>]}
-<value> -> {"entropy": [<value>]}
+<value> -> {"entropy": [<values>]}
 <value> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
 <value> -> {"ifelse": [<logic>, <value>, <value>]}  # if the condition is true, return the first argument else the second
 <value> -> {"left_shift": [<value>, <value>]}  # shift the bits in the first value left by the second value
