@@ -37,8 +37,8 @@ class Flow(object):
         self.idle_timeout = optional(obj, 'idle_timeout')
         self.bidirectional = optional(obj, 'bidirectional')
 
-        self.features = Features(obj['features']) if 'features' in obj else None
-        self.key_features = Features(obj['key_features']) if 'key_features' in obj else None
+        self.features = Features(obj['features'], level=1) if 'features' in obj else None
+        self.key_features = Features(obj['key_features'], level=1) if 'key_features' in obj else None
 
 
 class Packet(object):
@@ -46,7 +46,7 @@ class Packet(object):
         self.selection = optional(obj, 'selection')
         self.role = optional(obj, 'role')
         self.main_goal = optional(obj, 'main_goal')
-        self.features = Features(obj['features']) if 'features' in obj else None
+        self.features = Features(obj['features'], level=0) if 'features' in obj else None
 
 
 class FlowAggregation(object):
@@ -56,5 +56,5 @@ class FlowAggregation(object):
         self.main_goal = optional(obj, 'main_goal')
         self.active_timeout = optional(obj, 'active_timeout')
 
-        self.features = Features(obj['features']) if 'features' in obj else None
-        self.key_features = Features(obj['key_features']) if 'key_features' in obj else None
+        self.features = Features(obj['features'], level=2) if 'features' in obj else None
+        self.key_features = Features(obj['key_features'], level=2) if 'key_features' in obj else None

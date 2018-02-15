@@ -1,126 +1,7 @@
-# paper
-<paper> -> {
-  "flow_aggregations": <flow-aggregations>,
-  "flows": <flows>, 
-  "packets": <packets>, 
-  "methods": <methods>,
-  "evaluations": <evaluations>,
-  "datasets": <datasets>,
-  "reference": <reference>
-}
-# end
+<down> -> <value>  # (packet, flow, flow-agg) can use this rule (0, 1, 2) times
+<down2> -> <down>  # only applicable for flow-aggregations; goes down twice (same as executing down->value rule twice)
 
-# reference
-<reference> -> {
-  "author": <free-text>,
-  "title": <free-text>, 
-  "year": <free-integer>
-}
-# end
-
-# method
-<methods> -> [<method>+] | null
-<method> -> {
-  "name": <free-text>
-  "supervision": <supervision>,
-  "type": <type>,
-  "similarity_metric": <similarity_metric>
-}
-<supervision> -> "supervised" | "unsupervised" | "semi_supervised" | "descriptive" | "nest"
-<type> -> [<possible_type>+] | <possible_type>
-<possible_type> -> "classification" | "regression" | "clustering" | "association_rules" | "anomaly_detection" | "statistics" | "heuristics" | "feature_selection" | "other"
-<similarity_metric> -> [<possible_similarity>+] | <possible_similarity>
-<possible_similarity> -> "euclidean" | "mutual_information" | "correlation" | "cosine" | "jaccard" | "mahalanobis" | "hamming" | "l1" | "exact_matching" | "probability" | "other"
-# end
-
-# evaluation
-<evaluations> -> [<evaluation>+] | null
-<evaluation> -> {
-  "metrics": [<metric>+] | null
-  "method_evaluation": <method_evaluation> | null  # null means no evaluation of method
-}
-<metric> -> "error_rate"   # e.g. accuracy, precision, recall, f-1, etc
-<metric> -> "classification_loss"   # e.g. log-loss, etc
-<metric> -> "error_rate_variation"  # e.g. ROC, AUC, etc
-<metric> -> "error_distance"  # e.g. sum of squared error, absolute error, r^2, etc
-<metric> -> "clustering_metrics"  # e.g. silhouette, etc
-<metric> -> "time"  # time complexity/how much time is takes
-<metric> -> "space"  # space complexity/how much space is takes
-<method_evaluation> -> "internal"  # e.g. silhouette, metrics that do not depend on labels
-<method_evaluation> -> "external" # e.g. accuracy, metrics dependent on labels
-<method_evaluation> -> "both"  # both internal and external
-# end
-
-# dataset
-<datasets> -> [<dataset>+] | null
-<dataset> -> <free-text>  # dataset key
-# end
-
-# flows
-<flows> -> [<flow>+] | null
-<flow> -> {
-  "features": <features>, 
-  "goals": <goals>, 
-  "key": <key>, 
-  "tool": <tool>, 
-  "window": <window>,
-  "traffic_type": <traffic_type>
-}
-# end
-
-# window
-<window> -> <free-integer> | null
-# end
-
-# traffic_type
-<traffic_type> [<traffic_types>+] | <traffic_types>
-<traffic_types> -> "ip" | "tcp" | "udp" | "icmp" | "dns" | "http" | null
-# end
-
-# key
-<key> -> {
-  "bidirectional": <bidirectional>, 
-  "key_features": <features>
-} | null
-# end
-# bidirectional
-<bidirectional> -> true | false | null | "separate_directions"  # "separate_directions" in the case where the key is bidirectional and each feature appears twice, one for each direction
-# end
-
-# packets
-<packets> -> [<packet>+] | null
-<packet> -> {
-  "features": <features>, 
-  "goals": <goals>, 
-  "tool": <tool>, 
-  "traffic_type": <traffic_type>
-}
-# end
-
-# flow-aggregations
-# flow-aggregations -- features are extracted from sets of flows
-<flow-aggregations> -> [<flow-aggregation>+] | null
-<flow-aggregation> -> {
-  "flow": <flow>,
-  "features": <features>, 
-  "goals": <goals>, 
-  "key": <key>, 
-  "tool": <tool>, 
-  "window": <window>,
-  "traffic_type": <traffic_type>
-}
-# end
-
-# features
-<features> -> [<feature>+] | null
-<feature> -> <value> | <base-feature>
-# end
-
-<packet-feature> -> <feature>
-<flow-feature> -> <feature>
-<aggregation-feature> -> <feature>
-
-<tool> -> <free-text>  # tool key
+<value> -> <free-integer> | <base-feature> | <free-float> | <logic>
 
 # operation
 # <value> always outputs a single number (a <value>)
@@ -129,60 +10,64 @@
 <value> -> {"variance": [<values>]}
 <value> -> {"median": [<values>]}
 <value> -> {"quantile": [<values>, <value>]} # second argument is a number from 0 to 1, where 0 is the minimum and 1 the maximum
-<value> -> {"minimum": [<values>]} | {"minimum": [<value>+]}
-<value> -> {"maximum": [<values>]} | {"maximum": [<value>+]}
-<value> -> {"argmin": [<values>]} | {"argmin": [<value>+]}
-<value> -> {"argmax": [<values>]} | {"argmax": [<value>+]}
+<value> -> {"minimum": [<values>]} | {"minimum": [<value>, <value>+]}
+<value> -> {"maximum": [<values>]} | {"maximum": [<value>, <value>+]}
+<value> -> {"argmin": [<values>]} | {"argmin": [<value>, <value>+]}
+<value> -> {"argmax": [<values>]} | {"argmax": [<value>, <value>+]}
 <value> -> {"floor": [<value>]}
 <value> -> {"ceil": [<value>]}
 <value> -> {"mode": [<values>]} # returns the most frequent element in <values>
 <value> -> {"mad": [<values>]} # returns the mean absolute deviation of <values>
 <value> -> {"moment": [<values>, <value>]} # returns the <value>-th standardized moment of <values>
-<value> -> {"count": [<selection>]} | {"count": [<values>]}  # returns number of selected objects
-<value> -> {"distinct": [<values>]}  # returns number of distinct values in <feature> in the selected objects
-<value> -> {"apply": [<feature>, <selection>]}  # returns a single feature value for the selection of objects
-<value> -> {"add": [<value>+]} | {"add": [<values>]}
+<value> -> {"count": [<selection>]}  # returns number of selected objects
+<value> -> {"distinct": [<values>]}  # returns number of distinct values in <values> in the selected objects
+<value> -> {"apply": [<value>, <selection>]}  # returns a single feature value for the selection of objects
+<value> -> {"add": [<value>, <value>+]} | {"add": [<values>]}
 <value> -> {"subtract": [<value>, <value>]}
-<value> -> {"multiply": [<value>+]} | {"multiply": [<values>]}
+<value> -> {"multiply": [<value>, <value>+]} | {"multiply": [<values>]}
 <value> -> {"divide": [<value>, <value>]}
 <value> -> {"log": [<value>]}
 <value> -> {"exp": [<value>]}
-<value> -> {"entropy": [<value>]}
+<value> -> {"entropy": [<values>]}
 <value> -> {"get": [<value>, <values>]} | {"get": [<value>, <value>]}  # gets the <value>-th element of the second argument (if the second argument is also <value>, the elements are bits)
 <value> -> {"ifelse": [<logic>, <value>, <value>]}  # if the condition is true, return the first argument else the second
-<value> -> {"get_previous": [<aggregation-feature>]}  # gets feature at time = t-1
 <value> -> {"left_shift": [<value>, <value>]}  # shift the bits in the first value left by the second value
 <value> -> {"right_shift": [<value>, <value>]}  # shift the bits in the first value right by the second value
-<value> -> <free-integer> | <base-feature> | <free-float>
 # end
 
 # values
 # <values> outputs a list of <value>
-<values> -> {"map": [<feature>, <selection>]}  # returns a feature value for each object in selection
+<values> -> {"map": [<down>, <selection>]}  # returns a feature value for each object in selection
 <values> -> {"slice": [<value>, <value>, <values>]} | {"slice": [<value>, <value>, <value>]}  # gets third_argument[first_argument, second_argument] (if the third argument is also <value>, the elements are bits); indexing is like in Python
 <values> -> {"quantile_range": [<values>, <value>, <value>]} # e.g. {"quantile_range": [<values>, 0, 0.25]} returns all values in the first quartile
-<values> -> <feature>  # features from one level-down (in flows, packet features; in flow-aggregations, flow features)
+<values> -> {"flat_map": [<down2>, <selection>]} | {"flat_map": [<down2>, <selection>, <selection>]}  # only applicable for flow-aggregations; just one selection applies same selection for both flows and packets; two selections applies the 1st selection for flows and the second for packets
+<values> -> <down>  # features from one level-down (in flows, packet features; in flow-aggregations, flow features)
 # end
 
 # selection
 # <selection> outputs a list of objects (packets, flows or aggregations, depending on what kind of feature is used)
-<selection> -> {"select": [<logic>]}
+<selection> -> {"select": [<logic-down>]}
 <selection> -> {"select_slice": [<value>, <value>]} | {"select_slice": [<value>, <value>, <selection>]}  # selects a slice from the first value to the second value, with Python-like indexing (if a <selection is not provided, default to selecting everything)
 <selection> -> "forward" | "backward"  # special cases for selection; select objects in the forward (or backward) direction
-<selection> -> {"select_flows": [<logic>]}  # same as "select", but outputs flows; only valid when used in flow aggregations
-<selection> -> {"select_slice_flows": [<value>, <value>]} | {"select_slice_flows": [<value>, <value>, <selection>]}  # same as "select_slice", but outputs flows; only valid when used in flow aggregations
-<selection> -> "forward_flows" | "backward_flows"  # same as "forward"/"backward", but outputs flows; only valid when used in flow aggregations
 # end
 
 # logic
 # <logic> is used for selection, should be evaluated for each object
 <logic> -> {"and": [<logic>+]} 
 <logic> -> {"or": [<logic>+]}
-<logic> -> {"geq": [<feature>, <value>]}
-<logic> -> {"leq": [<feature>, <value>]}
-<logic> -> {"less": [<feature>, <value>]}
-<logic> -> {"greater": [<feature>, <value>]}
-<logic> -> {"equal": [<feature>, <value>]}
+<logic> -> {"geq": [<value>, <value>]}
+<logic> -> {"leq": [<value>, <value>]}
+<logic> -> {"less": [<value>, <value>]}
+<logic> -> {"greater": [<value>, <value>]}
+<logic> -> {"equal": [<value>, <value>]}
 <logic> -> true | false
+<logic-down> -> {"and": [<logic-down>+]} 
+<logic-down> -> {"or": [<logic-down>+]}
+<logic-down> -> {"geq": [<down>, <value>]}
+<logic-down> -> {"leq": [<down>, <value>]}
+<logic-down> -> {"less": [<down>, <value>]}
+<logic-down> -> {"greater": [<down>, <value>]}
+<logic-down> -> {"equal": [<down>, <value>]}
+<logic-down> -> true | false
 # end
 
