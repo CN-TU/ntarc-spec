@@ -48,7 +48,10 @@ def _get_aliases(filename):
 def get_rules(target):
     out = []
     match_line = re.compile('^<'+target+'> -> ')
+    match_exception = re.compile('^#! ')
     for line in specification:
+        if match_exception.match(line):
+            line = line[3:]  # remove '#! ' and parse the rest
         if match_line.match(line):  # check if line has rule for target
             options = [x.strip() for x in line.split('->')[1].split('#')[0].split('|')]
             out.extend(options)
@@ -251,7 +254,6 @@ class BaseFeature(Base):
     name = 'base-feature'
     iana_ies = _get_iana_ies(IANA_IE_LIST)
     own_ies = _get_own_ies(OWN_IE_LIST)
-    # aliases = _get_aliases(CONVERSION_FILE)
     rare_feature = re.compile('^__[a-z0-9]+([A-Z][a-z0-9]*)*$')
     leaf = True
 
