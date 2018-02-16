@@ -184,7 +184,7 @@
     "other": {
       "type": "string",
       "minLength": 1,
-      "pattern": "^_[A-Za-z0-9_][A-Za-z0-9]+",
+      "pattern": "^_[A-Za-z0-9-_]+",
       "title": "other"
     },
     "missing": {

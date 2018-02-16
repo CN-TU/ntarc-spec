@@ -41,8 +41,6 @@ For features that we can not get out of combining IANA features with our limited
     * if the feature is very specific to this paper, use ``__`` (double ``_``) as prefix to a descriptive feature name
 
 In both of this cases, try to give descriptive feature names, similar to the the ones used by IANA.
-Names should use camel case and start with a lower-case character.
-They should follow the following regex: ``^[_]{1,2}[a-z0-9]+([A-Z][a-z0-9]*)*$``.
 
 This means that **all base features that do not start with** ``_`` **have to be IPFIX information elements defined by IANA**.
 
