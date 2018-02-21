@@ -41,6 +41,7 @@
 <value> -> {"subtract": [<value>, <value>]}
 <value> -> {"multiply": [<value>, <value>+]} | {"multiply": [<values>]}
 <value> -> {"divide": [<value>, <value>]}
+<value> -> {"pow": [<value>, <value>]}  # raises the first value to the power of the second value (e.g., pow(octetTotalCount, 2) == octetTotalCount^2)
 <value> -> {"log": [<value>]}
 <value> -> {"exp": [<value>]}
 <value> -> {"entropy": [<values>]}
