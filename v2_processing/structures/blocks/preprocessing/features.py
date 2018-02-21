@@ -139,7 +139,7 @@ class Base(object):
         if self.level < 0:
             raise FeatureError(d, self.name, "Already at bottom level, can't go further down.")
 
-        if type(d) == str and d in self.aliases:
+        while type(d) == str and d in self.aliases:
             d = self.aliases[d]
 
         self.key = None
