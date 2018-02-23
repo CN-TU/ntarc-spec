@@ -607,8 +607,7 @@
           "type": "boolean"
         },
         "flow_aggregation_analysis_oriented": {
-          "title": "flow_aggregation_analysis_oriented",
-          "title": "flow_analysis_oriented <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#flow_aggregation-aggregation-analysis-oriented\">help</a>",
+          "title": "flow_aggregation_analysis_oriented <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#flow-aggregation-analysis-oriented\">help</a>",
           "format": "checkbox",
           "propertyOrder": 40,
           "type": "boolean"
