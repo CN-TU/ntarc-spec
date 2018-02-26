@@ -121,7 +121,8 @@
       "enum": [
         "main",
         "competitor",
-        "validation"
+        "validation",
+        "intermediate"
       ]
     },
     "goal": {
