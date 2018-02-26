@@ -37,7 +37,7 @@ class Reference(BaseEntity):
             self._data = None
 
     def __repr__(self):
-        return self._author_full + ' ' + str(self.year)
+        return self.author + ' ' + str(self.year)
 
     @property
     def year(self):
