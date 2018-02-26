@@ -42,7 +42,7 @@ flow_aggregation_analysis_oriented
 
 	"flow_aggregation_analysis_oriented": false
 
-.. include:: tools.rst 
+.. include:: tools.rst
 
 normalization_type
 ~~~~~~~~~~~~~~~~~~
@@ -72,7 +72,7 @@ transformations
 Example:
 
 .. code-block:: none
- 
+
  	"transformations": ["sampling", "flow_extraction", "class_separation"]
 
 final_data_format
@@ -89,13 +89,13 @@ final_data_format
 Example:
 
 .. code-block:: none
- 
+
    	"final_data_format": "numerical_vectors"
 
 feature_selections (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *feature_selections* can contain several *feature_selection-objects*. A *feature_selection-object* is composed of several fields: 
+(*array* of *objects*) *feature_selections* can contain several *feature_selection-objects*. A *feature_selection-object* is composed of several fields:
 
 name
 ----
@@ -103,26 +103,26 @@ name
 (*string*) The name that identifies the feature selection technique. Example:
 
 .. code-block:: none
-   
+
    "name": "forward_selection"
 
 type (*optional*)
 -----------------
 
-(*string*) It identifies the type of feature selection method. Please, consider carefully the following default labels (values): 
+(*string*) It identifies the type of feature selection method. Please, consider carefully the following default labels (values):
 
 * ``"wrapper"``
 * ``"filter"``
 * ``"hybrid"``
 * ``"nest"``
-  when it embeds or operates in a higher level than other nested methods. 
+  when it embeds or operates in a higher level than other nested methods.
 * ``"feature_reduction"``
-  when it refers to methods that change the space and transform the initial set of features into a new set of features with less dimensions (e.g., PCA, LDA). 
+  when it refers to methods that change the space and transform the initial set of features into a new set of features with less dimensions (e.g., PCA, LDA).
 
 Example:
 
 .. code-block:: none
-      
+
       "type": "wrapper"
 
 classifier (*optional*)
@@ -131,7 +131,7 @@ classifier (*optional*)
 (*string*) It identifies the wrapped classifier that is used to evaluate the subset performance. If *classifier* is not applicable (e.g., for filters), write ``"none"``. Example:
 
 .. code-block:: none
-   
+
      "classifier": "naive_bayes"
 
 role (*optional*)
@@ -140,13 +140,13 @@ role (*optional*)
 (*string*) This field is meaningful when diverse feature selection methods are compared. Default values are: ``"main"``, when the method led to the best solutions; and ``"competitor"`` for other cases. If only one feature selection method is used, it is always ``"main"``. Example:
 
 .. code-block:: none
-   
+
     "role": "main"
 
 packets (*optional*)
 ~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. Use this if you have a feature-vector for each packet. A *packet-object* is composed of several fields: 
+(*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. Use this if you have a feature-vector for each packet. A *packet-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
@@ -158,7 +158,7 @@ selection (*optional*)
 * ``"in_dataset"``
   if the analyzed feature set is exactly the same feature set of the dataset before preprocessing.
 * ``"feature_selection"``
-  if a feature selection process was conducted and led to the current feature subset. 
+  if a feature selection process was conducted and led to the current feature subset.
 * ``"study_based"``
   if the selected features are taken from a previous study referred in the paper.
 * ``"tool_based"``
@@ -171,7 +171,7 @@ Example:
 .. code-block:: none
 
      "selection": "in_dataset"
-   
+
 .. _role:
 
 role (*optional*)
@@ -185,13 +185,15 @@ Default values are:
   when the method led to the best solutions.
 * ``"validation"``
   for the specific case of *packets*, when packet inspection is used as baseline or ground truth for validating flow-based analysis.
+* ``"intermediate"``
+  if this method of aggregation is only used as an intermediate step on the way to further aggregation. E.g. if flows are used but only for the purpose of being aggregated to flow aggregations.
 * ``"competitor"``
   otherwise.
 
 Example:
 
 .. code-block:: none
-  
+
         "role": "validation"
 
 .. _main_goal:
@@ -224,7 +226,7 @@ main_goal (*optional*)
 Example:
 
 .. code-block:: none
-  
+
            "main_goal": "traffic_classification"
 
 .. _features:
@@ -240,7 +242,7 @@ Describes the features used in the paper. See :doc:`features` for complete infor
 flows (*optional*)
 ~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. Use this if you have a feature-vector for each flow. A *flow-object* is composed of several fields: 
+(*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. Use this if you have a feature-vector for each flow. A *flow-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
@@ -252,7 +254,7 @@ role (*optional*)
 
 main_goal (*optional*)
 ----------------------
-   Like in :ref:`packet-object.main_goal <main_goal>`. 
+   Like in :ref:`packet-object.main_goal <main_goal>`.
 
 .. _active_timeout:
 
@@ -260,7 +262,7 @@ active_timeout (*optional*)
 ---------------------------
 
 (*numerical*, in seconds) This field defines the maximum duration of a flow. Example:
-   
+
 .. code-block:: none
 
   "active_timeout": 60
@@ -304,7 +306,7 @@ For the features, see :ref:`features <features>`.
 flow_aggregations (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *flow_aggregation* can contain several *flow_aggregation-objects*. A *flow_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. Use this if you have a feature-vector for each set of flows. A *flow_aggregation-object* is composed of several fields: 
+(*array* of *objects*) *flow_aggregation* can contain several *flow_aggregation-objects*. A *flow_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. Use this if you have a feature-vector for each set of flows. A *flow_aggregation-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
@@ -319,7 +321,7 @@ Like in :ref:`packet-object.role <role>`.
 main_goal (*optional*)
 ----------------------
 
-Like in :ref:`packet-object.main_goal <main_goal>`. 
+Like in :ref:`packet-object.main_goal <main_goal>`.
 
 active_timeout (*optional*)
 ---------------------------
@@ -402,7 +404,7 @@ JSON example (preprocessing, complete)
                 "__numberof_activity_intervals",
             ],
             "key_features": [
-                "sourceIPv4Address", 
+                "sourceIPv4Address",
                 "destinationIPv4Address",
                 "protocolIdentifier"
             ]
@@ -421,7 +423,7 @@ JSON example (preprocessing, complete)
                 {"minimum": ["_interPacketTimeMicroseconds"]},
             ],
             "key_features": [
-                "sourceIPv4Address", 
+                "sourceIPv4Address",
                 "destinationIPv4Address",
                 "protocolIdentifier"
             ]
