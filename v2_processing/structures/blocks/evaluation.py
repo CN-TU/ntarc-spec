@@ -1,4 +1,4 @@
-from ...structures import optional
+from .. import optional
 
 
 class Evaluation(object):
