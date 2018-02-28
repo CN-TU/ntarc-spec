@@ -58,3 +58,7 @@ class FlowAggregation(object):
 
         self.features = Features(obj['features']) if 'features' in obj else None
         self.key_features = Features(obj['key_features']) if 'key_features' in obj else None
+
+    @property
+    def bidirectional(self):
+        return None
