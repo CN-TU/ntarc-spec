@@ -55,6 +55,7 @@ class FlowAggregation(object):
         self.role = optional(obj, 'role')
         self.main_goal = optional(obj, 'main_goal')
         self.active_timeout = optional(obj, 'active_timeout')
+        self.bidirectional = optional(obj, 'bidirectional')
 
         self.features = Features(obj['features'], level=2) if 'features' in obj else None
         self.key_features = Features(obj['key_features'], level=2) if 'key_features' in obj else None
