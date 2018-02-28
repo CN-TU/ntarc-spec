@@ -1,8 +1,8 @@
 try:
-    from .conf import PROJECT_PATH, API_KEY, MAPS_API_KEY, CACHE_DIR
+    from ..conf import PROJECT_PATH, API_KEY, MAPS_API_KEY, CACHE_DIR
 except ImportError:
     import os
-    PROJECT_PATH = os.environ['PYTHONPATH'] + '/..'
+    PROJECT_PATH = os.environ['PYTHONPATH']
     API_KEY = ''
     MAPS_API_KEY = ''
     CACHE_DIR = None
