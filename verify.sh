@@ -14,5 +14,5 @@ fi
 jsonschema -i $1 $SCRIPTPATH/schema_v2.json && echo "No errors according to JSON Schema!"
 
 # Verify features
-export PYTHONPATH="$SCRIPTPATH/v2_processing"
-python3 $PYTHONPATH/scripts/verify.py $1
+export PYTHONPATH="$SCRIPTPATH"
+python3 $PYTHONPATH/v2_processing/scripts/verify.py $1

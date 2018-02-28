@@ -1,10 +1,10 @@
 from __future__ import print_function
 import sys
 import json
-from structures import FullPaper
+from v2_processing.structures import FullPaper
 
 
-# Needs environment variable PYTHONPATH=project_directory/v2_processing
+# Needs environment variable PYTHONPATH=project_directory
 
 
 def _get_or_empty(d, key):

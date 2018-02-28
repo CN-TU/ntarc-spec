@@ -6,9 +6,7 @@ try:
     from googleplaces import GooglePlaces
 except ImportError:
     GooglePlaces = None
-from ... import PROJECT_PATH, API_KEY, MAPS_API_KEY
-
-CACHE_DIR = PROJECT_PATH + '/v2_processing/.cache'
+from ... import API_KEY, MAPS_API_KEY, CACHE_DIR
 
 
 class BaseEntity(object):
@@ -21,10 +19,16 @@ class BaseEntity(object):
         self._data = None
 
     def __hash__(self):
-        return hash(self.id)
+        try:
+            return hash(self.id)
+        except AttributeError:
+            return hash(str(self))
 
     def __eq__(self, other):
-        return self.id == other.id
+        try:
+            return self.id == other.id
+        except AttributeError:
+            return str(self) == str(other)
 
     def _query_id_attrs(self, id, attrs):
         if not self._check_cache():
@@ -46,7 +50,10 @@ class BaseEntity(object):
 
     @property
     def id(self):
-        return self._saved_data['microsoft_api']['Id']
+        if CACHE_DIR is not None and API_KEY is not None and len(API_KEY) > 0:
+            return self._saved_data['microsoft_api']['Id']
+        else:
+            raise AttributeError('Asked for ID, but provided no cache directory or API key.')
 
     @property
     def _saved_data(self):

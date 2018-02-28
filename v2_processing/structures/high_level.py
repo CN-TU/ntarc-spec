@@ -15,7 +15,9 @@ class FullPaper(Reference):
         self.reference_block = Reference(obj['reference'])
         self.data_block = Data(obj['data'])
         self.preprocessing_block = Preprocessing(obj['preprocessing'])
-        # TODO add other blocks
+        self.analysis_method_block = AnalysisMethod(obj['analysis_method'])
+        self.evaluation_block = Evaluation(obj['evaluation'])
+        self.result_block = Result(obj['result'])
 
         self._data = None
 
@@ -35,6 +37,30 @@ class FullPaper(Reference):
         data['preprocessing'] = _get_public_variables(self.preprocessing_block)
         with open(self._cache_id_filename, 'w') as fd:
             json.dump(data, fd)
+
+    @property
+    def reference(self):
+        return self.reference_block
+
+    @property
+    def data(self):
+        return self.data_block
+
+    @property
+    def preprocessing(self):
+        return self.preprocessing_block
+
+    @property
+    def analysis_method(self):
+        return self.analysis_method_block
+
+    @property
+    def evaluation(self):
+        return self.evaluation_block
+
+    @property
+    def result(self):
+        return self.result_block
 
     @property
     def title(self):
