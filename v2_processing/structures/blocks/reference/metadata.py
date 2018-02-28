@@ -21,10 +21,16 @@ class BaseEntity(object):
         self._data = None
 
     def __hash__(self):
-        return hash(self.id)
+        try:
+            return hash(self.id)
+        except AttributeError:
+            return hash(str(self))
 
     def __eq__(self, other):
-        return self.id == other.id
+        try:
+            return self.id == other.id
+        except AttributeError:
+            return str(self) == str(other)
 
     def _query_id_attrs(self, id, attrs):
         if not self._check_cache():
