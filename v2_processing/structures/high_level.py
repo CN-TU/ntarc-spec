@@ -17,7 +17,7 @@ class FullPaper(Reference):
         self.preprocessing_block = Preprocessing(obj['preprocessing'])
         self.analysis_method_block = AnalysisMethod(obj['analysis_method'])
         self.evaluation_block = Evaluation(obj['evaluation'])
-        self.result_block = Result(obj['results'])
+        self.result_block = Result(obj['result'])
 
         self._data = None
 
