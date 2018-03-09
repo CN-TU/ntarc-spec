@@ -112,8 +112,11 @@ type (*optional*)
 (*string*) It identifies the type of feature selection method. Please, consider carefully the following default labels (values):
 
 * ``"wrapper"``
+  see a description `here <https://en.wikipedia.org/wiki/Feature_selection#Wrapper_method>`__.
 * ``"filter"``
+  see a description `here <https://en.wikipedia.org/wiki/Feature_selection#Filter_method>`__.
 * ``"hybrid"``
+  see a description `here <https://en.wikipedia.org/wiki/Feature_selection#Embedded_method>`__.
 * ``"nest"``
   when it embeds or operates in a higher level than other nested methods.
 * ``"feature_reduction"``
