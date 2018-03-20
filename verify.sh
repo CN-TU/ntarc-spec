@@ -11,8 +11,7 @@ then
     echo "Usage: ./verify.sh FILENAME_TO_TEST.json"
     exit 1
 fi
-jsonschema -i $1 $SCRIPTPATH/schema_v2.json && echo "No errors according to JSON Schema!"
-
-# Verify features
 export PYTHONPATH="$SCRIPTPATH"
-python3 $PYTHONPATH/v2_processing/scripts/verify.py $1
+
+jsonschema -i $1 $SCRIPTPATH/schema_v2.json && echo "No errors according to JSON Schema!" && \
+        python3 $PYTHONPATH/v2_processing/scripts/verify.py $1  # Verify features
