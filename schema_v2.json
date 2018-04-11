@@ -1103,6 +1103,7 @@
                   },
                   {
                     "title": "partially",
+                    "type": "string",
                     "const": "partially"
                   }
                 ]
