@@ -174,9 +174,7 @@
         {
           "type": "string",
           "minLength": 1,
-          "enum": [
-            "missing"
-          ]
+          "const": "missing"
         },
         {
           "type": "number"
@@ -194,9 +192,7 @@
       "title": "missing",
       "type": "string",
       "minLength": 1,
-      "enum": [
-        "missing"
-      ]
+      "const": "missing"
     }
   },
   "properties": {
@@ -204,7 +200,7 @@
       "title": "version",
       "type": "string",
       "propertyOrder": 1,
-      "enum": ["v2.1"]
+      "const": "v2.1"
     },
     "reference": {
       "title": "reference",
@@ -1107,9 +1103,7 @@
                   },
                   {
                     "title": "partially",
-                    "enum": [
-                      "partially"
-                    ]
+                    "const": "partially"
                   }
                 ]
               }
