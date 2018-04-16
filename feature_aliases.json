@@ -43,6 +43,6 @@
 "_KDD39": "_KDD_dstHostSrvSerrorRate",
 "_KDD40": "_KDD_dstHostRerrorRate",
 "_KDD41": "_KDD_dstHostSrvRerrorRate",
-"_tcpCwrTocalCount": {"count": ["select": [{"equal": [{"get_bits": [8,"tcpControlBits"]},1]}]]},
-"_tcpEceTocalCount": {"count": ["select": [{"equal": [{"get_bits": [9,"tcpControlBits"]},1]}]]}
+"_tcpCwrTocalCount": {"count": [{"select": [{"equal": [{"get_bits": [8,"tcpControlBits"]},1]}]}]},
+"_tcpEceTocalCount": {"count": [{"select": [{"equal": [{"get_bits": [9,"tcpControlBits"]},1]}]}]}
 }
