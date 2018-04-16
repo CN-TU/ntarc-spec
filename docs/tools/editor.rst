@@ -10,6 +10,6 @@ Alternatively, you can clone the repository and run
 
 .. code:: bash
 
-    npm start
+    npm run electron
 
 to open up the editor.
