@@ -17,3 +17,4 @@ class Dataset(object):
         self.covered_period = optional(obj, 'covered_period')
         self.details = optional(obj, 'details')
         self.subsets = obj['subsets']
+        self.anonymized = optional(obj, 'anonymized')
