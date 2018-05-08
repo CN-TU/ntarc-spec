@@ -17,6 +17,7 @@ class Algorithm(object):
         self.subname = optional(obj, 'subname')
         self.learning = optional(obj, 'learning')
         self.role = optional(obj, 'role')
+        self.type = optional(obj, 'type')
         self.metric = optional(obj, 'metric/decision_criteria')
         self.tools = [Tool(tt) for tt in obj['tools']] if 'tools' in obj else None
         self.source = optional(obj, 'source')
