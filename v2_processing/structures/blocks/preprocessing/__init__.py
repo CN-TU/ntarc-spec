@@ -19,6 +19,26 @@ class Preprocessing(object):
         self._flow_aggregations = [FlowAggregation(pp) for pp in obj['flow_aggregations']] \
             if 'flow_aggregations' in obj else None
 
+    @property
+    def tools(self):
+        return self._tools
+
+    @property
+    def feature_selections(self):
+        return self._feature_selections
+
+    @property
+    def packets(self):
+        return self._packets
+
+    @property
+    def flows(self):
+        return self._flows
+
+    @property
+    def flow_aggregations(self):
+        return self._flow_aggregations
+
 
 class FeatureSelection(object):
     def __init__(self, obj):
