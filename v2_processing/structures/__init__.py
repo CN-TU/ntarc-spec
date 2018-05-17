@@ -1,8 +1,8 @@
-from subprocess import call
+from subprocess import check_output
 from .tool import Tool
 
 
-PROJECT_PATH = call(['git', 'rev-parse', '--top-level'])
+PROJECT_PATH = check_output(['git', 'rev-parse', '--top-level'])
 
 
 def optional(d, key):
