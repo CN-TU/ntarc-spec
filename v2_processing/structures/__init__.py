@@ -1,12 +1,8 @@
-try:
-    from ..conf import PROJECT_PATH, API_KEY, MAPS_API_KEY, CACHE_DIR
-except ImportError:
-    import os
-    PROJECT_PATH = os.environ['PYTHONPATH']
-    API_KEY = ''
-    MAPS_API_KEY = ''
-    CACHE_DIR = None
+from subprocess import call
 from .tool import Tool
+
+
+PROJECT_PATH = call(['git', 'rev-parse', '--top-level'])
 
 
 def optional(d, key):
