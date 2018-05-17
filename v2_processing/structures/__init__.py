@@ -1,8 +1,8 @@
-from subprocess import check_output
+import os
 from .tool import Tool
 
 
-PROJECT_PATH = check_output(['git', 'rev-parse', '--show-toplevel']).decode().strip()
+PROJECT_PATH = os.path.join(os.sep.join(__file__.split('/')[:-1]), '..', '..')
 
 
 def optional(d, key):
@@ -10,6 +10,7 @@ def optional(d, key):
         return d[key]
     except KeyError:
         return None
+
 
 from .blocks import *
 from .high_level import FullPaper
