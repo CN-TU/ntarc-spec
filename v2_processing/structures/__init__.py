@@ -2,7 +2,7 @@ from subprocess import check_output
 from .tool import Tool
 
 
-PROJECT_PATH = check_output(['git', 'rev-parse', '--top-level'])
+PROJECT_PATH = check_output(['git', 'rev-parse', '--show-toplevel']).decode().strip()
 
 
 def optional(d, key):
