@@ -59,8 +59,16 @@
         },
         "detail": {
           "title": "detail <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#detail-optional\">help</a>",
-          "type": "string",
-          "minLength": 1
+          "oneOf": [
+            {
+              "title": "detail",
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "$ref": "#/definitions/none"
+            }
+          ]
         },
         "availability": {
           "title": "availability <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#availability\">help</a>",
@@ -196,6 +204,13 @@
       "minLength": 1,
       "enum": [
         "missing"
+      ]
+    },
+    "none": {
+      "title": "none",
+      "type": "string",
+      "enum": [
+        "none"
       ]
     }
   },
