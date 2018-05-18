@@ -628,11 +628,18 @@
         },
         "tools": {
           "title": "tools <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#tools\">help</a>",
-          "type": "array",
           "propertyOrder": 50,
-          "items": {
-            "$ref": "#/definitions/tool"
-          }
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/tool"
+              }
+            },
+            {
+              "$ref": "#/definitions/missing"
+            }
+          ]
         },
         "normalization_type": {
           "title": "normalization_type <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#normalization-type\">help</a>",
