@@ -993,9 +993,17 @@
               },
               "subname": {
                 "title": "subname <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/analysis_method.html#subname-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 20,
-                "minLength": 1
+                "oneOf": [
+                  {
+                    "title": "subname",
+                    "type": "string",
+                    "propertyOrder": 20,
+                    "minLength": 1
+                  },
+                  {
+                    "$ref": "#/definitions/none"
+                  }
+                ]
               },
               "learning": {
                 "title": "learning <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/analysis_method.html#learning-optional\">help</a>",
