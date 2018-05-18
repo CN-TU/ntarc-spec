@@ -10,6 +10,7 @@
 
    global
    repository_organization
+   versions
    main
    features
 
