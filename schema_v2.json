@@ -1244,7 +1244,7 @@
                         "accuracy",
                         "recall",
                         "f-1",
-                        "roc/uac",
+                        "roc/auc",
                         "complete_confusion_matrix",
                         "incomplete_confusion_matrix",
                         "classification_loss",
