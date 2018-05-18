@@ -63,7 +63,7 @@ name
 subname (*optional*)
 --------------------
 
-(*string*) A subname that can be more specific and refer to algorithm specification or subclass. Example:
+(*string*) A subname that can be more specific and refer to algorithm specification or subclass. If no subname is required, ``"none"`` should be written in the corresponding place. Example:
 
 .. code-block:: none
   
