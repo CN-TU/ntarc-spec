@@ -174,19 +174,26 @@
       ]
     },
     "time": {
-      "type": [
-        "number",
-        "string"
-      ],
+      "type": "number",
+      "title": "time"
+    },
+    "time_times": {
       "oneOf": [
         {
-          "type": "number"
+          "$ref": "#/definitions/time"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/time"
+          },
+          "minItems": 1,
+          "title": "times"
         },
         {
           "$ref": "#/definitions/missing"
         }
-      ],
-      "title": "time"
+      ]
     },
     "other": {
       "type": "string",
@@ -833,34 +840,12 @@
               "active_timeout": {
                 "propertyOrder": 40,
                 "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/time"
-                  },
-                  {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/time"
-                    },
-                    "title": "times"
-                  }
-                ]
+                "$ref": "#/definitions/time_times"
               },
               "idle_timeout": {
                 "title": "idle_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#idle-timeout-optional\">help</a>",
                 "propertyOrder": 50,
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/time"
-                  },
-                  {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/time"
-                    },
-                    "title": "times"
-                  }
-                ]
+                "$ref": "#/definitions/time_times"
               },
               "bidirectional": {
                 "propertyOrder": 60,
@@ -907,18 +892,7 @@
               "active_timeout": {
                 "propertyOrder": 40,
                 "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
-                "oneOf": [
-                  {
-                    "$ref": "#/definitions/time"
-                  },
-                  {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/definitions/time"
-                    },
-                    "title": "times"
-                  }
-                ]
+                "$ref": "#/definitions/time_times"
               },
               "features": {
                 "propertyOrder": 50,
