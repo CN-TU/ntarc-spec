@@ -7,7 +7,8 @@ class AnalysisMethod(object):
         self.unsupervised_learning = obj['unsupervised_learning']
         self.semisupervised_learning = obj['semisupervised_learning']
         self.anomaly_detection = obj['anomaly_detection']
-        self.tools = [Tool(tt) for tt in obj['tools']]
+        self.tools = [Tool(tt) for tt in obj['tools']] \
+            if obj['tools'] not in ['missing', 'none'] else []
         self.algorithms = [Algorithm(aa) for aa in obj['algorithms']] \
             if 'algorithms' in obj and obj['algorithms'] not in ['missing', 'none'] else None
 
@@ -20,7 +21,8 @@ class Algorithm(object):
         self.role = optional(obj, 'role')
         self.type = optional(obj, 'type')
         self.metric = optional(obj, 'metric/decision_criteria')
-        self.tools = [Tool(tt) for tt in obj['tools']] if 'tools' in obj else None
+        self.tools = [Tool(tt) for tt in obj['tools']] \
+            if 'tools' in obj and obj['tools'] not in ['missing', 'none'] else None
         self.source = optional(obj, 'source')
         self.parameters_provided = optional(obj, 'parameters_provided')
 

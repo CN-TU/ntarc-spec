@@ -8,7 +8,8 @@ class Preprocessing(object):
         self.packet_analysis_oriented = obj['packet_analysis_oriented']
         self.flow_analysis_oriented = obj['flow_analysis_oriented']
         self.flow_aggregation_analysis_oriented = obj['flow_aggregation_analysis_oriented']
-        self._tools = [Tool(tt) for tt in obj['tools']]
+        self._tools = [Tool(tt) for tt in obj['tools']] \
+            if obj['tools'] not in ['missing', 'none'] else []
         self.normalization_type = obj['normalization_type']
         self.transformations = obj['transformations']
         self.final_data_format = obj['final_data_format']
