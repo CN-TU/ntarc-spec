@@ -1,12 +1,8 @@
-try:
-    from ..conf import PROJECT_PATH, API_KEY, MAPS_API_KEY, CACHE_DIR
-except ImportError:
-    import os
-    PROJECT_PATH = os.environ['PYTHONPATH']
-    API_KEY = ''
-    MAPS_API_KEY = ''
-    CACHE_DIR = None
+import os
 from .tool import Tool
+
+
+PROJECT_PATH = os.path.join(os.sep.join(__file__.split('/')[:-1]), '..', '..')
 
 
 def optional(d, key):
@@ -14,6 +10,7 @@ def optional(d, key):
         return d[key]
     except KeyError:
         return None
+
 
 from .blocks import *
 from .high_level import FullPaper
