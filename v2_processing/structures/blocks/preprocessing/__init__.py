@@ -13,11 +13,13 @@ class Preprocessing(object):
         self.transformations = obj['transformations']
         self.final_data_format = obj['final_data_format']
         self._feature_selections = [FeatureSelection(ff) for ff in obj['feature_selections']] \
-            if 'feature_selections' in obj else None
-        self._packets = [Packet(pp) for pp in obj['packets']] if 'packets' in obj else None
-        self._flows = [Flow(pp) for pp in obj['flows']] if 'flows' in obj else None
+            if 'feature_selections' in obj and obj['feature_selections'] != 'none' else None
+        self._packets = [Packet(pp) for pp in obj['packets']] \
+            if 'packets' in obj and obj['packets'] != 'none' else None
+        self._flows = [Flow(pp) for pp in obj['flows']] \
+            if 'flows' in obj and obj['flows'] != 'none' else None
         self._flow_aggregations = [FlowAggregation(pp) for pp in obj['flow_aggregations']] \
-            if 'flow_aggregations' in obj else None
+            if 'flow_aggregations' in obj and obj['flow_aggregations'] != 'none' else None
 
     @property
     def tools(self):
@@ -57,8 +59,10 @@ class Flow(object):
         self.idle_timeout = optional(obj, 'idle_timeout')
         self.bidirectional = optional(obj, 'bidirectional')
 
-        self.features = Features(obj['features'], level=1) if 'features' in obj else None
-        self.key_features = Features(obj['key_features'], level=1) if 'key_features' in obj else None
+        self.features = Features(obj['features'], level=1) \
+            if 'features' in obj and obj['features'] not in ['missing', 'none'] else None
+        self.key_features = Features(obj['key_features'], level=1) \
+            if 'key_features' in obj and obj['key_features'] not in ['missing', 'none'] else None
 
 
 class Packet(object):
@@ -66,7 +70,8 @@ class Packet(object):
         self.selection = optional(obj, 'selection')
         self.role = optional(obj, 'role')
         self.main_goal = optional(obj, 'main_goal')
-        self.features = Features(obj['features'], level=0) if 'features' in obj else None
+        self.features = Features(obj['features'], level=0) \
+            if 'features' in obj and obj['features'] not in ['missing', 'none'] else None
 
 
 class FlowAggregation(object):
@@ -77,5 +82,7 @@ class FlowAggregation(object):
         self.active_timeout = optional(obj, 'active_timeout')
         self.bidirectional = optional(obj, 'bidirectional')
 
-        self.features = Features(obj['features'], level=2) if 'features' in obj else None
-        self.key_features = Features(obj['key_features'], level=2) if 'key_features' in obj else None
+        self.features = Features(obj['features'], level=2) \
+            if 'features' in obj and obj['features'] not in ['missing', 'none'] else None
+        self.key_features = Features(obj['key_features'], level=2) \
+            if 'key_features' in obj and obj['key_features'] not in ['missing', 'none'] else None

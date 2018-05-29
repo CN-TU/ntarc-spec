@@ -12,7 +12,8 @@ class Evaluation(object):
         self.manual_verification = obj['manual_verification']
         self.implementation_in_real_scenario = obj['implementation_in_real_scenario']
         self.train_test_separation = obj['train_test_separation']
-        self.methods = [EvaluationMethod(mm) for mm in obj['methods']] if 'methods' in obj else None
+        self.methods = [EvaluationMethod(mm) for mm in obj['methods']] \
+            if 'methods' in obj and obj['methods'] not in ['missing', 'none'] else None
 
 
 class EvaluationMethod(object):

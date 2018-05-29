@@ -8,7 +8,8 @@ class AnalysisMethod(object):
         self.semisupervised_learning = obj['semisupervised_learning']
         self.anomaly_detection = obj['anomaly_detection']
         self.tools = [Tool(tt) for tt in obj['tools']]
-        self.algorithms = [Algorithm(aa) for aa in obj['algorithms']] if 'algorithms' in obj else None
+        self.algorithms = [Algorithm(aa) for aa in obj['algorithms']] \
+            if 'algorithms' in obj and obj['algorithms'] not in ['missing', 'none'] else None
 
 
 class Algorithm(object):
