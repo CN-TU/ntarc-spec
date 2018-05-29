@@ -308,7 +308,7 @@ key_features (*optional*)
 
 Describes the features used to aggregate the packets.
 That is, packets which share these features will be put in the same flow.
-In case all packets should be in the same flow, use an empty list (``[]``).
+In case all packets should be in the same flow, use ``"none"``.
 
 For the features, see :ref:`features <features>`.
 
@@ -356,7 +356,7 @@ key_features (*optional*)
 
 Describes the features used to aggregate the flows.
 That is, flows which share these features will be put in the same flow aggregation.
-In case all flows should be in the same flow, use an empty list (``[]``).
+In case all flows should be in the same flow, use ``"none"``.
 
 For the features, see :ref:`features <features>`.
 

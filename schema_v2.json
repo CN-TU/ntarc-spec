@@ -31,11 +31,22 @@
       "pattern": "^((_KDD){0,1}_[A-Za-z0-9_][A-Za-z0-9]+|((?!_).)*)$"
     },
     "key": {
-      "type": "array",
       "title": "key_features <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/features.html\">help</a>",
-      "items": {
-        "$ref": "#/definitions/feature"
-      }
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/feature"
+          }
+        },
+        {
+          "$ref": "#/definitions/missing"
+        },
+        {
+          "$ref": "#/definitions/none"
+        }
+      ]
     },
     "features": {
       "title": "features <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/features.html\">help</a>",
