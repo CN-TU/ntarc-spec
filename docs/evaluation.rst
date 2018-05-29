@@ -135,6 +135,10 @@ metrics (*optional*)
   recall metric
 * ``"f-1"``
   f-1 metric
+* ``"false_negative_rate"``
+  rate of false negatives
+* ``"false_positive_rate"``
+  rate of false positives
 * ``"roc/auc"``
   roc-based metrics
 * ``"complete_confusion_matrix"``
