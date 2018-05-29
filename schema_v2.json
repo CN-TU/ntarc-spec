@@ -116,6 +116,25 @@
         "availability"
       ]
     },
+    "tools": {
+      "title": "tools <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#tools\">help</a>",
+      "propertyOrder": 50,
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/tool"
+          }
+        },
+        {
+          "$ref": "#/definitions/missing"
+        },
+        {
+          "$ref": "#/definitions/none"
+        }
+      ]
+    },
     "selection": {
       "title": "selection <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#selection-optional\">help</a>",
       "type": "string",
@@ -691,20 +710,8 @@
           "type": "boolean"
         },
         "tools": {
-          "title": "tools <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#tools\">help</a>",
           "propertyOrder": 50,
-          "oneOf": [
-            {
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "$ref": "#/definitions/tool"
-              }
-            },
-            {
-              "$ref": "#/definitions/missing"
-            }
-          ]
+          "$ref": "#/definitions/tools"
         },
         "normalization_type": {
           "title": "normalization_type <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#normalization-type\">help</a>",
@@ -1051,23 +1058,8 @@
           "type": "boolean"
         },
         "tools": {
-          "title": "tools",
           "propertyOrder": 50,
-          "oneOf": [
-            {
-              "type": "array",
-              "minItems": 1,
-              "items": {
-                "$ref": "#/definitions/tool"
-              }
-            },
-            {
-              "$ref": "#/definitions/missing"
-            },
-            {
-              "$ref": "#/definitions/none"
-            }
-          ]
+          "$ref": "#/definitions/tools"
         },
         "algorithms": {
           "title": "algorithms",
@@ -1187,12 +1179,8 @@
                     ]
                   },
                   "tools": {
-                    "title": "tools",
-                    "type": "array",
                     "propertyOrder": 70,
-                    "items": {
-                      "$ref": "#/definitions/tool"
-                    }
+                    "$ref": "#/definitions/tools"
                   },
                   "source": {
                     "title": "source <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/analysis_method.html#source-optional\">help</a>",
