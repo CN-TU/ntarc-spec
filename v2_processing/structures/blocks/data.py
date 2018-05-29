@@ -3,7 +3,8 @@ from .. import optional
 
 class Data(object):
     def __init__(self, obj):
-        self.datasets = [Dataset(dd) for dd in obj['datasets']]
+        self.datasets = [Dataset(dd) for dd in obj['datasets']] \
+            if obj['datasets'] not in ['none', 'missing'] else []
 
 
 class Dataset(object):
