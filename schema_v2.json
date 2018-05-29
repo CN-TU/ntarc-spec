@@ -735,58 +735,63 @@
         },
         "feature_selections": {
           "title": "feature_selections",
-          "type": "array",
           "propertyOrder": 90,
-          "items": {
-            "title": "feature_selection",
-            "type": "object",
-            "format": "grid",
-            "properties": {
-              "name": {
-                "title": "name <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#id2\">help</a>",
-                "type": "string",
-                "propertyOrder": 10,
-                "minLength": 1
+          "oneOf": [
+            "type": "array",
+            "items": {
+              "title": "feature_selection",
+              "type": "object",
+              "format": "grid",
+              "properties": {
+                "name": {
+                  "title": "name <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#id2\">help</a>",
+                  "type": "string",
+                  "propertyOrder": 10,
+                  "minLength": 1
+                },
+                "type": {
+                  "title": "type <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#type-optional\">help</a>",
+                  "type": "string",
+                  "propertyOrder": 20,
+                  "minLength": 1,
+                  "oneOf": [
+                    {
+                      "title": "default values",
+                      "enum": [
+                        "wrapper",
+                        "filter",
+                        "hybrid",
+                        "nest",
+                        "feature_reduction"
+                      ]
+                    },
+                    {
+                      "$ref": "#/definitions/other"
+                    },
+                    {
+                      "$ref": "#/definitions/missing"
+                    }
+                  ]
+                },
+                "classifier": {
+                  "title": "classifier <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#classifier-optional\">help</a>",
+                  "type": "string",
+                  "propertyOrder": 30,
+                  "minLength": 1
+                },
+                "role": {
+                  "propertyOrder": 40,
+                  "$ref": "#/definitions/role"
+                }
               },
-              "type": {
-                "title": "type <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#type-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 20,
-                "minLength": 1,
-                "oneOf": [
-                  {
-                    "title": "default values",
-                    "enum": [
-                      "wrapper",
-                      "filter",
-                      "hybrid",
-                      "nest",
-                      "feature_reduction"
-                    ]
-                  },
-                  {
-                    "$ref": "#/definitions/other"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "classifier": {
-                "title": "classifier <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#classifier-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 30,
-                "minLength": 1
-              },
-              "role": {
-                "propertyOrder": 40,
-                "$ref": "#/definitions/role"
-              }
+              "required": [
+                "name"
+              ]
             },
-            "required": [
-              "name"
-            ]
-          }
+            {
+              "$ref": "#/definitions/none"
+            }
+          ]
         },
         "packets": {
           "title": "packets",

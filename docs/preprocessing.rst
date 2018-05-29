@@ -95,7 +95,9 @@ Example:
 feature_selections (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *feature_selections* can contain several *feature_selection-objects*. A *feature_selection-object* is composed of several fields:
+(*array* of *objects*) *feature_selections* can contain several *feature_selection-objects*.
+When no *flow_aggregation-object* exists in the paper, write ``"none"``.
+A *feature_selection-object* is composed of several fields:
 
 name
 ----
