@@ -790,120 +790,135 @@
         },
         "packets": {
           "title": "packets",
-          "type": "array",
           "propertyOrder": 100,
-          "items": {
-            "title": "packet",
-            "type": "object",
-            "properties": {
-              "selection": {
-                "propertyOrder": 10,
-                "$ref": "#/definitions/selection"
-              },
-              "role": {
-                "propertyOrder": 20,
-                "$ref": "#/definitions/role"
-              },
-              "main_goal": {
-                "propertyOrder": 30,
-      "title": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
-                "$ref": "#/definitions/goal"
-              },
-              "features": {
-                "propertyOrder": 40,
-                "$ref": "#/definitions/features"
+          "oneOf": [
+            "type": "array",
+            "items": {
+              "title": "packet",
+              "type": "object",
+              "properties": {
+                "selection": {
+                  "propertyOrder": 10,
+                  "$ref": "#/definitions/selection"
+                },
+                "role": {
+                  "propertyOrder": 20,
+                  "$ref": "#/definitions/role"
+                },
+                "main_goal": {
+                  "propertyOrder": 30,
+      "tit  le": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
+                  "$ref": "#/definitions/goal"
+                },
+                "features": {
+                  "propertyOrder": 40,
+                  "$ref": "#/definitions/features"
+                }
               }
+            },
+            {
+              "$ref": "#/definitions/none"
             }
-          }
+          ]
         },
         "flows": {
           "title": "flows",
-          "type": "array",
           "propertyOrder": 110,
-          "items": {
-            "title": "flow",
-            "type": "object",
-            "properties": {
-              "selection": {
-                "propertyOrder": 10,
-                "$ref": "#/definitions/selection"
-              },
-              "role": {
-                "propertyOrder": 20,
-                "$ref": "#/definitions/role"
-              },
-              "main_goal": {
-                "propertyOrder": 30,
-      "title": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
-                "$ref": "#/definitions/goal"
-              },
-              "active_timeout": {
-                "propertyOrder": 40,
-                "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
-                "$ref": "#/definitions/time_times"
-              },
-              "idle_timeout": {
-                "title": "idle_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#idle-timeout-optional\">help</a>",
-                "propertyOrder": 50,
-                "$ref": "#/definitions/time_times"
-              },
-              "bidirectional": {
-                "propertyOrder": 60,
-                "title": "bidirectional <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#bidirectional-optional\">help</a>",
-                "type": "boolean"
-              },
-              "features": {
-                "propertyOrder": 70,
-                "$ref": "#/definitions/features"
-              },
-              "key_features": {
-                "propertyOrder": 80,
-                "$ref": "#/definitions/key"
+          "oneOf": [
+            "type": "array",
+            "items": {
+              "title": "flow",
+              "type": "object",
+              "properties": {
+                "selection": {
+                  "propertyOrder": 10,
+                  "$ref": "#/definitions/selection"
+                },
+                "role": {
+                  "propertyOrder": 20,
+                  "$ref": "#/definitions/role"
+                },
+                "main_goal": {
+                  "propertyOrder": 30,
+                  "title": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
+                  "$ref": "#/definitions/goal"
+                },
+                "active_timeout": {
+                  "propertyOrder": 40,
+                  "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
+                  "$ref": "#/definitions/time_times"
+                },
+                "idle_timeout": {
+                  "title": "idle_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#idle-timeout-optional\">help</a>",
+                  "propertyOrder": 50,
+                  "$ref": "#/definitions/time_times"
+                },
+                "bidirectional": {
+                  "propertyOrder": 60,
+                  "title": "bidirectional <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#bidirectional-optional\">help</a>",
+                  "type": "boolean"
+                },
+                "features": {
+                  "propertyOrder": 70,
+                  "$ref": "#/definitions/features"
+                },
+                "key_features": {
+                  "propertyOrder": 80,
+                  "$ref": "#/definitions/key"
+                }
               }
+            },
+            {
+              "$ref": "#/definitions/none"
             }
-          }
+          ]
         },
         "flow_aggregations": {
           "title": "flow_aggregations",
-          "type": "array",
           "propertyOrder": 120,
-          "items": {
-            "title": "flow_aggregation",
-            "type": "object",
-            "properties": {
-              "selection": {
-                "propertyOrder": 10,
-                "$ref": "#/definitions/selection"
-              },
-              "role": {
-                "propertyOrder": 20,
-                "$ref": "#/definitions/role"
-              },
-              "main_goal": {
-                "propertyOrder": 30,
-      "title": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
-                "$ref": "#/definitions/goal"
-              },
-              "bidirectional": {
-                "propertyOrder": 35,
-                "title": "bidirectional <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#bidirectional-optional\">help</a>",
-                "type": "boolean"
-              },
-              "active_timeout": {
-                "propertyOrder": 40,
-                "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
-                "$ref": "#/definitions/time_times"
-              },
-              "features": {
-                "propertyOrder": 50,
-                "$ref": "#/definitions/features"
-              },
-              "key_features": {
-                "propertyOrder": 60,
-                "$ref": "#/definitions/key"
+          "oneOf": [
+            "type": "array",
+            "items": {
+              "title": "flow_aggregation",
+              "type": "object",
+              "properties": {
+                "selection": {
+                  "propertyOrder": 10,
+                  "$ref": "#/definitions/selection"
+                },
+                "role": {
+                  "propertyOrder": 20,
+                  "$ref": "#/definitions/role"
+                },
+                "main_goal": {
+                  "propertyOrder": 30,
+                  "title": "main_goal <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#main-goal-optional\">help</a>",
+                  "$ref": "#/definitions/goal"
+                },
+                "bidirectional": {
+                  "propertyOrder": 35,
+                  "title": "bidirectional <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#bidirectional-optional\">help</a>",
+                  "type": "boolean"
+                },
+                "active_timeout": {
+                  "propertyOrder": 40,
+                  "title": "active_timeout <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#active-timeout-optional\">help</a>",
+                  "$ref": "#/definitions/time_times"
+                },
+                "features": {
+                  "propertyOrder": 50,
+                  "$ref": "#/definitions/features"
+                },
+                "key_features": {
+                  "propertyOrder": 60,
+                  "$ref": "#/definitions/key"
+                }
               }
+            },
+            {
+              "$ref": "#/definitions/none"
             }
-          }
+          ]
         }
       },
       "required": [

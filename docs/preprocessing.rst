@@ -149,7 +149,9 @@ role (*optional*)
 packets (*optional*)
 ~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. Use this if you have a feature-vector for each packet. A *packet-object* is composed of several fields:
+(*array* of *objects*) *packets* can contain several *packet-objects*. A *packet-object* is defined when analysis in the paper are conducted on packets, i.e., analysis tools check packets independently or/and packet contents. Use this if you have a feature-vector for each packet.
+When no *packet-object* exists in the paper, write ``"none"``.
+A *packet-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
@@ -245,7 +247,9 @@ Describes the features used in the paper. See :doc:`features` for complete infor
 flows (*optional*)
 ~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. Use this if you have a feature-vector for each flow. A *flow-object* is composed of several fields:
+(*array* of *objects*) *flows* can contain several *flow-objects*. A *flow-object* is defined when analysis in the paper are conducted on flows, i.e., analysis tools check the behaviour of connection and connection attempts. Use this if you have a feature-vector for each flow.
+When no *flow-object* exists in the paper, write ``"none"``.
+A *flow-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
@@ -309,7 +313,9 @@ For the features, see :ref:`features <features>`.
 flow_aggregations (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *objects*) *flow_aggregation* can contain several *flow_aggregation-objects*. A *flow_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. Use this if you have a feature-vector for each set of flows. A *flow_aggregation-object* is composed of several fields:
+(*array* of *objects*) *flow_aggregation* can contain several *flow_aggregation-objects*. A *flow_aggregation-object* is defined when analysis in the paper are conducted on aggregation of features or flows, i.e., analysis tools usually describe networks as a whole. Use this if you have a feature-vector for each set of flows.
+When no *flow_aggregation-object* exists in the paper, write ``"none"``.
+A *flow_aggregation-object* is composed of several fields:
 
 selection (*optional*)
 ----------------------
