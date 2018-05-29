@@ -721,39 +721,46 @@
         },
         "transformations": {
           "title": "transformations <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#transformations\">help</a>",
-          "type": "array",
-          "format": "table",
           "propertyOrder": 70,
-          "items": {
-            "title": "transformation",
-            "type": "string",
-            "minLength": 1,
-            "oneOf": [
-              {
-                "title": "default values",
-                "enum": [
-                  "no",
-                  "sampling",
-                  "filtering",
-                  "log",
-                  "map",
-                  "graph",
-                  "feature_aggregation",
-                  "flow_extraction",
-                  "entropy",
-                  "time_series",
-                  "feature_operation",
-                  "class_separation"
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 1,
+              "format": "table",
+              "items": {
+                "title": "transformation",
+                "type": "string",
+                "minLength": 1,
+                "oneOf": [
+                  {
+                    "title": "default values",
+                    "enum": [
+                      "sampling",
+                      "filtering",
+                      "log",
+                      "map",
+                      "graph",
+                      "feature_aggregation",
+                      "flow_extraction",
+                      "entropy",
+                      "time_series",
+                      "feature_operation",
+                      "class_separation"
+                    ]
+                  },
+                  {
+                    "$ref": "#/definitions/other"
+                  }
                 ]
-              },
-              {
-                "$ref": "#/definitions/other"
-              },
-              {
-                "$ref": "#/definitions/missing"
               }
-            ]
-          }
+            },
+            {
+              "$ref": "#/definitions/missing"
+            },
+            {
+              "$ref": "#/definitions/none"
+            }
+          ]
         },
         "final_data_format": {
           "title": "final_data_format <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#final-data-format\">help</a>",

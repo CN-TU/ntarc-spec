@@ -65,7 +65,7 @@ transformations
 
 (*array* of *strings*) This field collects all transformations that are performed after the dataset retrieval and previous to the analysis phase (i.e., they are part of the data preparation). Please, consider carefully the following listed operations (values):
 
-``"no"``, ``"sampling"``, ``"filtering"``, ``"log"``, ``"map"``, ``"graph"``, ``"feature_aggregation"``, ``"flow_extraction"``, ``"entropy"``, ``"time_series"``, ``"feature_operation"``, ``"class_separation"``
+``"sampling"``, ``"filtering"``, ``"log"``, ``"map"``, ``"graph"``, ``"feature_aggregation"``, ``"flow_extraction"``, ``"entropy"``, ``"time_series"``, ``"feature_operation"``, ``"class_separation"``
 
 .. note:: This field is redundant with the features in the packets/flows/flow aggregations. However, this field is mandatory while the feature fields are optionals.
 
