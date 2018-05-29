@@ -401,243 +401,254 @@
     },
     "data": {
       "title": "data",
-      "type": "object",
       "propertyOrder": 20,
-      "properties": {
-        "datasets": {
-          "type": "array",
-          "title": "datasets",
-          "items": {
-            "title": "dataset",
-            "type": "object",
-            "properties": {
-              "name": {
-                "title": "name <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#name\">help</a>",
-                "type": "string",
-                "propertyOrder": 10,
-                "minLength": 1
-              },
-              "availability": {
-                "title": "availability <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#availability\">help</a>",
-                "type": "string",
-                "minLength": 1,
-                "propertyOrder": 20,
-                "oneOf": [
-                  {
-                    "enum": [
-                      "public",
-                      "public_on_demand",
-                      "private",
-                      "lost_source"
-                    ],
-                    "title": "default values"
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "datasets": {
+              "type": "array",
+              "minItems": 1,
+              "title": "datasets",
+              "items": {
+                "title": "dataset",
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "title": "name <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#name\">help</a>",
+                    "type": "string",
+                    "propertyOrder": 10,
+                    "minLength": 1
                   },
-                  {
-                    "$ref": "#/definitions/other"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "format": {
-                "title": "format <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#format-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 30,
-                "minLength": 1,
-                "oneOf": [
-                  {
-                    "title": "default values",
-                    "enum": [
-                      "packet",
-                      "flow"
+                  "availability": {
+                    "title": "availability <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#availability\">help</a>",
+                    "type": "string",
+                    "minLength": 1,
+                    "propertyOrder": 20,
+                    "oneOf": [
+                      {
+                        "enum": [
+                          "public",
+                          "public_on_demand",
+                          "private",
+                          "lost_source"
+                        ],
+                        "title": "default values"
+                      },
+                      {
+                        "$ref": "#/definitions/other"
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
                     ]
                   },
-                  {
-                    "$ref": "#/definitions/other"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "types": {
-                "title": "types <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#types-optional\">help</a>",
-                "type": "array",
-                "format": "table",
-                "propertyOrder": 40,
-                "items": {
-                  "title": "type",
-                  "type": "string",
-                  "oneOf": [
-                    {
-                      "enum": [
-                        "ip",
-                        "ipv4",
-                        "ipv6",
-                        "tcp",
-                        "http",
-                        "udp",
-                        "icmp",
-                        "dns",
-                        "tls",
-                        "ipsec"
-                      ],
-                      "title": "default values"
-                    },
-                    {
-                      "$ref": "#/definitions/other"
-                    },
-                    {
-                      "$ref": "#/definitions/missing"
-                    }
-                  ]
-                }
-              },
-              "generation": {
-                "title": "generation <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#generation-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 50,
-                "minLength": 1,
-                "oneOf": [
-                  {
-                    "title": "default values",
-                    "enum": [
-                      "captured",
-                      "synthetic",
-                      "altered_captured",
-                      "mixed"
+                  "format": {
+                    "title": "format <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#format-optional\">help</a>",
+                    "type": "string",
+                    "propertyOrder": 30,
+                    "minLength": 1,
+                    "oneOf": [
+                      {
+                        "title": "default values",
+                        "enum": [
+                          "packet",
+                          "flow"
+                        ]
+                      },
+                      {
+                        "$ref": "#/definitions/other"
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
                     ]
                   },
-                  {
-                    "$ref": "#/definitions/other"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "generation_year": {
-                "title": "generation_year <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#generation-year\">help</a>",
-                "propertyOrder": 60,
-                "oneOf": [
-                  {
-                    "title": "year",
-                    "type": "integer",
-                    "minimum": 1900
-                  },
-                  {
-                    "title": "years",
+                  "types": {
+                    "title": "types <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#types-optional\">help</a>",
                     "type": "array",
-                    "items": {
-                      "type": "integer",
-                      "title": "year",
-                      "minimum": 1900
-                    }
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "covered_period": {
-                "title": "covered_period <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#covered-period-optional\">help</a>",
-                "type": "string",
-                "propertyOrder": 70,
-                "minLength": 1,
-                "oneOf": [
-                  {
-                    "title": "default values",
-                    "enum": [
-                      "minutes",
-                      "hours",
-                      "days",
-                      "weeks",
-                      "months",
-                      "years"
-                    ]
-                  },
-                  {
-                    "$ref": "#/definitions/other"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ]
-              },
-              "details": {
-                "title": "details <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#details-optional\">help</a>",
-                "propertyOrder": 80,
-                "oneOf": [
-                  {
                     "format": "table",
-                    "type": "array",
+                    "propertyOrder": 40,
                     "items": {
-                      "title": "detail",
+                      "title": "type",
                       "type": "string",
-                      "minLength": 1,
                       "oneOf": [
                         {
-                          "title": "default values",
                           "enum": [
-                            "raw",
-                            "preprocessed",
-                            "no_payload"
-                          ]
+                            "ip",
+                            "ipv4",
+                            "ipv6",
+                            "tcp",
+                            "http",
+                            "udp",
+                            "icmp",
+                            "dns",
+                            "tls",
+                            "ipsec"
+                          ],
+                          "title": "default values"
                         },
                         {
                           "$ref": "#/definitions/other"
+                        },
+                        {
+                          "$ref": "#/definitions/missing"
                         }
                       ]
                     }
                   },
-                  {
-                    "$ref": "#/definitions/none"
+                  "generation": {
+                    "title": "generation <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#generation-optional\">help</a>",
+                    "type": "string",
+                    "propertyOrder": 50,
+                    "minLength": 1,
+                    "oneOf": [
+                      {
+                        "title": "default values",
+                        "enum": [
+                          "captured",
+                          "synthetic",
+                          "altered_captured",
+                          "mixed"
+                        ]
+                      },
+                      {
+                        "$ref": "#/definitions/other"
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
+                    ]
+                  },
+                  "generation_year": {
+                    "title": "generation_year <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#generation-year\">help</a>",
+                    "propertyOrder": 60,
+                    "oneOf": [
+                      {
+                        "title": "year",
+                        "type": "integer",
+                        "minimum": 1900
+                      },
+                      {
+                        "title": "years",
+                        "type": "array",
+                        "items": {
+                          "type": "integer",
+                          "title": "year",
+                          "minimum": 1900
+                        }
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
+                    ]
+                  },
+                  "covered_period": {
+                    "title": "covered_period <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#covered-period-optional\">help</a>",
+                    "type": "string",
+                    "propertyOrder": 70,
+                    "minLength": 1,
+                    "oneOf": [
+                      {
+                        "title": "default values",
+                        "enum": [
+                          "minutes",
+                          "hours",
+                          "days",
+                          "weeks",
+                          "months",
+                          "years"
+                        ]
+                      },
+                      {
+                        "$ref": "#/definitions/other"
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
+                    ]
+                  },
+                  "details": {
+                    "title": "details <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#details-optional\">help</a>",
+                    "propertyOrder": 80,
+                    "oneOf": [
+                      {
+                        "format": "table",
+                        "type": "array",
+                        "items": {
+                          "title": "detail",
+                          "type": "string",
+                          "minLength": 1,
+                          "oneOf": [
+                            {
+                              "title": "default values",
+                              "enum": [
+                                "raw",
+                                "preprocessed",
+                                "no_payload"
+                              ]
+                            },
+                            {
+                              "$ref": "#/definitions/other"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "$ref": "#/definitions/none"
+                      }
+                    ]
+                  },
+                  "subsets": {
+                    "title": "subsets <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#subsets\">help</a>",
+                    "propertyOrder": 90,
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "format": "table",
+                        "items": {
+                          "title": "subset",
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      },
+                      {
+                        "$ref": "#/definitions/none"
+                      }
+                    ]
+                  },
+                  "anonymized": {
+                    "title": "anonymized <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#anonymized-optional\">help</a>",
+                    "oneOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "$ref": "#/definitions/missing"
+                      }
+                    ],
+                    "propertyOrder": 100
                   }
+                },
+                "required": [
+                  "name",
+                  "generation_year",
+                  "subsets"
                 ]
-              },
-              "subsets": {
-                "title": "subsets <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#subsets\">help</a>",
-                "propertyOrder": 90,
-                "oneOf": [
-                  {
-                    "type": "array",
-                    "format": "table",
-                    "items": {
-                      "title": "subset",
-                      "type": "string",
-                      "minLength": 1
-                    }
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  },
-                  {
-                    "$ref": "#/definitions/none"
-                  }
-                ]
-              },
-              "anonymized": {
-                "title": "anonymized <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#anonymized-optional\">help</a>",
-                "oneOf": [
-                  {
-                    "type": "boolean"
-                  },
-                  {
-                    "$ref": "#/definitions/missing"
-                  }
-                ],
-                "propertyOrder": 100
               }
-            },
-            "required": [
-              "name",
-              "generation_year",
-              "subsets"
-            ]
+            }
           }
+        },
+        {
+          "$ref": "#/definitions/missing"
+        },
+        {
+          "$ref": "#/definitions/none"
         }
-      }
+      ]
     },
     "preprocessing": {
       "title": "preprocessing",
