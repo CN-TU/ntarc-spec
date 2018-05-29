@@ -80,6 +80,7 @@
         "role": "main"
       }
     ],
+    "packets": "none",
     "flows": [
       {
         "selection": "expert_knowledge",
@@ -180,7 +181,8 @@
           "protocolIdentifier"
         ]
       }
-    ]
+    ],
+    "flow_aggregations": "none"
   },
   "analysis_method": {
     "supervised_learning": false,
