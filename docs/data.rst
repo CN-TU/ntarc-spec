@@ -148,7 +148,9 @@ Example:
 subsets
 -------
 
-(*array* of *strings*) The dataset might consist of diverse subsets. Here we specify which subsets have been used during the analysis. If it is not clearly specified in the paper with a proper name, the default nomenclature of the subsets refer to the date if possible (format: *hh-dd-mm-yyyy*). Example:
+(*array* of *strings*) The dataset might consist of diverse subsets. Here we specify which subsets have been used during the analysis. If it is not clearly specified in the paper with a proper name, the default nomenclature of the subsets refer to the date if possible (format: *hh-dd-mm-yyyy*).
+If there are no relevant subsets, write ``"none"``, and if the subsets are not specified (or if it is not clear whether subsets are used or not), write ``"missing"``.
+Example:
 
 .. note:: You can also use this field when a dataset has been divided into constant time pieces (for example, when a one-hour long dataset was divided into 60 1-second long datasets)
 

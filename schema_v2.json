@@ -587,14 +587,24 @@
               },
               "subsets": {
                 "title": "subsets <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#subsets\">help</a>",
-                "type": "array",
-                "format": "table",
                 "propertyOrder": 90,
-                "items": {
-                  "title": "subset",
-                  "type": "string",
-                  "minLength": 1
-                }
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "format": "table",
+                    "items": {
+                      "title": "subset",
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  },
+                  {
+                    "$ref": "#/definitions/none"
+                  }
+                ]
               },
               "anonymized": {
                 "title": "anonymized <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#anonymized-optional\">help</a>",
