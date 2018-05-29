@@ -557,26 +557,33 @@
               "details": {
                 "title": "details <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#details-optional\">help</a>",
                 "propertyOrder": 80,
-                "format": "table",
-                "type": "array",
-                "items": {
-                  "title": "detail",
-                  "type": "string",
-                  "minLength": 1,
-                  "oneOf": [
-                    {
-                      "title": "default values",
-                      "enum": [
-                        "raw",
-                        "preprocessed",
-                        "no_payload"
+                "oneOf": [
+                  {
+                    "format": "table",
+                    "type": "array",
+                    "items": {
+                      "title": "detail",
+                      "type": "string",
+                      "minLength": 1,
+                      "oneOf": [
+                        {
+                          "title": "default values",
+                          "enum": [
+                            "raw",
+                            "preprocessed",
+                            "no_payload"
+                          ]
+                        },
+                        {
+                          "$ref": "#/definitions/other"
+                        }
                       ]
-                    },
-                    {
-                      "$ref": "#/definitions/other"
                     }
-                  ]
-                }
+                  },
+                  {
+                    "$ref": "#/definitions/none"
+                  }
+                ]
               },
               "subsets": {
                 "title": "subsets <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#subsets\">help</a>",
@@ -591,7 +598,14 @@
               },
               "anonymized": {
                 "title": "anonymized <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/data.html#anonymized-optional\">help</a>",
-                "type": "boolean",
+                "oneOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "$ref": "#/definitions/missing"
+                  }
+                ],
                 "propertyOrder": 100
               }
             },

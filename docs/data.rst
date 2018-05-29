@@ -136,6 +136,8 @@ details (*optional*)
 * ``"no_payload"``
   when payload has been removed from data. Payload removal does not make data *preprocessed*.  
 
+When no relevant details exist, write ``"none"``.
+
 Example:
 
 .. code-block:: none
