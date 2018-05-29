@@ -76,7 +76,7 @@
         },
         "detail": {
           "title": "detail <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#detail-optional\">help</a>",
-          "oneOf": [
+          "anyOf": [
             {
               "title": "detail",
               "type": "string",
@@ -842,7 +842,7 @@
                   "classifier": {
                     "title": "classifier <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/preprocessing.html#classifier-optional\">help</a>",
                     "propertyOrder": 30,
-                    "oneOf": [
+                    "anyOf": [
                         {
                           "type": "string",
                           "minLength": 1
@@ -1087,11 +1087,11 @@
                   },
                   "subname": {
                     "title": "subname <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/analysis_method.html#subname-optional\">help</a>",
-                    "oneOf": [
+                    "propertyOrder": 20,
+                    "anyOf": [
                       {
                         "title": "subname",
                         "type": "string",
-                        "propertyOrder": 20,
                         "minLength": 1
                       },
                       {
