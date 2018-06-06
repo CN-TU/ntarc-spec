@@ -1,5 +1,5 @@
 {
-  "version": "v2.1",
+  "version": "v2.3.0",
   "reference": {
     "title": "time-activity footprints in ip traffic",
     "authors": ["Iglesias, Félix", "Zseby, Tanja"],

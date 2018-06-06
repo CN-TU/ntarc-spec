@@ -121,8 +121,8 @@ Example:
 
      "claimed_improvements": ["improved_detection_rates","reduced_computational_resources"]
 
-reproducibility (*optional*)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+reproducibility
+~~~~~~~~~~~~~~~
 
 (*string*) This field states if, based on the opinion of the paper data curator, the experiments and analysis can be reproduced or repeated. Please, consider carefully the following default terms (values):
 
