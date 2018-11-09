@@ -1453,11 +1453,9 @@
             {
               "title": "default values",
               "enum": [
-                "anomaly_detection",
-                "traffic_classification",
-                "botnet_detection",
-                "specific_malware_detection",
-                "network_properties_monitoring"
+                  "detect_anomalies",
+                  "detect_attacks",
+                  "classify_traffic"
               ]
             },
             {

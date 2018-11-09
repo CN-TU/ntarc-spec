@@ -9,24 +9,25 @@ Properties
 main_goal
 ~~~~~~~~~
 
-(*string*) This field should contain the main paper goal. In case of doubt, abstract and conclusion sections should help to establish this value. Please, consider carefully the following default labels (values):
+(*string*) This field should contain the main paper goal, as intended by the authors. In case of doubt, abstract and conclusion sections should help to establish this value. Note that in some cases, datasets for specific goals are used when evaluating different goals (e.g., using KDD99 to evaluate anomaly detection). In these cases, this value should correspond to the intentions of the authors, and not to the used dataset. Please, consider carefully the following default labels (values):
 
-* ``"anomaly_detection"``
-* ``"botnet_detection"``
-* ``"network_properties_monitoring"``
-* ``"specific_malware_detection"``
-* ``"traffic_classification"``
+* ``"detect_anomalies"``
+  The goal of the paper is to detect anomalies in network traffic. That means just to distinguish between normal traffic and traffic that does not fit the normal behavior model, no matter if this is due to an attack, failure or just changes in user behavior. Methods can include statistical models, supervised or unsupervised machine learning, outlier detection and others. Important to distinguish this category from other (e.g., attack detection or traffic classification) is that the authors look for any traffic that does not fit the normal behavior and do not have detecting a particular attack or traffic class in mind.
+* ``"detect_attacks"``
+  The goal of the paper is to detect attacks or related behavior (e.g., botnet communication) in network traffic. That means that the authors look for traffic that can be associated with malicious behavior. This can be done for instance by searching for attack specific traffic patterns in the network. Attack detection can use signature-based or anomaly detection based methods. If a papers goal is stated as detecting attacks and it is using anomaly detection methods for it, it is classified as attack detection paper (with method anomaly detection) and not as anomaly detection paper.
+* ``"classify_traffic"``
+  The goal of the paper is to identify specific traffic classes in the network traffic. This could be for instance classifying packets into traffic properties (encrypted/non-encrypted, fragmented/non-fragmented packets) or usage of different applications or protocols (HTTP, FTP), distinguishing different flows by their characteristics (long, short flows, bursty flows) and many more. If a paper is looking for attacks and aims at classifying different attack types, the goal for the paper is detect_attacks and not classify_traffic.
 
 Example:
 
 .. code-block:: none
 
-     "main_goal": "traffic_classification"
+     "main_goal": "detect_anomalies"
 
 subgoals (*optional*)
 ~~~~~~~~~~~~~~~~~~~~~
 
-(*array* of *strings*) Here additional paper goals are collected. Goals are usually aimed in the *abstract* and must be understood as the *motivations* that inspire and justify the research. Please, repeat the main goal in this array and consider the following possible labels (values):
+(*array* of *strings*) Here additional paper goals are collected. Goals are usually aimed in the *abstract* and must be understood as the *motivations* that inspire and justify the research. Please consider the following possible labels (values):
 
 * ``"anomaly_detection"``
 * ``"application_classification"``
@@ -148,7 +149,7 @@ JSON example (result, complete)
 .. code-block:: none
 
   "result": {
-    "main_goal": "traffic_classification",
+    "main_goal": "detect_anomalies",
     "goals": ["traffic_classification"],
     "focus_main": "methodology/framework",
     "claimed_improvements": ["improved_data_description", "improved_traffic_classification", "fast_processing", "_flaw_detection"]
