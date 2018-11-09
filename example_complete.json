@@ -1,5 +1,5 @@
 {
-  "version": "v2.3.0",
+  "version": "v3.0.0",
   "reference": {
     "title": "time-activity footprints in ip traffic",
     "authors": ["Iglesias, Félix", "Zseby, Tanja"],
@@ -308,7 +308,7 @@
     ]
   },
   "result": {
-    "main_goal": "traffic_classification",
+    "main_goal": "detect_anomalies",
     "focus_main": "methodology/framework",
     "claimed_improvements": [
       "improved_data_description",
