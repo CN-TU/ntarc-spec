@@ -203,8 +203,8 @@
     ],
     "algorithms": [
       {
-        "name": "fuzzy clustering",
-        "subname": "gustafson-kessel",
+        "family": "fuzzy_clustering",
+        "detail": "Gustafson-kessel fuzzy clustering",
         "learning": "unsupervised",
         "role": "main",
         "type": "clustering",
@@ -220,11 +220,11 @@
         "parameters_provided": false
       },
       {
-        "name": "mad-based outlier removal",
-        "subname": "double mad",
+        "family": "statistics",
+        "detail": "Mad-based outlier removal",
         "learning": "statistics/model_fit",
         "role": "main",
-        "type": "anomaly_detection",
+        "type": "outlier_detection",
         "metric/decision_criteria": "mahalanobis",
         "tools": [
           {
