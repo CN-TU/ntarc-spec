@@ -51,23 +51,54 @@ algorithms (*optional*)
 
 (*array* of *objects*) *algorithms* can contain several *algorithm-objects*. An *algorithm-object* is composed of several fields: 
 
-name
-----
+family
+------
 
-(*string*) The name that identifies the algorithm main family. Example:
+(*string*) The family to which the algorithm belongs. Please, consider carefully the following default labels (values):
+
+* ``"autoregressive_models"``
+* ``"bayesian"``
+* ``"cluster_validation"``
+* ``"crossvalidation"``
+* ``"decision_tree"``
+* ``"ensemble"``
+* ``"entropy_based"``
+* ``"fuzzy_clustering"``
+* ``"glm_regression"``
+* ``"graph_modeling"``
+* ``"hierarchical_clustering"``
+* ``"kmeans_clustering"``
+* ``"kmedoids_clustering"``
+* ``"knn"``
+* ``"markov_process"``
+* ``"mixture_model"``
+* ``"neural_networks"``
+* ``"parameter_search"``
+* ``"pca"``
+* ``"random_forest"``
+* ``"rule_extraction"``
+* ``"signature"``
+* ``"statistics"``
+* ``"stream_clustering"``
+* ``"svm"``
+* ``"two_step_clustering"``
+* ``"wavelet_transform"``
+
+Example:
 
 .. code-block:: none
 
-  "name": "fuzzy clustering"
+  "name": "fuzzy_clustering"
 
-subname (*optional*)
---------------------
+detail (*optional*)
+-------------------
 
-(*string*) A subname that can be more specific and refer to algorithm specification or subclass. If no subname is required, ``"none"`` should be written in the corresponding place. Example:
+(*string*) Additional details about the algorithm name.
+Example:
 
 .. code-block:: none
   
-    "subname": "gustafson-kessel"
+    "subname": "Gustafson-kessel fuzzy clustering"
 
 learning (*optional*)
 ---------------------
@@ -114,24 +145,31 @@ Example:
 type (*optional*)
 -----------------
 
-(*string*) It identifies the type of algorithm with regard to analysis main approaches. Please, consider carefully the following default labels (values): 
+(*string*) It refers to the normal use of the defined algorithms, i.e., the algorithm is generally considered as a method for <type_value>. Please consider carefully the following default labels (values):
 
 * ``"classification"``
+The algorithm is supervised and originally intended to perform classification and class-prediction. Based on a labeled set of training data, the algorithm predicts the labels of a set of test data.
 * ``"regression"``
+Similar to classification, the algorithm is supervised but, instead of predicting or guessing a class/label, it outputs a predicted numerical value.
 * ``"clustering"``
-* ``"anomaly_detection"``
-* ``"heuristics"``
-  the algorithm is quite ad-hoc and based on rules and equations defined by the authors' expert knowledge.
-* ``"statistics"``
-  the algorithm belongs to the statistics domain and uses parametric or non-parametric models to explain the data.
-* ``"text_matching"``
-  the algorithm bases its classification and decisions on searching for specific text strings or comparing text strings.
+The algorithm is unsupervised and originally intended to find clusters within the data. Results are based on the intrinsic properties of the analyzed data and the input space drawn by such data (without resorting to any external partition or knowledge)
+* ``"modeling"``
+Based on a set of given assumptions and pre-knowledge, the algorithm uses some training data to create a model that summarizes a given process. The difference with other algorithm types--which might and generally do also use models--is that here the "model-according-to-some-initial-assumptions" is the focus of the process (i.e., knowledge discovery), whereas other algorithms are focused on the predicted values (i.e., problem solving), being the model a mean or secondary otuput.
+* ``"outlier_detection"``
+The algorithm is unsupervised and originally created to rank data points based on their outlierness properties when compared with the rest of data points in the same dataset. Clustering algorithms can be used for outlier detection, but purely outlier detection algorithms are not forced to create a cluster-like representation of the data.
+* ``"space_transformation"``
+The algorithm transforms the input space into an output space that simplifies subsequent analysis, improves the visualization or understanding of the data, or removes constraints.
+* ``"specific_detection"``
+The algorithm is specifically crafted to capture, detect, or identify a specific type of phenomenon. These algorithms are usually based on heuristics and ad-hoc steps.
+* ``"validation_optimization"``
+The algorithm contributes to validate or optimize the analysis process. Such algorithms validate the outcomes of other algorithms, performs the search of optimal parameters, or nest algorithms to enhance some properties.
+
 
 Example:
 
 .. code-block:: none
 
-     "type": "heuristics"
+     "type": "clustering"
 
 metric/decision_criteria (*optional*)
 -------------------------------------
@@ -216,8 +254,8 @@ JSON example (analysis_method, complete)
     ],
     "algorithms": [
         {
-            "name": "fuzzy clustering",
-            "subname": "gustafson-kessel",
+            "family": "fuzzy_clustering",
+            "detail": "Gustafson-kessel fuzzy clustering",
             "learning": "unsupervised",
             "role": "main",
             "type": "clustering",
@@ -233,11 +271,11 @@ JSON example (analysis_method, complete)
             "parameters_provided": false
         },
         {
-            "name": "mad-based outlier removal",
-            "subname": "double mad",
+            "family": "statistics",
+            "detail": "Mad-based outlier removal",
             "learning": "statistics/model_fit",
             "role": "main",
-            "type": "anomaly_detection",
+            "type": "outlier_detection",
             "metric_distance": "mahalanobis",
             "tools": [
                 {
