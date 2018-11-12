@@ -6,7 +6,7 @@
 
 .. toctree::
    :maxdepth: 3
-   :caption: V2 version:
+   :caption: current version:
 
    global
    repository_organization
@@ -16,7 +16,7 @@
 
 .. toctree::
    :maxdepth: 3
-   :caption: V2 format specification:
+   :caption: format specification:
    :numbered:
 
    reference.rst

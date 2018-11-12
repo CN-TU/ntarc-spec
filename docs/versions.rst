@@ -1,11 +1,11 @@
 Versions
 ========
 
-Major Versions
---------------
+Old Versions
+------------
 
-Currently there are 2 simultaneous major versions, v1 and v2.
-No more work should be done for the v1 version, and it should be deleted when all the curated papers have been converted to v2.
+Currently there are 2 simultaneous major versions, v1 and the current version.
+No more work should be done for the v1 version, and it should be deleted when all the curated papers have been converted to the current version.
 However, until then some useful information might be extracted from the existing v1 papers.
 
 Versioning System
