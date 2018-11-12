@@ -15,8 +15,8 @@ class AnalysisMethod(object):
 
 class Algorithm(object):
     def __init__(self, obj):
-        self.name = obj['name']
-        self.subname = optional(obj, 'subname')
+        self.family = obj['family']
+        self.detail = optional(obj, 'detail')
         self.learning = optional(obj, 'learning')
         self.role = optional(obj, 'role')
         self.type = optional(obj, 'type')
