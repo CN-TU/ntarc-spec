@@ -1116,6 +1116,7 @@
                       {
                         "$ref": "#/definitions/missing"
                       }
+                    ]
                   },
                   "detail": {
                     "title": "detail <a href=\"https://nta-meta-analysis.readthedocs.io/en/latest/analysis_method.html#detail-optional\">help</a>",
